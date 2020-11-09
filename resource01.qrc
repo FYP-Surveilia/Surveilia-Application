@@ -1,0 +1,17 @@
+<RCC>
+  <qresource prefix="logo">
+    <file>geography-24.png</file>
+    <file>play-24.png</file>
+    <file>surveilialogo.PNG</file>
+  </qresource>
+  <qresource prefix="menubar">
+    <file>group-24.png</file>
+    <file>geography-24.png</file>
+    <file>question-mark-24.png</file>
+    <file>logout-24.png</file>
+    <file>contacts-24.png</file>
+    <file>database-5-24.png</file>
+    <file>alarm-clock-24.png</file>
+    <file>camera-24.png</file>
+  </qresource>
+</RCC>
