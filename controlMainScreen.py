@@ -44,6 +44,10 @@ curs.execute(
     'CREATE TABLE IF NOT EXISTS surveilia_users(user_id INTEGER PRIMARY KEY UNIQUE NOT NULL, user_fname STRING NOT NULL, user_lname STRING NOT NULL,user_username STRING NOT NULL,user_password STRING NOT NULL, user_contactno NUMERIC,user_address STRING)'
 )
 
+curs.execute(
+    'CREATE TABLE IF NOT EXISTS surveilia_admin(admin_id INTEGER PRIMARY KEY UNIQUE NOT NULL, admin_fname STRING NOT NULL, admin_lname STRING NOT NULL,admin_username STRING NOT NULL,admin_password STRING NOT NULL, admin_contactno NUMERIC,admin_address STRING)'
+)
+
 
 class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
     def __init__(self, *args, **kwargs):
@@ -53,6 +57,10 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.camSignal = 0
         self.mainStackedWidget.setCurrentIndex(0)
         self.menuStackedWidget.setCurrentIndex(0)
+
+        self.user_tableWidget.horizontalHeader().setVisible(True)
+        self.user_tableWidget.verticalHeader().setVisible(True)
+        self.admin_tableWidget.horizontalHeader().setVisible(True)
 
         ####################### MAIN STACKED WIDGET ###############################################
         # self.login_pushButton.clicked.connect(lambda: self.mainStackedWidget.setCurrentIndex(1))
@@ -130,35 +138,136 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         # pass the widget where the video will be displayed
         # self.mediaPlayer.setVideoOutput(self.videoDisplay_widget1)
         self.alarm_toolButton.clicked.connect(self.anomaly_tableDetail)
+
         self.userAdd_pushButton.clicked.connect(lambda: self.menuStackedWidget.setCurrentIndex(6))
-        self.addNewUser_pushButton.clicked.connect(self.addUser)
         self.userDelete_pushButton.clicked.connect(self.deleteUser)
-        """
-        if self.mainStackedWidget.currentIndex() == 1:
-            if self.menuStackedWidget.currentIndex() == 1:
-                print("NOOOO")
-                self.camera_toolButton.setStyleSheet("background-color:white;")
-            elif self.menuStackedWidget.setCurrentIndex(2):
-                print("in 2")
-                self.alarm_toolButton.setStyleSheet("background-color:#2A2F3C;")
-            elif self.menuStackedWidget.setCurrentIndex(3) == True:
-                print("3rd logic worked hehe")
-                self.storage_toolButton.setStyleSheet("background-color:#2A2F3C;")
-            elif self.menuStackedWidget.currentIndex() == 4:
-                self.account_toolButton.setStyleSheet("background-color:#2A2F3C;")
-            elif self.menuStackedWidget.currentIndex() == 5:
-                self.user_toolButton.setStyleSheet("background-color:#2A2F3C;")
-            elif self.menuStackedWidget.currentIndex() == 6:
-                self.language_toolButton.setStyleSheet("background-color:#2A2F3C;")
-            else:
-                print("I AM NOT GONNA ENTER HEHE")
-        """
-    def showAccountinfo(self):
-        self.menuStackedWidget.setCurrentIndex(4)
+        self.adminAdd_pushButton.clicked.connect(lambda: self.menuStackedWidget.setCurrentIndex(6))
+        self.adminDelete_pushButton.clicked.connect(self.deleteAdmin)
+
+        self.addNewUser_pushButton.clicked.connect(self.addnewuser)
+        self.adminstable_radioButton.toggled.connect(lambda: self.stackedWidget.setCurrentIndex(1))
+        self.securitytable_radioButton.toggled.connect(lambda: self.stackedWidget.setCurrentIndex(0))
+
+        # self.aAdmin_radioButton.toggled(self.adminRadioButton)
+        # self.aSecurity_radioButton.toggled(self.securityRadioButton)
+
+    """
+            if self.mainStackedWidget.currentIndex() == 1:
+                if self.menuStackedWidget.currentIndex() == 1:
+                    print("NOOOO")
+                    self.camera_toolButton.setStyleSheet("background-color:white;")
+                elif self.menuStackedWidget.setCurrentIndex(2):
+                    print("in 2")
+                    self.alarm_toolButton.setStyleSheet("background-color:#2A2F3C;")
+                elif self.menuStackedWidget.setCurrentIndex(3) == True:
+                    print("3rd logic worked hehe")
+                    self.storage_toolButton.setStyleSheet("background-color:#2A2F3C;")
+                elif self.menuStackedWidget.currentIndex() == 4:
+                    self.account_toolButton.setStyleSheet("background-color:#2A2F3C;")
+                elif self.menuStackedWidget.currentIndex() == 5:
+                    self.user_toolButton.setStyleSheet("background-color:#2A2F3C;")
+                elif self.menuStackedWidget.currentIndex() == 6:
+                    self.language_toolButton.setStyleSheet("background-color:#2A2F3C;")
+                else:
+                    print("I AM NOT GONNA ENTER HEHE")
+    """
+    # def adminRadioButton(self):
+    # def securityRadioButton(self):
+
+    def addnewuser(self):
+        if self.aAdmin_radioButton.isChecked():
+            self.addAdmin()
+        elif self.aSecurity_radioButton.isChecked():
+            self.addUser()
+
+    def addAdmin(self):
+        fname = self.afname_field.text()
+        lname = self.alname_field.text()
+        username = self.ausername_field.text()
+        password = self.aPassword_field.text()
+        contactno = self.aContactNo_field.text()
+        address = self.aAddress_field.toPlainText()
+        try:
+            curs.execute(
+                'INSERT INTO surveilia_admin (admin_fname,admin_lname,admin_username,admin_password,admin_contactno,admin_address) VALUES (?,?,?,?,?,?)',
+                (fname, lname, username, password, contactno, address))
+            connection.commit()
+            print('User added')
+            self.Load_DatabaseAdmin()
+            self.stackedWidget.setCurrentIndex(1)
+        except Exception as error:
+            print(error)
+        self.menuStackedWidget.setCurrentIndex(5)
+
+    def addUser(self):
+        fname = self.afname_field.text()
+        lname = self.alname_field.text()
+        username = self.ausername_field.text()
+        password = self.aPassword_field.text()
+        contactno = self.aContactNo_field.text()
+        address = self.aAddress_field.toPlainText()
+        try:
+            curs.execute(
+                'INSERT INTO surveilia_users (user_fname,user_lname,user_username,user_password,user_contactno,user_address) VALUES (?,?,?,?,?,?)',
+                (fname, lname, username, password, contactno, address))
+            connection.commit()
+            print('User added')
+            self.Load_DatabaseUsers()
+        except Exception as error:
+            print(error)
+        self.menuStackedWidget.setCurrentIndex(5)
+
+    def userMenubutton(self):
+
+        if self.admin_radioButton.isChecked():
+            self.menuStackedWidget.setCurrentIndex(5)
+            self.Load_DatabaseUsers()
+            self.Load_DatabaseAdmin()
+
+        elif self.security_radioButton.isChecked():
+            self.menuStackedWidget.setCurrentIndex(9)
+
+
+    def login(self):
         while True:
             username = self.username1_field.text()
             password = self.password1_field.text()
-            find_user = ("SELECT * FROM surveilia_users WHERE user_username = ? AND user_password = ?")
+            if self.admin_radioButton.isChecked():
+                find_user = ("SELECT * FROM surveilia_admin WHERE admin_username = ? AND admin_password = ?")
+            elif self.security_radioButton.isChecked():
+                find_user = ("SELECT * FROM surveilia_users WHERE user_username = ? AND user_password = ?")
+            curs.execute(find_user, [(username), (password)])
+            results = curs.fetchall()
+            if results:
+                for i in results:
+                    print("Welcome " + i[1])
+                    self.mainStackedWidget.setCurrentIndex(1)
+                    self.welcomeName_label.setText(i[1] + " " + i[2])
+                    self.userName_label.setText(i[1] + " " + i[2])
+                break
+            else:
+                print("Username & password not recognized")
+                self.loginFlag_label.setText("Invalid Username or Password.")
+                break
+
+    def showAccountinfo(self):
+        self.menuStackedWidget.setCurrentIndex(4)
+        if self.security_radioButton.isChecked():
+            self.edit_pushButton.hide()
+            self.fname_field.setReadOnly(True)
+            self.lname_field.setReadOnly(True)
+            self.username_field.setReadOnly(True)
+            self.password_field.setReadOnly(True)
+            self.contactInfo_field.setReadOnly(True)
+            self.address_field.setReadOnly(True)
+        while True:
+            username = self.username1_field.text()
+            password = self.password1_field.text()
+            if self.admin_radioButton.isChecked():
+                find_user = ("SELECT * FROM surveilia_admin WHERE admin_username = ? AND admin_password = ?")
+            elif self.security_radioButton.isChecked():
+                find_user = ("SELECT * FROM surveilia_users WHERE user_username = ? AND user_password = ?")
+
             curs.execute(find_user, [(username), (password)])
             results = curs.fetchall()
             if results:
@@ -173,32 +282,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
             else:
                 print("UNKNOWN ERROR occured while displaying data.")
                 break
-
-    def login(self):
-        while True:
-            username = self.username1_field.text()
-            password = self.password1_field.text()
-            find_user = ("SELECT * FROM surveilia_users WHERE user_username = ? AND user_password = ?")
-            curs.execute(find_user, [(username), (password)])
-            results = curs.fetchall()
-
-            if results:
-                for i in results:
-                    print("Welcome " + i[1])
-                    self.mainStackedWidget.setCurrentIndex(1)
-                    self.welcomeName_label.setText(i[1] + " " + i[2])
-                    self.userName_label.setText(i[1] + " " + i[2])
-                break
-            else:
-                print("Username & password not recognized")
-                self.loginFlag_label.setText("Invalid Username or Password.")
-                break
-
-    def userMenubutton(self):
-        self.menuStackedWidget.setCurrentIndex(5)
-        self.Load_Database()
-        #
-
+########################################################################################################################
     def deleteUser(self):
         # print('ifrah')
         content = "SELECT * FROM surveilia_users"
@@ -217,30 +301,35 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                     "DELETE FROM surveilia_users WHERE user_id=? AND user_fname=? AND user_lname=? AND user_username = ? AND user_password = ? AND user_contactno =? AND user_address =? ",
                     (id, fname, lname, username, password, contactno, address))
                 connection.commit()
-                self.Load_Database()
+                self.Load_DatabaseUsers()
         # self.user_tableWidget.removeRow(self.user_tableWidget.currentRow())
 
-    def addUser(self):
 
-        fname = self.afname_field.text()
-        lname = self.alname_field.text()
-        username = self.ausername_field.text()
-        password = self.aPassword_field.text()
-        contactno = self.aContactNo_field.text()
-        address = self.aAddress_field.toPlainText()
-        try:
-            curs.execute(
-                'INSERT INTO surveilia_users (user_fname,user_lname,user_username,user_password,user_contactno,user_address) VALUES (?,?,?,?,?,?)',
-                (fname, lname, username, password, contactno, address))
-            connection.commit()
-            print('User added')
-            self.Load_Database()
-        except Exception as error:
-            print(error)
+########################################################################################################################
+    def deleteAdmin(self):
+        content = "SELECT * FROM surveilia_admin"
+        res = curs.execute(content)
+        for row in enumerate(res):
+            if row[0] == self.admin_tableWidget.currentRow():
+                data = row[1]
+                id = data[0]
+                fname = data[1]
+                lname = data[2]
+                username = data[3]
+                password = data[4]
+                contactno = data[5]
+                address = data[6]
+                curs.execute(
+                    "DELETE FROM surveilia_admin WHERE admin_id=? AND admin_fname=? AND admin_lname=? AND admin_username = ? AND admin_password = ? AND admin_contactno =? AND admin_address =? ",
+                    (id, fname, lname, username, password, contactno, address))
+                connection.commit()
+                self.Load_DatabaseAdmin()
+        # self.admin_tableWidget.removeRow(self.user_tableWidget.currentRow())
 
-        self.menuStackedWidget.setCurrentIndex(5)
 
-    def Load_Database(self):
+########################################################################################################################
+
+    def Load_DatabaseUsers(self):
 
         while self.user_tableWidget.rowCount() > 0:
             self.user_tableWidget.removeRow(0)
@@ -251,6 +340,20 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
             self.user_tableWidget.insertRow(row_index)
             for colm_index, colm_data in enumerate(row_data):
                 self.user_tableWidget.setItem(row_index, colm_index, QtWidgets.QTableWidgetItem(str(colm_data)))
+        # self.countLabel.setText("Total Users : " + str(self.user_tableWidget.rowCount()))
+        return
+
+    def Load_DatabaseAdmin(self):
+
+        while self.admin_tableWidget.rowCount() > 0:
+            self.admin_tableWidget.removeRow(0)
+        # connection = sqlite3.connect('Surveilia_database.db')
+        content = 'SELECT * FROM surveilia_admin'
+        res = connection.execute(content)
+        for row_index, row_data in enumerate(res):
+            self.admin_tableWidget.insertRow(row_index)
+            for colm_index, colm_data in enumerate(row_data):
+                self.admin_tableWidget.setItem(row_index, colm_index, QtWidgets.QTableWidgetItem(str(colm_data)))
         # self.countLabel.setText("Total Users : " + str(self.user_tableWidget.rowCount()))
         return
 
@@ -851,6 +954,10 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.address_label.setText("پتہ")
         self.edit_pushButton.setText("ترمیم کریں")
         self.userInfo_label.setText("صارفین کی معلومات")
+        self.viewLabel.setText("دیکھیں:")
+        self.adminstable_radioButton.setText("ایڈمن")
+        self.securitytable_radioButton.setText("سکیورٹی گارڈ")
+
         self.userAdd_pushButton.setText("شامل کریں")
         self.userDelete_pushButton.setText("حذف کریں")
 
@@ -861,6 +968,16 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.user_tableWidget.horizontalHeaderItem(4).setText("پاس ورڈ")
         self.user_tableWidget.horizontalHeaderItem(5).setText("رابطہ نمبر")
         self.user_tableWidget.horizontalHeaderItem(6).setText("پتہ")
+
+        self.adminAdd_pushButton.setText("شامل کریں")
+        self.adminDelete_pushButton.setText("حذف کریں")
+        self.admin_tableWidget.horizontalHeaderItem(0).setText("صارف کی شناخت")
+        self.admin_tableWidget.horizontalHeaderItem(1).setText("پہلا نام")
+        self.admin_tableWidget.horizontalHeaderItem(2).setText("آخری نام")
+        self.admin_tableWidget.horizontalHeaderItem(3).setText("صارف نام")
+        self.admin_tableWidget.horizontalHeaderItem(4).setText("پاس ورڈ")
+        self.admin_tableWidget.horizontalHeaderItem(5).setText("رابطہ نمبر")
+        self.admin_tableWidget.horizontalHeaderItem(6).setText("پتہ")
         self.addUser_label.setText("نیا صارف شامل کریں:")
         self.afname_label.setText("پہلا نام")
         self.alname_label.setText("آخری نام")
@@ -869,6 +986,10 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.aAddress_label.setText("پتہ")
         self.addNewUser_pushButton.setText("نیا صارف شامل کریں")
         self.ausername_label.setText("صارف نام")
+        self.aAdmin_radioButton.setText("ایڈمن")
+        self.aSecurity_radioButton.setText("سکیورٹی گارڈ")
+        self.accountType_label.setText("اکاؤنٹ ٹاعپ")
+
         self.addIPCam_label.setText(" ایڈریس کا استعمال کرتے ہوئے کیمرا شامل کریں")
         self.addIPCam_field.setText("IP ایڈریس یہاں داخل کریں")
         self.addIPCam_pushButton.setText("شامل کریں")
@@ -916,7 +1037,9 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.cam06_pushButton.setText("CAMERA_06")
         self.addNew_pushButton.setText("ADD NEW")
         self.alarmHistory_label.setText("ALARM HISTORY")
-        self.alarmHistoryDetail_label.setText("The history of alarms is displayed here.")
+        self.alarmHistoryDetail_label.setText(
+            "The history of alarms is displayed here.")
+
         self.alarm_tableWidget.horizontalHeaderItem(0).setText("Camera ID")
         self.alarm_tableWidget.horizontalHeaderItem(1).setText("Event")
         self.alarm_tableWidget.horizontalHeaderItem(2).setText("Date")
@@ -925,7 +1048,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.show_label.setText("           Show:")
         self.anomalyClip_checkBox.setText("Anomaly Clip")
         self.cameraFeed_checkBox.setText("Camera Feed")
-        self.storage_tableWidget.verticalHeaderItem(0).setText("1")
+
         self.storage_tableWidget.horizontalHeaderItem(0).setText("Filename")
         self.storage_tableWidget.horizontalHeaderItem(1).setText("Date")
         self.storage_tableWidget.horizontalHeaderItem(2).setText("Size")
@@ -938,15 +1061,28 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.address_label.setText("Address:")
         self.edit_pushButton.setText("EDIT")
         self.userInfo_label.setText("  USERS INFORMATION")
+        self.viewLabel.setText("View:")
+        self.adminstable_radioButton.setText("Admins")
+        self.securitytable_radioButton.setText("Security Guards")
         self.userAdd_pushButton.setText("ADD")
         self.userDelete_pushButton.setText("DELETE")
-        self.user_tableWidget.horizontalHeaderItem(0).setText("User ID")
+        self.user_tableWidget.horizontalHeaderItem(0).setText("ID")
         self.user_tableWidget.horizontalHeaderItem(1).setText("First Name")
         self.user_tableWidget.horizontalHeaderItem(2).setText("Last Name")
         self.user_tableWidget.horizontalHeaderItem(3).setText("Username")
         self.user_tableWidget.horizontalHeaderItem(4).setText("Password")
         self.user_tableWidget.horizontalHeaderItem(5).setText("Contact No.")
         self.user_tableWidget.horizontalHeaderItem(6).setText("Address")
+        self.adminAdd_pushButton.setText("ADD")
+        self.adminDelete_pushButton.setText("DELETE")
+        self.admin_tableWidget.horizontalHeaderItem(0).setText("ID")
+        self.admin_tableWidget.horizontalHeaderItem(1).setText("First Name")
+        self.admin_tableWidget.horizontalHeaderItem(2).setText("Last Name")
+        self.admin_tableWidget.horizontalHeaderItem(3).setText("Username")
+        self.admin_tableWidget.horizontalHeaderItem(4).setText("Password")
+        self.admin_tableWidget.horizontalHeaderItem(5).setText("Contact No.")
+        self.admin_tableWidget.horizontalHeaderItem(6).setText("Address")
+
         self.addUser_label.setText("ADD NEW USER")
         self.afname_label.setText("First Name:")
         self.alname_label.setText("Last Name:")
@@ -954,7 +1090,10 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.aContactNo_label.setText("Contact No.")
         self.aAddress_label.setText("Address:")
         self.addNewUser_pushButton.setText("ADD USER")
-        self.ausername_label.setText("User Name:")
+        self.ausername_label.setText("Username:")
+        self.aAdmin_radioButton.setText("Admin")
+        self.aSecurity_radioButton.setText("Security Guard")
+        self.accountType_label.setText("Account Type:")
         self.addIPCam_label.setText("Add camera using IP Address")
         self.addIPCam_field.setText("ENTER IP ADDRESS HERE")
         self.addIPCam_pushButton.setText("ADD")
