@@ -54,6 +54,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         super().__init__(*args, **kwargs)
         self.setupUi(self)
         self.logic = 0
+        self.flag = 0
         self.camSignal = 0
         self.mainStackedWidget.setCurrentIndex(0)
         self.menuStackedWidget.setCurrentIndex(0)
@@ -61,44 +62,14 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.user_tableWidget.horizontalHeader().setVisible(True)
         self.user_tableWidget.verticalHeader().setVisible(True)
         self.admin_tableWidget.horizontalHeader().setVisible(True)
+        self.admin_tableWidget.verticalHeader().setVisible(True)
 
-        ####################### MAIN STACKED WIDGET ###############################################
-        # self.login_pushButton.clicked.connect(lambda: self.mainStackedWidget.setCurrentIndex(1))
-        self.login_pushButton.clicked.connect(self.login)
-        self.logout_toolButton.clicked.connect(
-            self.logout
-        )
-        self.loginAgain_pushButton.clicked.connect(
-            lambda: self.mainStackedWidget.setCurrentIndex(0)
-        )
+        self.loginAgain_pushButton.clicked.connect(lambda: self.mainStackedWidget.setCurrentIndex(0))
+        self.logo_toolButton.clicked.connect(lambda: self.menuStackedWidget.setCurrentIndex(0))
+        self.getStarted_pushButton.clicked.connect(lambda: self.menuStackedWidget.setCurrentIndex(1))
+        self.camera_toolButton.clicked.connect(lambda: self.menuStackedWidget.setCurrentIndex(1))
+        self.language_toolButton.clicked.connect(lambda: self.menuStackedWidget.setCurrentIndex(8))
 
-        ######################## MENU STACKED WIDGET ##############################################
-        self.logo_toolButton.clicked.connect(
-            lambda: self.menuStackedWidget.setCurrentIndex(0)
-        )
-        self.getStarted_pushButton.clicked.connect(
-            lambda: self.menuStackedWidget.setCurrentIndex(1)
-        )
-        self.camera_toolButton.clicked.connect(
-            lambda: self.menuStackedWidget.setCurrentIndex(1)
-        )
-        # self.alarm_toolButton.clicked.connect(lambda: self.menuStackedWidget.setCurrentIndex(2))
-        # self.storage_toolButton.clicked.connect(lambda: self.menuStackedWidget.setCurrentIndex(3))
-
-        self.account_toolButton.clicked.connect(
-            self.showAccountinfo
-        )
-        self.users_toolButton.clicked.connect(
-            self.userMenubutton
-        )
-        # self.userAdd_pushButton.clicked.connect(
-        #     lambda: self.menuStackedWidget.setCurrentIndex(6)
-        # )
-        self.language_toolButton.clicked.connect(
-            lambda: self.menuStackedWidget.setCurrentIndex(8)
-        )
-        # self.storage_toolButton.clicked.connect(self.openDir)
-        ##########################CAMERA PAGE####################################################
         self.cam02_pushButton.hide()
         self.cam03_pushButton.hide()
         self.cam04_pushButton.hide()
@@ -125,9 +96,12 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.videoSlider.hide()
         self.videoDurationChanged.hide()
 
+        self.login_pushButton.clicked.connect(self.login)
+        self.logout_toolButton.clicked.connect(self.logout)
+        self.account_toolButton.clicked.connect(self.showAccountinfo)
+        self.users_toolButton.clicked.connect(self.userMenubutton)
         self.addNew_pushButton.clicked.connect(self.addNewCamera)
         self.cancel_pushButton.clicked.connect(self.close)
-        self.flag = 0
 
         self.cam01_pushButton.clicked.connect(self.cam1clicked)
         self.cam02_pushButton.clicked.connect(self.cam2clicked)
@@ -135,42 +109,29 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.cam04_pushButton.clicked.connect(self.cam4clicked)
         self.cam05_pushButton.clicked.connect(self.cam5clicked)
         self.cam06_pushButton.clicked.connect(self.cam6clicked)
-
-        ##########################PAGE 7####################################################
         self.openDir_pushButton.clicked.connect(self.openFile)
         self.addIPCam_pushButton.clicked.connect(self.openIPcam)
         self.openWebcam_pushButton.clicked.connect(self.openWebcam)
-        self.cancel_PushButton.clicked.connect(
-            lambda: self.menuStackedWidget.setCurrentIndex(1)
-        )
+        self.cancel_PushButton.clicked.connect(lambda: self.menuStackedWidget.setCurrentIndex(1))
+        self.userAdd_pushButton.clicked.connect(lambda: self.menuStackedWidget.setCurrentIndex(6))
+        self.adminAdd_pushButton.clicked.connect(lambda: self.menuStackedWidget.setCurrentIndex(6))
+        self.adminstable_radioButton.toggled.connect(lambda: self.stackedWidget.setCurrentIndex(1))
+        self.securitytable_radioButton.toggled.connect(lambda: self.stackedWidget.setCurrentIndex(0))
+
         self.english_radioButton.toggled.connect(self.changeLanguagetoEnglish)
         self.urdu_radioButton.toggled.connect(self.changeLanguagetoUrdu)
         self.logout_toolButton.clicked.connect(self.changeLanguagetoEnglish)
-        # create media player object
-        self.mediaPlayer = QMediaPlayer(None, QMediaPlayer.VideoSurface)
-        # pass the widget where the video will be displayed
-        # self.mediaPlayer.setVideoOutput(self.videoDisplay_widget1)
         self.alarm_toolButton.clicked.connect(self.anomaly_tableDetail)
-
-        self.userAdd_pushButton.clicked.connect(lambda: self.menuStackedWidget.setCurrentIndex(6))
         self.userDelete_pushButton.clicked.connect(self.deleteUser)
-        self.adminAdd_pushButton.clicked.connect(lambda: self.menuStackedWidget.setCurrentIndex(6))
         self.adminDelete_pushButton.clicked.connect(self.deleteAdmin)
-
         self.addNewUser_pushButton.clicked.connect(self.addnewuser)
-        self.adminstable_radioButton.toggled.connect(lambda: self.stackedWidget.setCurrentIndex(1))
-        self.securitytable_radioButton.toggled.connect(lambda: self.stackedWidget.setCurrentIndex(0))
         self.anomalyVideoDisplay.setStyleSheet("\n"
                                                "background-color: rgb(0, 0, 0);\n"
                                                "")
-        self.videoPathEnter_pushButton.clicked.connect(self.openVideo)
-        # self.aAdmin_radioButton.toggled(self.adminRadioButton)
-        # self.aSecurity_radioButton.toggled(self.securityRadioButton)
         ####################################Display video#########################################
-        # create media player object
-        self.mediaPlayer = QMediaPlayer(None, QMediaPlayer.VideoSurface)
-        # pass the widget where the video will be displayed
-        self.mediaPlayer.setVideoOutput(self.anomalyVideoDisplay)
+        self.videoPathEnter_pushButton.clicked.connect(self.openVideo)
+        self.mediaPlayer = QMediaPlayer(None, QMediaPlayer.VideoSurface)        # create media player object
+        self.mediaPlayer.setVideoOutput(self.anomalyVideoDisplay)        # pass the widget where the video will be displayed
         self.play_pushButton.setEnabled(False)
         self.pause_pushButton.setEnabled(False)
         self.play_pushButton.clicked.connect(self.playVideo)
@@ -178,40 +139,24 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.mediaPlayer.positionChanged.connect(self.positionChanged)
         self.mediaPlayer.durationChanged.connect(self.durationChanged)
 
-    """
-            if self.mainStackedWidget.currentIndex() == 1:
-                if self.menuStackedWidget.currentIndex() == 1:
-                    print("NOOOO")
-                    self.camera_toolButton.setStyleSheet("background-color:white;")
-                elif self.menuStackedWidget.setCurrentIndex(2):
-                    print("in 2")
-                    self.alarm_toolButton.setStyleSheet("background-color:#2A2F3C;")
-                elif self.menuStackedWidget.setCurrentIndex(3) == True:
-                    print("3rd logic worked hehe")
-                    self.storage_toolButton.setStyleSheet("background-color:#2A2F3C;")
-                elif self.menuStackedWidget.currentIndex() == 4:
-                    self.account_toolButton.setStyleSheet("background-color:#2A2F3C;")
-                elif self.menuStackedWidget.currentIndex() == 5:
-                    self.user_toolButton.setStyleSheet("background-color:#2A2F3C;")
-                elif self.menuStackedWidget.currentIndex() == 6:
-                    self.language_toolButton.setStyleSheet("background-color:#2A2F3C;")
-                else:
-                    print("I AM NOT GONNA ENTER HEHE")
-    """
-
-    ########################################################################################################################
-    """
-    def openDir(self):
-        
-        fileName, _ = QFileDialog.getOpenFileName(
-            self, "Open Video", "", "Video Files (*.mp4 *.flv *.ts *.mts *.avi *.wmv)"
-        )
-        
-        # os.path("C:\Windows\System32\cmd.exe")
-        # path = "D:\FYP\Surveilia"
-        # open(path, "r")
-        # os.startfile(path)
-    """
+    def menuButtonColor(self):
+        if self.menuStackedWidget.currentIndex() == 1:
+            print("NOOOO")
+            self.camera_toolButton.setStyleSheet("background-color:white;")
+        elif self.menuStackedWidget.setCurrentIndex(2):
+            print("in 2")
+            self.alarm_toolButton.setStyleSheet("background-color:#2A2F3C;")
+        elif self.menuStackedWidget.setCurrentIndex(3) == True:
+            print("3rd logic worked hehe")
+            self.storage_toolButton.setStyleSheet("background-color:#2A2F3C;")
+        elif self.menuStackedWidget.currentIndex() == 4:
+            self.account_toolButton.setStyleSheet("background-color:#2A2F3C;")
+        elif self.menuStackedWidget.currentIndex() == 5:
+            self.user_toolButton.setStyleSheet("background-color:#2A2F3C;")
+        elif self.menuStackedWidget.currentIndex() == 6:
+            self.language_toolButton.setStyleSheet("background-color:#2A2F3C;")
+        else:
+            print("I AM NOT GONNA ENTER HEHE")
 
     def openVideo(self):
         # fileName, _ = QFileDialog.getOpenFileName(self, "Open Movie",QDir.homePath())
@@ -237,42 +182,12 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
 
     def durationChanged(self, duration):
         self.videoSlider.setRange(0, duration)
-
         minutes = int(duration / 60000)
         seconds = int((duration - minutes * 60000) / 1000)
-
         self.videoDurationChanged.setText('{}:{}'.format(minutes, seconds))
 
     def setPosition(self, position):
         self.mediaPlayer.setPosition(position)
-        # minutes = int(position / 60000)
-        # seconds = int((position - minutes * 60000) / 1000)
-        # self.videoPositionChanged.setText('{}:{}'.format(minutes, seconds))
-
-    """
-    def getDuration(self, d):
-        '''d Is the total length of video captured( ms)'''
-        self.videoDurationChanged.setRange(0, d)
-        # self.videoDurationChanged.setEnabled(True)
-        self.displayTime(d)
-
-
-    # Video real-time location acquisition
-    def getPosition(self, p):
-        self.videoDurationChanged.setValue(p)
-        self.displayTime(self.ui.sld_duration.maximum() - p)
-
-    # Show time remaining
-    def displayTime(self, ms):
-        minutes = int(ms / 60000)
-        seconds = int((ms - minutes * 60000) / 1000)
-        self.videoPositionChanged.setText('{}:{}'.format(minutes, seconds))
-
-    # Update video location with progress bar
-    def updatePosition(self, v):
-        self.mediaPlayer.setPosition(v)
-        self.displayTime(self.videoDurationChanged.maximum() - v)
-    """
 
     def MessagesProfile(self, title, message):
         mssg = QMessageBox()
@@ -354,7 +269,6 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.menuStackedWidget.setCurrentIndex(5)
 
     def userMenubutton(self):
-
         if self.admin_radioButton.isChecked():
             self.menuStackedWidget.setCurrentIndex(5)
             self.Load_DatabaseUsers()
@@ -532,7 +446,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                 self.alarm_tableWidget.setItem(row - 1, column, self.item)
                 # to set the elements read only
                 self.item.setFlags(QtCore.Qt.ItemIsEnabled)
-
+##########################################MODEL######################################################
     def tsmmodel(self, f, check):
 
         # os.environ[""] = "0"
@@ -706,7 +620,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                 )
                 cv2.putText(
                     img,
-                    "FPS: {:.1f} Frame/s".format(1 / current_time),
+                    "FPS: {:.1f} ".format(1 / current_time),
                     (250, int(height / 9)),
                     cv2.FONT_HERSHEY_SIMPLEX,
                     0.6,
@@ -838,42 +752,6 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                 cap.release()
                 cv2.destroyAllWindows()
 
-    """
-    def Login(self):
-
-        self.excel = xlrd.open_workbook("UsersList.xlsx")
-        self.sheet1 = self.excel.sheet_by_index(0)
-
-        for row in range(self.sheet1.nrows):
-
-            cellID = str(self.sheet1.cell(row, 0))
-            cellID = cellID.lstrip(":'text")  # to get data before text
-            cellID = cellID.rstrip("'")
-
-            cellUserName = str(self.sheet1.cell(row, 1))
-            cellUserName = cellUserName.lstrip(":'text")
-            cellUserName = cellUserName.rstrip("'")
-
-            cellPassword = str(self.sheet1.cell_value(row, 2))
-            cellPassword = cellPassword.lstrip(":'text")
-            cellPassword = cellPassword.rstrip("'")
-
-            Name = str(self.username1_field.text())
-            Password = str(self.password1_field.text())
-
-            if cellUserName == Name:
-                print("HERE")
-                if Password == cellPassword:
-                    print("login successful")
-                    self.mainStackedWidget.setCurrentIndex(1)
-                    break
-                else:
-                    print("INVALID USERNAME OR PASSWORD")
-
-            else:
-                print("still in else")
-    """
-
     def cam1clicked(self):
         self.camSignal = 1
         self.menuStackedWidget.setCurrentIndex(7)
@@ -906,8 +784,6 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         t = Thread(target=self.tsmmodel, args=(url, self.camSignal))
         t.start()
         cv2.waitKey(10)
-
-    # cv2.waitKey(10)
 
     # METHOD TO OPEN WEB CAM
     @pyqtSlot()
@@ -1051,7 +927,6 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.show_label.setText("دکھائیں:        ")
         self.anomalyClip_checkBox.setText("اناملی کلپ")
         self.cameraFeed_checkBox.setText("کیمرا فیڈ")
-
         self.storage_tableWidget.horizontalHeaderItem(0).setText("فائل کا نام")
         self.storage_tableWidget.horizontalHeaderItem(1).setText("تاریخ")
         self.storage_tableWidget.horizontalHeaderItem(2).setText("سائز")
@@ -1067,10 +942,8 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.viewLabel.setText("دیکھیں:")
         self.adminstable_radioButton.setText("ایڈمن")
         self.securitytable_radioButton.setText("سکیورٹی گارڈ")
-
         self.userAdd_pushButton.setText("شامل کریں")
         self.userDelete_pushButton.setText("حذف کریں")
-
         self.user_tableWidget.horizontalHeaderItem(0).setText("صارف کی شناخت")
         self.user_tableWidget.horizontalHeaderItem(1).setText("پہلا نام")
         self.user_tableWidget.horizontalHeaderItem(2).setText("آخری نام")
@@ -1078,7 +951,6 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.user_tableWidget.horizontalHeaderItem(4).setText("پاس ورڈ")
         self.user_tableWidget.horizontalHeaderItem(5).setText("رابطہ نمبر")
         self.user_tableWidget.horizontalHeaderItem(6).setText("پتہ")
-
         self.adminAdd_pushButton.setText("شامل کریں")
         self.adminDelete_pushButton.setText("حذف کریں")
         self.admin_tableWidget.horizontalHeaderItem(0).setText("صارف کی شناخت")
@@ -1099,7 +971,6 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.aAdmin_radioButton.setText("ایڈمن")
         self.aSecurity_radioButton.setText("سکیورٹی گارڈ")
         self.accountType_label.setText("اکاؤنٹ ٹاعپ")
-
         self.addIPCam_label.setText(" ایڈریس کا استعمال کرتے ہوئے کیمرا شامل کریں")
         self.addIPCam_field.setText("IP ایڈریس یہاں داخل کریں")
         self.addIPCam_pushButton.setText("شامل کریں")
@@ -1149,7 +1020,6 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.alarmHistory_label.setText("ALARM HISTORY")
         self.alarmHistoryDetail_label.setText(
             "The history of alarms is displayed here.")
-
         self.alarm_tableWidget.horizontalHeaderItem(0).setText("Camera ID")
         self.alarm_tableWidget.horizontalHeaderItem(1).setText("Event")
         self.alarm_tableWidget.horizontalHeaderItem(2).setText("Date")
@@ -1158,7 +1028,6 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.show_label.setText("           Show:")
         self.anomalyClip_checkBox.setText("Anomaly Clip")
         self.cameraFeed_checkBox.setText("Camera Feed")
-
         self.storage_tableWidget.horizontalHeaderItem(0).setText("Filename")
         self.storage_tableWidget.horizontalHeaderItem(1).setText("Date")
         self.storage_tableWidget.horizontalHeaderItem(2).setText("Size")
@@ -1192,7 +1061,6 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.admin_tableWidget.horizontalHeaderItem(4).setText("Password")
         self.admin_tableWidget.horizontalHeaderItem(5).setText("Contact No.")
         self.admin_tableWidget.horizontalHeaderItem(6).setText("Address")
-
         self.addUser_label.setText("ADD NEW USER")
         self.afname_label.setText("First Name:")
         self.alname_label.setText("Last Name:")
@@ -1227,6 +1095,5 @@ if __name__ == "__main__":
     widget.show()
     try:
         app.exec_()
-
     except:
         print("EXITING")
