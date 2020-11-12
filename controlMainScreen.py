@@ -19,7 +19,7 @@ from PyQt5 import QtWidgets as qtw, QtWidgets, QtCore
 from PyQt5 import QtCore as qtc
 from PyQt5.QtCore import QUrl, QDir, QTimer, pyqtSlot
 from PyQt5.QtGui import QImage, QPixmap
-from PyQt5.QtWidgets import QFileDialog, QStyle
+from PyQt5.QtWidgets import QFileDialog, QStyle, QMessageBox
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent, QMediaPlaylist
 from surveiliaFrontEnd import Ui_surveiliaFrontEnd
 from PyQt5.QtMultimediaWidgets import QVideoWidget
@@ -66,7 +66,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         # self.login_pushButton.clicked.connect(lambda: self.mainStackedWidget.setCurrentIndex(1))
         self.login_pushButton.clicked.connect(self.login)
         self.logout_toolButton.clicked.connect(
-            lambda: self.mainStackedWidget.setCurrentIndex(2)
+            self.logout
         )
         self.loginAgain_pushButton.clicked.connect(
             lambda: self.mainStackedWidget.setCurrentIndex(0)
@@ -83,9 +83,8 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
             lambda: self.menuStackedWidget.setCurrentIndex(1)
         )
         # self.alarm_toolButton.clicked.connect(lambda: self.menuStackedWidget.setCurrentIndex(2))
-        self.storage_toolButton.clicked.connect(
-            lambda: self.menuStackedWidget.setCurrentIndex(3)
-        )
+        # self.storage_toolButton.clicked.connect(lambda: self.menuStackedWidget.setCurrentIndex(3))
+
         self.account_toolButton.clicked.connect(
             self.showAccountinfo
         )
@@ -98,7 +97,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.language_toolButton.clicked.connect(
             lambda: self.menuStackedWidget.setCurrentIndex(8)
         )
-
+        # self.storage_toolButton.clicked.connect(self.openDir)
         ##########################CAMERA PAGE####################################################
         self.cam02_pushButton.hide()
         self.cam03_pushButton.hide()
@@ -111,6 +110,20 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.display_4.hide()
         self.display_5.hide()
         self.display_6.hide()
+
+        self.displaycross_2.hide()
+        self.displaycross_3.hide()
+        self.displaycross_4.hide()
+        self.displaycross_5.hide()
+        self.displaycross_6.hide()
+
+        self.videoPathfield.hide()
+        self.videoPathEnter_pushButton.hide()
+        self.anomalyVideoDisplay.hide()
+        self.play_pushButton.hide()
+        self.pause_pushButton.hide()
+        self.videoSlider.hide()
+        self.videoDurationChanged.hide()
 
         self.addNew_pushButton.clicked.connect(self.addNewCamera)
         self.cancel_pushButton.clicked.connect(self.close)
@@ -147,9 +160,23 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.addNewUser_pushButton.clicked.connect(self.addnewuser)
         self.adminstable_radioButton.toggled.connect(lambda: self.stackedWidget.setCurrentIndex(1))
         self.securitytable_radioButton.toggled.connect(lambda: self.stackedWidget.setCurrentIndex(0))
-
+        self.anomalyVideoDisplay.setStyleSheet("\n"
+                                               "background-color: rgb(0, 0, 0);\n"
+                                               "")
+        self.videoPathEnter_pushButton.clicked.connect(self.openVideo)
         # self.aAdmin_radioButton.toggled(self.adminRadioButton)
         # self.aSecurity_radioButton.toggled(self.securityRadioButton)
+        ####################################Display video#########################################
+        # create media player object
+        self.mediaPlayer = QMediaPlayer(None, QMediaPlayer.VideoSurface)
+        # pass the widget where the video will be displayed
+        self.mediaPlayer.setVideoOutput(self.anomalyVideoDisplay)
+        self.play_pushButton.setEnabled(False)
+        self.pause_pushButton.setEnabled(False)
+        self.play_pushButton.clicked.connect(self.playVideo)
+        self.pause_pushButton.clicked.connect(self.pauseVideo)
+        self.mediaPlayer.positionChanged.connect(self.positionChanged)
+        self.mediaPlayer.durationChanged.connect(self.durationChanged)
 
     """
             if self.mainStackedWidget.currentIndex() == 1:
@@ -171,8 +198,117 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                 else:
                     print("I AM NOT GONNA ENTER HEHE")
     """
-    # def adminRadioButton(self):
-    # def securityRadioButton(self):
+
+    ########################################################################################################################
+    """
+    def openDir(self):
+        
+        fileName, _ = QFileDialog.getOpenFileName(
+            self, "Open Video", "", "Video Files (*.mp4 *.flv *.ts *.mts *.avi *.wmv)"
+        )
+        
+        # os.path("C:\Windows\System32\cmd.exe")
+        # path = "D:\FYP\Surveilia"
+        # open(path, "r")
+        # os.startfile(path)
+    """
+
+    def openVideo(self):
+        # fileName, _ = QFileDialog.getOpenFileName(self, "Open Movie",QDir.homePath())
+        fileName = str(self.videoPathfield.text())
+        if fileName != '':
+            print(fileName)
+            self.mediaPlayer.setMedia(
+                QMediaContent(QUrl.fromLocalFile(fileName)))
+            self.mediaPlayer.play()
+            self.play_pushButton.setEnabled(True)
+            self.pause_pushButton.setEnabled(True)
+        else:
+            print("Video not played")
+
+    def playVideo(self):
+        self.mediaPlayer.play()
+
+    def pauseVideo(self):
+        self.mediaPlayer.pause()
+
+    def positionChanged(self, position):
+        self.videoSlider.setValue(position)
+
+    def durationChanged(self, duration):
+        self.videoSlider.setRange(0, duration)
+
+        minutes = int(duration / 60000)
+        seconds = int((duration - minutes * 60000) / 1000)
+
+        self.videoDurationChanged.setText('{}:{}'.format(minutes, seconds))
+
+    def setPosition(self, position):
+        self.mediaPlayer.setPosition(position)
+        # minutes = int(position / 60000)
+        # seconds = int((position - minutes * 60000) / 1000)
+        # self.videoPositionChanged.setText('{}:{}'.format(minutes, seconds))
+
+    """
+    def getDuration(self, d):
+        '''d Is the total length of video captured( ms)'''
+        self.videoDurationChanged.setRange(0, d)
+        # self.videoDurationChanged.setEnabled(True)
+        self.displayTime(d)
+
+
+    # Video real-time location acquisition
+    def getPosition(self, p):
+        self.videoDurationChanged.setValue(p)
+        self.displayTime(self.ui.sld_duration.maximum() - p)
+
+    # Show time remaining
+    def displayTime(self, ms):
+        minutes = int(ms / 60000)
+        seconds = int((ms - minutes * 60000) / 1000)
+        self.videoPositionChanged.setText('{}:{}'.format(minutes, seconds))
+
+    # Update video location with progress bar
+    def updatePosition(self, v):
+        self.mediaPlayer.setPosition(v)
+        self.displayTime(self.videoDurationChanged.maximum() - v)
+    """
+
+    def MessagesProfile(self, title, message):
+        mssg = QMessageBox()
+        mssg.setWindowTitle(title)
+        mssg.setIcon(QMessageBox.Warning)
+        mssg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+        mssg.setStyleSheet("*{\n"
+                           "font-family: century gothic;\n"
+                           "background: white ;\n"
+                           "}\n"
+                           "QPushButton, QToolButton{\n"
+                           "font-weight:bold;\n"
+                           "background-color:#1C1D25;\n"
+                           "color:white ;\n"
+                           "background: #2A2F3C ;\n"
+                           "}\n"
+                           "QPushButton:hover{\n"
+                           "color:white;\n"
+                           "background-color:black;\n"
+                           "}\n"
+                           )
+        mssg.setText(message)
+        mssg.buttonClicked.connect(self.buttonClickeed)
+        mssg.exec_()
+
+    def buttonClickeed(self, me):
+        if me.text() == QMessageBox.Ok:
+            self.mainStackedWidget.setCurrentIndex(2)
+            print('quit')
+            # quit()
+
+    def logout(self):
+        self.MessagesProfile('Quit', 'Will you like to Logout?')
+        self.mainStackedWidget.setCurrentIndex(2)
+        quit()
+        # connection.close()
 
     def addnewuser(self):
         if self.aAdmin_radioButton.isChecked():
@@ -227,11 +363,12 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         elif self.security_radioButton.isChecked():
             self.menuStackedWidget.setCurrentIndex(9)
 
-
     def login(self):
         while True:
             username = self.username1_field.text()
             password = self.password1_field.text()
+
+            # if username !="" or password != "" or self.admin_radioButton.isChecked() == False:
             if self.admin_radioButton.isChecked():
                 find_user = ("SELECT * FROM surveilia_admin WHERE admin_username = ? AND admin_password = ?")
             elif self.security_radioButton.isChecked():
@@ -252,14 +389,14 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
 
     def showAccountinfo(self):
         self.menuStackedWidget.setCurrentIndex(4)
-        if self.security_radioButton.isChecked():
-            self.edit_pushButton.hide()
-            self.fname_field.setReadOnly(True)
-            self.lname_field.setReadOnly(True)
-            self.username_field.setReadOnly(True)
-            self.password_field.setReadOnly(True)
-            self.contactInfo_field.setReadOnly(True)
-            self.address_field.setReadOnly(True)
+        # if self.security_radioButton.isChecked():
+        self.edit_pushButton.hide()
+        self.fname_field.setReadOnly(True)
+        self.lname_field.setReadOnly(True)
+        self.username_field.setReadOnly(True)
+        self.password_field.setReadOnly(True)
+        self.contactInfo_field.setReadOnly(True)
+        self.address_field.setReadOnly(True)
         while True:
             username = self.username1_field.text()
             password = self.password1_field.text()
@@ -282,7 +419,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
             else:
                 print("UNKNOWN ERROR occured while displaying data.")
                 break
-########################################################################################################################
+
     def deleteUser(self):
         # print('ifrah')
         content = "SELECT * FROM surveilia_users"
@@ -304,8 +441,6 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                 self.Load_DatabaseUsers()
         # self.user_tableWidget.removeRow(self.user_tableWidget.currentRow())
 
-
-########################################################################################################################
     def deleteAdmin(self):
         content = "SELECT * FROM surveilia_admin"
         res = curs.execute(content)
@@ -325,9 +460,6 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                 connection.commit()
                 self.Load_DatabaseAdmin()
         # self.admin_tableWidget.removeRow(self.user_tableWidget.currentRow())
-
-
-########################################################################################################################
 
     def Load_DatabaseUsers(self):
 
@@ -357,7 +489,9 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         # self.countLabel.setText("Total Users : " + str(self.user_tableWidget.rowCount()))
         return
 
-    # Record Anomalous event to a file
+    #############################################################################################################################
+
+    # Record Anaomlous event to a file
     def getStatsOfAbnormalActivity(self, cameraID):
         x = datetime.datetime.now()
         with open("./appData/Details.csv", mode="a") as csv_file:
@@ -402,6 +536,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
     def tsmmodel(self, f, check):
 
         # os.environ[""] = "0"
+
         emptyString = ""
 
         print()
@@ -485,7 +620,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         print("loading Video...")
         if f == emptyString:
             print("cam")
-            cap = cv2.VideoCapture(0)
+            cap = cv2.VideoCapture(cv2.CAP_DSHOW)
         else:
             print("cam")
             cap = cv2.VideoCapture(f)
@@ -532,7 +667,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                         print(count, "-", categories[idx[0]], "Prob: ", probs[0])
 
                         current_time = t2 - t1
-                dim = (self.display_1.width(), self.display_1.height())
+                dim = (420, 420)
                 img = cv2.resize(img, dim, interpolation=cv2.INTER_AREA)
                 height, width, _ = img.shape
                 # height, width, _ = img.shape
@@ -540,7 +675,6 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                 # label = np.ones([height // 10, width, 3]).astype("uint8") + 255
 
                 if categories[idx[0]] == "Abnormal Activity":
-
                     R = 255
                     G = 0
                     print("\007")
@@ -573,9 +707,9 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                 cv2.putText(
                     img,
                     "FPS: {:.1f} Frame/s".format(1 / current_time),
-                    (350, int(height / 9)),
+                    (250, int(height / 9)),
                     cv2.FONT_HERSHEY_SIMPLEX,
-                    0.5,
+                    0.6,
                     (255, 255, 255),
                     2,
                 )
@@ -607,6 +741,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                         cv2.imwrite(imageName, img)
 
                     # image_frame = np.concatenate((img, label), axis=0)
+
                 if ret == True:
                     if check == 1:
                         dim = (self.display_1.width(), self.display_1.height())
@@ -621,10 +756,9 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                             qtg.QImage.Format_RGB888,
                         ).rgbSwapped()
                         self.display_1.setPixmap(qtg.QPixmap.fromImage(img1))
-                        # self.camSignal = 0
 
                     elif check == 2:
-                        dim = (self.display_2.width(), self.display_2.height())
+                        dim = (self.display_1.width(), self.display_1.height())
                         img2 = cv2.resize(img, dim, interpolation=cv2.INTER_AREA)
                         height, width, _ = img2.shape
                         bytesPerLine = 3 * width
@@ -639,7 +773,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                         # self.camSignal = 0
 
                     elif check == 3:
-                        dim = (self.display_3.width(), self.display_3.height())
+                        dim = (self.display_1.width(), self.display_1.height())
                         img3 = cv2.resize(img, dim, interpolation=cv2.INTER_AREA)
                         height, width, _ = img3.shape
                         bytesPerLine = 3 * width
@@ -654,7 +788,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                         # self.camSignal = 0
 
                     elif check == 4:
-                        dim = (self.display_4.width(), self.display_4.height())
+                        dim = (self.display_1.width(), self.display_1.height())
                         img4 = cv2.resize(img, dim, interpolation=cv2.INTER_AREA)
                         height, width, _ = img4.shape
                         bytesPerLine = 3 * width
@@ -669,7 +803,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                         # self.camSignal = 0
 
                     elif check == 5:
-                        dim = (self.display_5.width(), self.display_5.height())
+                        dim = (self.display_1.width(), self.display_1.height())
                         img5 = cv2.resize(img, dim, interpolation=cv2.INTER_AREA)
                         height, width, _ = img5.shape
                         bytesPerLine = 3 * width
@@ -684,7 +818,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                         # self.camSignal = 0
 
                     elif check == 6:
-                        dim = (self.display_6.width(), self.display_6.height())
+                        dim = (self.display_1.width(), self.display_1.height())
                         img6 = cv2.resize(img, dim, interpolation=cv2.INTER_AREA)
                         height, width, _ = img6.shape
                         bytesPerLine = 3 * width
@@ -766,7 +900,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
 
     # METHOD TO OPEN THE IP CAM THROUGH IP ADDRESS
     def openIPcam(self):
-        self.input = 1
+        self.input = 0
         url = str(self.addIPCam_field.text())
         self.menuStackedWidget.setCurrentIndex(1)
         t = Thread(target=self.tsmmodel, args=(url, self.camSignal))
@@ -778,52 +912,24 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
     # METHOD TO OPEN WEB CAM
     @pyqtSlot()
     def openWebcam(self):
-        self.input = 2
+        self.input = 0
         self.logic = 1
-        cap = cv2.VideoCapture(0)
-        date = datetime.datetime.now()
-        out = cv2.VideoWriter(
-            "D:/Video/Video_%s%s%sT%s%s%s.mp4"
-            % (date.year, date.month, date.day, date.hour, date.minute, date.second),
-            -1,
-            20.2,
-            (640, 480),
-        )
+        cap = 0
         self.menuStackedWidget.setCurrentIndex(1)
-        t1 = Thread(target=self.tsmmodel, args=(0, self.camSignal))
+        t1 = Thread(target=self.tsmmodel, args=(cap, self.camSignal))
         t1.start()
-
-        """while cap.isOpened():
-            # capture video frame by frame
-            ret, frame = cap.read()
-            print(frame)
-            if ret == True:
-                self.displayImage(frame, 1)
-                cv2.waitKey()
-
-                if self.logic == 1:
-                    out.write(frame)
-                    print("Camera Opened")
-
-                if self.logic == 0:
-                    break
-            else:
-                print("Else not found")"""
         # release everything when job is finished
-        cap.release()
-        out.release()
+        # cap.release()
         cv2.destroyAllWindows()
 
     # METHOD TO DISPLAY VIDEO(IMAGE BY IMAGE) IN THE BOX
-    def displayImage(self, img, window=1):
+    """def displayImage(self, img, window=1):
         qformat = QImage.Format_Indexed8
-
         if len(img.shape) == 3:
             if (img.shape[2]) == 4:
                 qformat = QImage.Format_RGBA8888
             else:
                 qformat = QImage.Format_RGB888
-
         img = QImage(img, img.shape[1], img.shape[0], qformat)
         img = img.rgbSwapped()
         pix = qtg.QPixmap.fromImage(img)
@@ -832,37 +938,31 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
             600, 450, QtCore.Qt.KeepAspectRatio, QtCore.Qt.SmoothTransformation
         )
         if self.camSignal == 1:
-
             self.display_1.setPixmap(pix)
             # self.camSignal = 0
-
         elif self.camSignal == 2:
             self.display_2.setPixmap(pix)
             # self.camSignal = 0
-
         elif self.camSignal == 3:
             # pix = pix.scaled(self.display_3.width(), self.display_3.height(), QtCore.Qt.KeepAspectRatio,QtCore.Qt.SmoothTransformation)
             self.display_3.setPixmap(pix)
             # self.camSignal = 0
-
         elif self.camSignal == 4:
             # pix = pix.scaled(self.display_4.width(), self.display_4.height(), QtCore.Qt.KeepAspectRatio,QtCore.Qt.SmoothTransformation)
             self.display_4.setPixmap(pix)
             # self.camSignal = 0
-
         elif self.camSignal == 5:
             # pix = pix.scaled(self.display_5.width(), self.display_5.height(), QtCore.Qt.KeepAspectRatio,QtCore.Qt.SmoothTransformation)
             self.display_5.setPixmap(pix)
             # self.camSignal = 0
-
         elif self.camSignal == 6:
             # pix = pix.scaled(self.display_6.width(), self.display_6.height(), QtCore.Qt.KeepAspectRatio,QtCore.Qt.SmoothTransformation)
             self.display_6.setPixmap(pix)
-            # self.camSignal = 0
+            # self.camSignal = 0"""
 
     # METHOD TO OPEN FILE DIALOG
     def openFile(self):
-        self.input = 3
+        self.input = 0
         fileName, _ = QFileDialog.getOpenFileName(
             self, "Open Video", "", "Video Files (*.mp4 *.flv *.ts *.mts *.avi *.wmv)"
         )
@@ -881,25 +981,35 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         if self.cam02_pushButton.isHidden():
             self.cam02_pushButton.show()
             self.display_2.show()
+            self.displaycross_2.show()
+
         elif self.cam03_pushButton.isHidden():
             self.cam03_pushButton.show()
             self.display_3.show()
+            self.displaycross_3.show()
+
         elif self.cam04_pushButton.isHidden():
             self.cam04_pushButton.show()
             self.display_4.show()
+            self.displaycross_4.show()
+
         elif self.cam05_pushButton.isHidden():
             self.cam05_pushButton.show()
             self.display_5.show()
+            self.displaycross_5.show()
+
         elif self.cam06_pushButton.isHidden():
             self.cam06_pushButton.show()
             self.display_6.show()
+            self.displaycross_6.show()
+
         else:
             self.addNew_pushButton.setEnabled(False)
             self.addNew_pushButton.setStyleSheet("background-color: light grey ;\n")
 
-            ############################TRANSLATE INTO URDU######################################
-            # METHOD TO CHANGE LANGUAGE
+    ############################TRANSLATE INTO URDU######################################
 
+    # METHOD TO CHANGE LANGUAGE
     def changeLanguagetoUrdu(self):
 
         self.title_label.setText("سرویلیا")
@@ -912,7 +1022,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.loginas1_label.setText(_translate("surveiliaFrontEnd", "Login as:"))
         """
         self.camera_toolButton.setText("کیمرہ")
-        self.storage_toolButton.setText("اسٹوریج")
+        # self.storage_toolButton.setText("اسٹوریج")
         self.logout_toolButton.setText("لاگ آوٹ")
         self.users_toolButton.setText("صارفین")
         self.language_toolButton.setText("زبان")
@@ -1018,7 +1128,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.admin_radioButton.setText("Admin")
         self.loginas1_label.setText("Login as:")
         self.camera_toolButton.setText("Camera")
-        self.storage_toolButton.setText("Storage")
+        # self.storage_toolButton.setText("Storage")
         self.logout_toolButton.setText("Logout")
         self.users_toolButton.setText("Users")
         self.language_toolButton.setText("Language")
