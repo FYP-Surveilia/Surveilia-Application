@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="logo">
+    <file>search-13-24.png</file>
     <file>visible-24.png</file>
     <file>invisible-24.png</file>
     <file>close-window-24.png</file>

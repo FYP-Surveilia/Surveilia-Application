@@ -118,7 +118,6 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.anomalyVideoDisplay.setStyleSheet("\n"
                                                "background-color: rgb(0, 0, 0);\n"
                                                "")
-
         ####################################Display video#########################################
         self.videoPathEnter_pushButton.clicked.connect(self.openVideo)
         self.mediaPlayer = QMediaPlayer(None, QMediaPlayer.VideoSurface)  # create media player object
@@ -131,7 +130,36 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.mediaPlayer.durationChanged.connect(self.durationChanged)
         self.eye_toolButton.clicked.connect(self.revealPassword)
         self.password_shown = False
-        
+        self.anomalySearch_pushButton.clicked.connect(self.anomalySearchAction)
+        self.anomalysearch = False
+
+    def anomalySearchAction(self):
+        if not self.anomalysearch:
+            # text = self.anomalySearch_lineEdit.text()
+            items = self.alarm_tableWidget.findItems(self.anomalySearch_lineEdit.text(), QtCore.Qt.MatchContains)
+            brush = qtg.QBrush(qtg.QColor("orange"))
+            brush.setStyle(QtCore.Qt.SolidPattern)
+            for item in items:
+                item.setForeground(brush)
+            self.anomalysearch = True
+        else:
+            items = self.alarm_tableWidget.findItems(self.anomalySearch_lineEdit.text(), QtCore.Qt.MatchContains)
+            brush = qtg.QBrush(qtg.QColor("white"))
+            brush.setStyle(QtCore.Qt.SolidPattern)
+            for item in items:
+                item.setForeground(brush)
+            self.anomalysearch = False
+        """
+        items = self.alarm_tableWidget.findItems(self.anomalySearch_lineEdit.text(), QtCore.Qt.MatchExactly)
+        if items:
+            results = '\n'.join(
+                'row %d column %d' % (item.row() + 1, item.column() + 1)
+                for item in items)
+        else:
+            results = 'Found Nothing'
+        QMessageBox().information(self, 'Search Results', results)
+        """
+
     def revealPassword(self):
         if not self.password_shown:
             icon = qtg.QIcon()
@@ -145,34 +173,35 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
             self.eye_toolButton.setIcon(icon)
             self.password1_field.setEchoMode(QtWidgets.QLineEdit.Password)
             self.password_shown = False
-
-    """
-    def hidePassword(self):
-
-        icon = qtg.QIcon()
-        icon.addPixmap(qtg.QPixmap(":/logo/invisible-24.png"), qtg.QIcon.Normal, qtg.QIcon.Off)
-        self.eye_toolButton.setIcon(icon)
-        self.password1_field.setEchoMode(QtWidgets.QLineEdit.Password)
     """
     def menuButtonColor(self):
-        if self.menuStackedWidget.currentIndex() == 1:
-            print("NOOOO")
-            self.camera_toolButton.setStyleSheet("background-color:white;")
-        elif self.menuStackedWidget.setCurrentIndex(2):
-            print("in 2")
-            self.alarm_toolButton.setStyleSheet("background-color:#2A2F3C;")
-        elif self.menuStackedWidget.setCurrentIndex(3) == True:
-            print("3rd logic worked hehe")
-            self.storage_toolButton.setStyleSheet("background-color:#2A2F3C;")
-        elif self.menuStackedWidget.currentIndex() == 4:
-            self.account_toolButton.setStyleSheet("background-color:#2A2F3C;")
-        elif self.menuStackedWidget.currentIndex() == 5:
-            self.user_toolButton.setStyleSheet("background-color:#2A2F3C;")
-        elif self.menuStackedWidget.currentIndex() == 6:
-            self.language_toolButton.setStyleSheet("background-color:#2A2F3C;")
-        else:
-            print("I AM NOT GONNA ENTER HEHE")
-
+        while True:
+            if self.menuStackedWidget.setCurrentIndex(1) == True:
+                print("NOOOO")
+                self.camera_toolButton.setStyleSheet("background-color:white;")
+                break
+            elif self.menuStackedWidget.currentIndex() == 2:
+                print("in 2")
+                self.alarm_toolButton.setStyleSheet("background-color:#2A2F3C;")
+                break
+            elif self.menuStackedWidget.currentIndex() == 3:
+                print("3rd logic worked hehe")
+                self.storage_toolButton.setStyleSheet("background-color:#2A2F3C;")
+                break
+            elif self.menuStackedWidget.currentIndex() == 4:
+                self.account_toolButton.setStyleSheet("background-color:#2A2F3C;")
+                break
+            elif self.menuStackedWidget.currentIndex() == 5:
+                self.user_toolButton.setStyleSheet("background-color:#2A2F3C;")
+                break
+            elif self.menuStackedWidget.currentIndex() == 6:
+                self.language_toolButton.setStyleSheet("background-color:#2A2F3C;")
+                break
+            else:
+                self.logout_toolButton.setStyleSheet("background-color:#2A2F3C;")
+                print("I AM NOT GONNA ENTER HEHE")
+                break
+    """
     def openVideo(self):
         # fileName, _ = QFileDialog.getOpenFileName(self, "Open Movie",QDir.homePath())
         fileName = str(self.videoPathfield.text())
@@ -232,12 +261,13 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         if me.text() == QMessageBox.Ok:
             self.mainStackedWidget.setCurrentIndex(2)
             print('quit')
-            # quit()
+            quit()
 
     def logout(self):
         self.MessagesProfile('Quit', 'Will you like to Logout?')
         self.mainStackedWidget.setCurrentIndex(2)
-        quit()
+        # self.menuButtonColor()
+        # quit()
         # connection.close()
 
     def addnewuser(self):
@@ -318,7 +348,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                 for i in results:
                     print("Welcome " + i[1])
                     self.mainStackedWidget.setCurrentIndex(1)
-                    self.menuButtonColor()
+                    # self.menuButtonColor()
                     self.welcomeName_label.setText(i[1] + " " + i[2])
                     self.userName_label.setText(i[1] + " " + i[2])
                 break
