@@ -129,7 +129,31 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.pause_pushButton.clicked.connect(self.pauseVideo)
         self.mediaPlayer.positionChanged.connect(self.positionChanged)
         self.mediaPlayer.durationChanged.connect(self.durationChanged)
+        self.eye_toolButton.clicked.connect(self.revealPassword)
+        self.password_shown = False
+        
+    def revealPassword(self):
+        if not self.password_shown:
+            icon = qtg.QIcon()
+            icon.addPixmap(qtg.QPixmap(":/logo/visible-24.png"), qtg.QIcon.Normal, qtg.QIcon.Off)
+            self.eye_toolButton.setIcon(icon)
+            self.password1_field.setEchoMode(QtWidgets.QLineEdit.Normal)
+            self.password_shown = True
+        else:
+            icon = qtg.QIcon()
+            icon.addPixmap(qtg.QPixmap(":/logo/invisible-24.png"), qtg.QIcon.Normal, qtg.QIcon.Off)
+            self.eye_toolButton.setIcon(icon)
+            self.password1_field.setEchoMode(QtWidgets.QLineEdit.Password)
+            self.password_shown = False
 
+    """
+    def hidePassword(self):
+
+        icon = qtg.QIcon()
+        icon.addPixmap(qtg.QPixmap(":/logo/invisible-24.png"), qtg.QIcon.Normal, qtg.QIcon.Off)
+        self.eye_toolButton.setIcon(icon)
+        self.password1_field.setEchoMode(QtWidgets.QLineEdit.Password)
+    """
     def menuButtonColor(self):
         if self.menuStackedWidget.currentIndex() == 1:
             print("NOOOO")
@@ -281,12 +305,11 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
 
                 elif self.security_radioButton.isChecked():
                     find_user = ("SELECT * FROM surveilia_users WHERE user_username = ? AND user_password = ?")
-
             elif username == "" or password == "":
                 self.loginFlag_label.setText("Enter username or password.")
                 break
             else:
-                self.loginFlag_label.setText("Unidentified Error.")
+                self.loginFlag_label.setText("Unknown Error Occured.")
                 break
 
             curs.execute(find_user, [(username), (password)])
@@ -303,8 +326,6 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                 print("Username & password not recognized")
                 self.loginFlag_label.setText("Invalid Username or Password.")
                 break
-
-
 
     def showAccountinfo(self):
         self.menuStackedWidget.setCurrentIndex(4)

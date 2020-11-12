@@ -109,7 +109,7 @@ background-color:black;
 </string>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="login_page">
        <property name="styleSheet">
@@ -362,6 +362,27 @@ COLOR:red;</string>
               </property>
               <property name="text">
                <string/>
+              </property>
+             </widget>
+             <widget class="QToolButton" name="eye_toolButton">
+              <property name="geometry">
+               <rect>
+                <x>320</x>
+                <y>250</y>
+                <width>27</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background: #2A2F3C ;
+</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="resource01.qrc">
+                <normaloff>:/logo/invisible-24.png</normaloff>:/logo/invisible-24.png</iconset>
               </property>
              </widget>
             </widget>
