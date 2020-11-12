@@ -1,13 +1,10 @@
 <RCC>
   <qresource prefix="logo">
-    <file>close-window-24.png</file>
-    <file>media-pause-24.png</file>
     <file>geography-24.png</file>
     <file>play-24.png</file>
     <file>surveilialogo.PNG</file>
   </qresource>
   <qresource prefix="menubar">
-    <file>play-24.png</file>
     <file>group-24.png</file>
     <file>geography-24.png</file>
     <file>question-mark-24.png</file>
