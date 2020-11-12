@@ -14,36 +14,26 @@ import torchvision
 import torch.nn.parallel
 import torch.optim
 import sqlite3
-from PyQt5 import QtGui as qtg
-from PyQt5 import QtWidgets as qtw, QtWidgets, QtCore
-from PyQt5 import QtCore as qtc
-from PyQt5.QtCore import QUrl, QDir, QTimer, pyqtSlot
-from PyQt5.QtGui import QImage, QPixmap
-from PyQt5.QtWidgets import QFileDialog, QStyle, QMessageBox
-from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent, QMediaPlaylist
-from surveiliaFrontEnd import Ui_surveiliaFrontEnd
-from PyQt5.QtMultimediaWidgets import QVideoWidget
-from PyQt5.QtWidgets import QPushButton
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import QUrl, QDir
-from PyQt5.QtWidgets import QFileDialog, QStyle
-from PyQt5.QtGui import QImage, QPixmap
+from PyQt5 import QtCore, QtWidgets
 from PyQt5 import QtWidgets as qtw
-from PyQt5 import QtCore as qtc
 from PyQt5 import QtGui as qtg
+from PyQt5.QtCore import QUrl, pyqtSlot
+from PyQt5.QtWidgets import QFileDialog, QMessageBox
+from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
+from surveiliaFrontEnd import Ui_surveiliaFrontEnd
 from PIL import Image
 from tsm_model.ops.models import TSN
 from tsm_model.ops.transforms import *
 from torch.nn import functional as F
 from threading import Thread
 
+#######################################database task#########################################
 count = 1
 connection = sqlite3.connect('Surveilia_database.db')
 curs = connection.cursor()
 curs.execute(
     'CREATE TABLE IF NOT EXISTS surveilia_users(user_id INTEGER PRIMARY KEY UNIQUE NOT NULL, user_fname STRING NOT NULL, user_lname STRING NOT NULL,user_username STRING NOT NULL,user_password STRING NOT NULL, user_contactno NUMERIC,user_address STRING)'
 )
-
 curs.execute(
     'CREATE TABLE IF NOT EXISTS surveilia_admin(admin_id INTEGER PRIMARY KEY UNIQUE NOT NULL, admin_fname STRING NOT NULL, admin_lname STRING NOT NULL,admin_username STRING NOT NULL,admin_password STRING NOT NULL, admin_contactno NUMERIC,admin_address STRING)'
 )
@@ -128,10 +118,11 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.anomalyVideoDisplay.setStyleSheet("\n"
                                                "background-color: rgb(0, 0, 0);\n"
                                                "")
+
         ####################################Display video#########################################
         self.videoPathEnter_pushButton.clicked.connect(self.openVideo)
-        self.mediaPlayer = QMediaPlayer(None, QMediaPlayer.VideoSurface)        # create media player object
-        self.mediaPlayer.setVideoOutput(self.anomalyVideoDisplay)        # pass the widget where the video will be displayed
+        self.mediaPlayer = QMediaPlayer(None, QMediaPlayer.VideoSurface)  # create media player object
+        self.mediaPlayer.setVideoOutput(self.anomalyVideoDisplay)  # pass the widget where the video will be displayed
         self.play_pushButton.setEnabled(False)
         self.pause_pushButton.setEnabled(False)
         self.play_pushButton.clicked.connect(self.playVideo)
@@ -281,18 +272,30 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         while True:
             username = self.username1_field.text()
             password = self.password1_field.text()
+            if username != "" and password != "":
+                if self.admin_radioButton.isChecked() == False and self.security_radioButton.isChecked() == False:
+                    self.loginFlag_label.setText("No account type selected.")
+                    break
+                if self.admin_radioButton.isChecked():
+                    find_user = ("SELECT * FROM surveilia_admin WHERE admin_username = ? AND admin_password = ?")
 
-            # if username !="" or password != "" or self.admin_radioButton.isChecked() == False:
-            if self.admin_radioButton.isChecked():
-                find_user = ("SELECT * FROM surveilia_admin WHERE admin_username = ? AND admin_password = ?")
-            elif self.security_radioButton.isChecked():
-                find_user = ("SELECT * FROM surveilia_users WHERE user_username = ? AND user_password = ?")
+                elif self.security_radioButton.isChecked():
+                    find_user = ("SELECT * FROM surveilia_users WHERE user_username = ? AND user_password = ?")
+
+            elif username == "" or password == "":
+                self.loginFlag_label.setText("Enter username or password.")
+                break
+            else:
+                self.loginFlag_label.setText("Unidentified Error.")
+                break
+
             curs.execute(find_user, [(username), (password)])
             results = curs.fetchall()
             if results:
                 for i in results:
                     print("Welcome " + i[1])
                     self.mainStackedWidget.setCurrentIndex(1)
+                    self.menuButtonColor()
                     self.welcomeName_label.setText(i[1] + " " + i[2])
                     self.userName_label.setText(i[1] + " " + i[2])
                 break
@@ -300,6 +303,8 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                 print("Username & password not recognized")
                 self.loginFlag_label.setText("Invalid Username or Password.")
                 break
+
+
 
     def showAccountinfo(self):
         self.menuStackedWidget.setCurrentIndex(4)
@@ -446,7 +451,8 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                 self.alarm_tableWidget.setItem(row - 1, column, self.item)
                 # to set the elements read only
                 self.item.setFlags(QtCore.Qt.ItemIsEnabled)
-##########################################MODEL######################################################
+
+    ##########################################MODEL######################################################
     def tsmmodel(self, f, check):
 
         # os.environ[""] = "0"
