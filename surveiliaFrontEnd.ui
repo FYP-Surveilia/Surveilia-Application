@@ -925,7 +925,7 @@ background-color:black;
 </string>
               </property>
               <property name="currentIndex">
-               <number>5</number>
+               <number>1</number>
               </property>
               <widget class="QWidget" name="welcome_page">
                <property name="styleSheet">
@@ -1110,227 +1110,15 @@ background-color:black;
 }
 </string>
                </property>
-               <layout class="QHBoxLayout" name="horizontalLayout_12">
-                <item>
-                 <spacer name="horizontalSpacer_42">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeType">
-                   <enum>QSizePolicy::Fixed</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>20</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
+               <layout class="QHBoxLayout" name="horizontalLayout_36">
                 <item>
                  <layout class="QGridLayout" name="gridLayout">
-                  <item row="0" column="4">
-                   <layout class="QVBoxLayout" name="verticalLayout_27">
-                    <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_44">
-                      <item>
-                       <spacer name="horizontalSpacer_54">
-                        <property name="orientation">
-                         <enum>Qt::Horizontal</enum>
-                        </property>
-                        <property name="sizeHint" stdset="0">
-                         <size>
-                          <width>40</width>
-                          <height>20</height>
-                         </size>
-                        </property>
-                       </spacer>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="displaycross_5">
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="icon">
-                         <iconset resource="resource01.qrc">
-                          <normaloff>:/logo/close-window-24.png</normaloff>:/logo/close-window-24.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                     </layout>
-                    </item>
-                    <item>
-                     <spacer name="verticalSpacer_36">
-                      <property name="orientation">
-                       <enum>Qt::Vertical</enum>
-                      </property>
-                      <property name="sizeType">
-                       <enum>QSizePolicy::Fixed</enum>
-                      </property>
-                      <property name="sizeHint" stdset="0">
-                       <size>
-                        <width>20</width>
-                        <height>1</height>
-                       </size>
-                      </property>
-                     </spacer>
-                    </item>
+                  <item row="2" column="1">
+                   <layout class="QVBoxLayout" name="verticalLayout_19">
                     <item>
                      <widget class="QLabel" name="display_5">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>0</height>
-                       </size>
-                      </property>
                       <property name="styleSheet">
-                       <string notr="true">background-color:black;</string>
-                      </property>
-                      <property name="text">
-                       <string/>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </item>
-                  <item row="0" column="0">
-                   <layout class="QVBoxLayout" name="verticalLayout_18">
-                    <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_34">
-                      <item>
-                       <spacer name="horizontalSpacer_45">
-                        <property name="orientation">
-                         <enum>Qt::Horizontal</enum>
-                        </property>
-                        <property name="sizeHint" stdset="0">
-                         <size>
-                          <width>40</width>
-                          <height>20</height>
-                         </size>
-                        </property>
-                       </spacer>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="displaycross_1">
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="icon">
-                         <iconset resource="resource01.qrc">
-                          <normaloff>:/logo/close-window-24.png</normaloff>:/logo/close-window-24.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                     </layout>
-                    </item>
-                    <item>
-                     <spacer name="verticalSpacer_27">
-                      <property name="orientation">
-                       <enum>Qt::Vertical</enum>
-                      </property>
-                      <property name="sizeType">
-                       <enum>QSizePolicy::Fixed</enum>
-                      </property>
-                      <property name="sizeHint" stdset="0">
-                       <size>
-                        <width>20</width>
-                        <height>1</height>
-                       </size>
-                      </property>
-                     </spacer>
-                    </item>
-                    <item>
-                     <widget class="QLabel" name="display_1">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>0</height>
-                       </size>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">background-color:black;</string>
-                      </property>
-                      <property name="text">
-                       <string/>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </item>
-                  <item row="0" column="2">
-                   <layout class="QVBoxLayout" name="verticalLayout_24">
-                    <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_41">
-                      <item>
-                       <spacer name="horizontalSpacer_51">
-                        <property name="orientation">
-                         <enum>Qt::Horizontal</enum>
-                        </property>
-                        <property name="sizeHint" stdset="0">
-                         <size>
-                          <width>40</width>
-                          <height>20</height>
-                         </size>
-                        </property>
-                       </spacer>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="displaycross_2">
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="icon">
-                         <iconset resource="resource01.qrc">
-                          <normaloff>:/logo/close-window-24.png</normaloff>:/logo/close-window-24.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                     </layout>
-                    </item>
-                    <item>
-                     <spacer name="verticalSpacer_33">
-                      <property name="orientation">
-                       <enum>Qt::Vertical</enum>
-                      </property>
-                      <property name="sizeType">
-                       <enum>QSizePolicy::Fixed</enum>
-                      </property>
-                      <property name="sizeHint" stdset="0">
-                       <size>
-                        <width>20</width>
-                        <height>1</height>
-                       </size>
-                      </property>
-                     </spacer>
-                    </item>
-                    <item>
-                     <widget class="QLabel" name="display_2">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>0</height>
-                       </size>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">background-color:black;</string>
+                       <string notr="true">background-color: rgb(0, 0, 0);</string>
                       </property>
                       <property name="text">
                        <string/>
@@ -1340,67 +1128,11 @@ background-color:black;
                    </layout>
                   </item>
                   <item row="2" column="0">
-                   <layout class="QVBoxLayout" name="verticalLayout_25">
+                   <layout class="QVBoxLayout" name="verticalLayout_18">
                     <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_42">
-                      <item>
-                       <spacer name="horizontalSpacer_52">
-                        <property name="orientation">
-                         <enum>Qt::Horizontal</enum>
-                        </property>
-                        <property name="sizeHint" stdset="0">
-                         <size>
-                          <width>40</width>
-                          <height>20</height>
-                         </size>
-                        </property>
-                       </spacer>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="displaycross_3">
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="icon">
-                         <iconset resource="resource01.qrc">
-                          <normaloff>:/logo/close-window-24.png</normaloff>:/logo/close-window-24.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                     </layout>
-                    </item>
-                    <item>
-                     <spacer name="verticalSpacer_34">
-                      <property name="orientation">
-                       <enum>Qt::Vertical</enum>
-                      </property>
-                      <property name="sizeType">
-                       <enum>QSizePolicy::Fixed</enum>
-                      </property>
-                      <property name="sizeHint" stdset="0">
-                       <size>
-                        <width>20</width>
-                        <height>1</height>
-                       </size>
-                      </property>
-                     </spacer>
-                    </item>
-                    <item>
-                     <widget class="QLabel" name="display_3">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>0</height>
-                       </size>
-                      </property>
+                     <widget class="QLabel" name="display_4">
                       <property name="styleSheet">
-                       <string notr="true">background-color:black;</string>
+                       <string notr="true">background-color: rgb(0, 0, 0);</string>
                       </property>
                       <property name="text">
                        <string/>
@@ -1410,137 +1142,11 @@ background-color:black;
                    </layout>
                   </item>
                   <item row="2" column="2">
-                   <layout class="QVBoxLayout" name="verticalLayout_26">
-                    <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_43">
-                      <item>
-                       <spacer name="horizontalSpacer_53">
-                        <property name="orientation">
-                         <enum>Qt::Horizontal</enum>
-                        </property>
-                        <property name="sizeHint" stdset="0">
-                         <size>
-                          <width>40</width>
-                          <height>20</height>
-                         </size>
-                        </property>
-                       </spacer>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="displaycross_4">
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="icon">
-                         <iconset resource="resource01.qrc">
-                          <normaloff>:/logo/close-window-24.png</normaloff>:/logo/close-window-24.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                     </layout>
-                    </item>
-                    <item>
-                     <spacer name="verticalSpacer_35">
-                      <property name="orientation">
-                       <enum>Qt::Vertical</enum>
-                      </property>
-                      <property name="sizeType">
-                       <enum>QSizePolicy::Fixed</enum>
-                      </property>
-                      <property name="sizeHint" stdset="0">
-                       <size>
-                        <width>20</width>
-                        <height>1</height>
-                       </size>
-                      </property>
-                     </spacer>
-                    </item>
-                    <item>
-                     <widget class="QLabel" name="display_4">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>0</height>
-                       </size>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">background-color:black;</string>
-                      </property>
-                      <property name="text">
-                       <string/>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </item>
-                  <item row="2" column="4">
-                   <layout class="QVBoxLayout" name="verticalLayout_28">
-                    <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_45">
-                      <item>
-                       <spacer name="horizontalSpacer_55">
-                        <property name="orientation">
-                         <enum>Qt::Horizontal</enum>
-                        </property>
-                        <property name="sizeHint" stdset="0">
-                         <size>
-                          <width>40</width>
-                          <height>20</height>
-                         </size>
-                        </property>
-                       </spacer>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="displaycross_6">
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="icon">
-                         <iconset resource="resource01.qrc">
-                          <normaloff>:/logo/close-window-24.png</normaloff>:/logo/close-window-24.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                     </layout>
-                    </item>
-                    <item>
-                     <spacer name="verticalSpacer_37">
-                      <property name="orientation">
-                       <enum>Qt::Vertical</enum>
-                      </property>
-                      <property name="sizeType">
-                       <enum>QSizePolicy::Fixed</enum>
-                      </property>
-                      <property name="sizeHint" stdset="0">
-                       <size>
-                        <width>20</width>
-                        <height>1</height>
-                       </size>
-                      </property>
-                     </spacer>
-                    </item>
+                   <layout class="QVBoxLayout" name="verticalLayout_20">
                     <item>
                      <widget class="QLabel" name="display_6">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>0</height>
-                       </size>
-                      </property>
                       <property name="styleSheet">
-                       <string notr="true">background-color:black;</string>
+                       <string notr="true">background-color: rgb(0, 0, 0);</string>
                       </property>
                       <property name="text">
                        <string/>
@@ -1549,55 +1155,35 @@ background-color:black;
                     </item>
                    </layout>
                   </item>
-                  <item row="2" column="1">
-                   <spacer name="horizontalSpacer_40">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeType">
-                     <enum>QSizePolicy::Fixed</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>10</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
+                  <item row="0" column="0">
+                   <layout class="QVBoxLayout" name="verticalLayout_15">
+                    <item>
+                     <widget class="QLabel" name="display_1">
+                      <property name="styleSheet">
+                       <string notr="true">background-color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string/>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
                   </item>
-                  <item row="0" column="1">
-                   <spacer name="horizontalSpacer_24">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeType">
-                     <enum>QSizePolicy::Fixed</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>10</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
+                  <item row="0" column="2">
+                   <layout class="QVBoxLayout" name="verticalLayout_17">
+                    <item>
+                     <widget class="QLabel" name="display_3">
+                      <property name="styleSheet">
+                       <string notr="true">background-color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string/>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
                   </item>
-                  <item row="2" column="3">
-                   <spacer name="horizontalSpacer_41">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeType">
-                     <enum>QSizePolicy::Fixed</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>10</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                  <item row="1" column="2">
+                  <item row="1" column="1">
                    <spacer name="verticalSpacer_13">
                     <property name="orientation">
                      <enum>Qt::Vertical</enum>
@@ -1607,45 +1193,27 @@ background-color:black;
                     </property>
                     <property name="sizeHint" stdset="0">
                      <size>
-                      <width>10</width>
+                      <width>20</width>
                       <height>10</height>
                      </size>
                     </property>
                    </spacer>
                   </item>
-                  <item row="0" column="3">
-                   <spacer name="horizontalSpacer_39">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeType">
-                     <enum>QSizePolicy::Fixed</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>10</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
+                  <item row="0" column="1">
+                   <layout class="QVBoxLayout" name="verticalLayout_16">
+                    <item>
+                     <widget class="QLabel" name="display_2">
+                      <property name="styleSheet">
+                       <string notr="true">background-color: rgb(0, 0, 0);</string>
+                      </property>
+                      <property name="text">
+                       <string/>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
                   </item>
                  </layout>
-                </item>
-                <item>
-                 <spacer name="horizontalSpacer_19">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeType">
-                   <enum>QSizePolicy::Fixed</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>10</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
                 </item>
                 <item>
                  <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -1789,6 +1357,22 @@ background-color:black;
                    </widget>
                   </item>
                  </layout>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_48">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeType">
+                   <enum>QSizePolicy::Fixed</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>20</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
                 </item>
                </layout>
               </widget>
