@@ -71,13 +71,13 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.display_4.hide()
         self.display_5.hide()
         self.display_6.hide()
-        """
+
         self.displaycross_2.hide()
         self.displaycross_3.hide()
         self.displaycross_4.hide()
         self.displaycross_5.hide()
         self.displaycross_6.hide()
-        """
+        ##########Code to display the anomaly video.. i have hidden it for now///////////////
         self.videoPathfield.hide()
         self.videoPathEnter_pushButton.hide()
         self.anomalyVideoDisplay.hide()
@@ -85,7 +85,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.pause_pushButton.hide()
         self.videoSlider.hide()
         self.videoDurationChanged.hide()
-
+        ##########################################################
         self.login_pushButton.clicked.connect(self.login)
         self.logout_toolButton.clicked.connect(self.logout)
         self.account_toolButton.clicked.connect(self.showAccountinfo)
@@ -132,7 +132,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.password_shown = False
         self.anomalySearch_pushButton.clicked.connect(self.anomalySearchAction)
         self.anomalysearch = False
-    """
+
         self.displaycross_1.clicked.connect(self.displaycross1Action)
         self.displaycross_2.clicked.connect(self.displaycross2Action)
         self.displaycross_3.clicked.connect(self.displaycross3Action)
@@ -141,24 +141,24 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.displaycross_6.clicked.connect(self.displaycross6Action)
 
     def displaycross1Action(self):
-        self.display_1.hide()
+        self.display_1.setText("Nothing to display.")
         self.displaycross_1.hide()
     def displaycross2Action(self):
-        self.display_2.hide()
+        self.display_2.setText("Nothing to display.")
         self.displaycross_2.hide()
     def displaycross3Action(self):
-        self.display_3.hide()
+        self.display_3.setText("Nothing to display.")
         self.displaycross_3.hide()
     def displaycross4Action(self):
-        self.display_4.hide()
+        self.display_4.setText("Nothing to display.")
         self.displaycross_4.hide()
     def displaycross5Action(self):
-        self.display_5.hide()
+        self.display_5.setText("Nothing to display.")
         self.displaycross_5.hide()
     def displaycross6Action(self):
-        self.display_6.hide()
+        self.display_6.setText("Nothing to display.")
         self.displaycross_6.hide()
-    """
+
     def anomalySearchAction(self):
         if not self.anomalysearch:
             # text = self.anomalySearch_lineEdit.text()
@@ -934,33 +934,34 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
             print("NO FILE FOUND")
         # display_1.play()
         self.menuStackedWidget.setCurrentIndex(1)
+        self.menuStackedWidget.setCurrentIndex(1)
 
     # METHOD TO ADD NEW CAMERAS
     def addNewCamera(self):
         if self.cam02_pushButton.isHidden():
             self.cam02_pushButton.show()
             self.display_2.show()
-            # self.displaycross_2.show()
+            self.displaycross_2.show()
 
         elif self.cam03_pushButton.isHidden():
             self.cam03_pushButton.show()
             self.display_3.show()
-            # self.displaycross_3.show()
+            self.displaycross_3.show()
 
         elif self.cam04_pushButton.isHidden():
             self.cam04_pushButton.show()
             self.display_4.show()
-            # self.displaycross_4.show()
+            self.displaycross_4.show()
 
         elif self.cam05_pushButton.isHidden():
             self.cam05_pushButton.show()
             self.display_5.show()
-            # self.displaycross_5.show()
+            self.displaycross_5.show()
 
         elif self.cam06_pushButton.isHidden():
             self.cam06_pushButton.show()
             self.display_6.show()
-            # self.displaycross_6.show()
+            self.displaycross_6.show()
 
         else:
             self.addNew_pushButton.setEnabled(False)
@@ -972,6 +973,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
     def changeLanguagetoUrdu(self):
 
         self.title_label.setText("سرویلیا")
+        ################# DO NOT DELETE THIS COMMENTED CODE ##############
         """
         self.username1_field.setPlaceholderText(_translate("surveiliaFrontEnd", "Username"))
         self.password1_field.setPlaceholderText(_translate("surveiliaFrontEnd", "Password"))
@@ -980,6 +982,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.admin_radioButton.setText(_translate("surveiliaFrontEnd", "Admin"))
         self.loginas1_label.setText(_translate("surveiliaFrontEnd", "Login as:"))
         """
+        ###################################################################
         self.camera_toolButton.setText("کیمرہ")
         # self.storage_toolButton.setText("اسٹوریج")
         self.logout_toolButton.setText("لاگ آوٹ")
