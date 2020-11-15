@@ -1723,7 +1723,7 @@ class Ui_surveiliaFrontEnd(object):
         self.cam04_pushButton.setText(_translate("surveiliaFrontEnd", "CAMERA_04"))
         self.cam05_pushButton.setText(_translate("surveiliaFrontEnd", "CAMERA_05"))
         self.cam06_pushButton.setText(_translate("surveiliaFrontEnd", "CAMERA_06"))
-        self.addNew_pushButton.setText(_translate("surveiliaFrontEnd", "ADD NEW"))
+        self.addNew_pushButton.setText(_translate("surveiliaFrontEnd", "ADD CAMERA"))
         self.alarmHistory_label.setText(_translate("surveiliaFrontEnd", "ALARM HISTORY"))
         self.alarmHistoryDetail_label.setText(_translate("surveiliaFrontEnd", "The history of alarms is displayed here."))
         self.anomalySearch_lineEdit.setText(_translate("surveiliaFrontEnd", "Enter data to search"))

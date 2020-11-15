@@ -1330,7 +1330,7 @@ background-color:black;
                     </rect>
                    </property>
                    <property name="text">
-                    <string>ADD NEW</string>
+                    <string>ADD CAMERA</string>
                    </property>
                   </widget>
                   <widget class="QPushButton" name="displaycross_1">

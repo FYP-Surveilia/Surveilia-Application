@@ -29,13 +29,13 @@ from threading import Thread
 
 #######################################database task#########################################
 count = 1
-connection = sqlite3.connect('Surveilia_database.db')
+connection = sqlite3.connect("Surveilia_database.db")
 curs = connection.cursor()
 curs.execute(
-    'CREATE TABLE IF NOT EXISTS surveilia_users(user_id INTEGER PRIMARY KEY UNIQUE NOT NULL, user_fname STRING NOT NULL, user_lname STRING NOT NULL,user_username STRING NOT NULL,user_password STRING NOT NULL, user_contactno NUMERIC,user_address STRING)'
+    "CREATE TABLE IF NOT EXISTS surveilia_users(user_id INTEGER PRIMARY KEY UNIQUE NOT NULL, user_fname STRING NOT NULL, user_lname STRING NOT NULL,user_username STRING NOT NULL,user_password STRING NOT NULL, user_contactno NUMERIC,user_address STRING)"
 )
 curs.execute(
-    'CREATE TABLE IF NOT EXISTS surveilia_admin(admin_id INTEGER PRIMARY KEY UNIQUE NOT NULL, admin_fname STRING NOT NULL, admin_lname STRING NOT NULL,admin_username STRING NOT NULL,admin_password STRING NOT NULL, admin_contactno NUMERIC,admin_address STRING)'
+    "CREATE TABLE IF NOT EXISTS surveilia_admin(admin_id INTEGER PRIMARY KEY UNIQUE NOT NULL, admin_fname STRING NOT NULL, admin_lname STRING NOT NULL,admin_username STRING NOT NULL,admin_password STRING NOT NULL, admin_contactno NUMERIC,admin_address STRING)"
 )
 
 
@@ -49,34 +49,50 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.mainStackedWidget.setCurrentIndex(0)
         self.menuStackedWidget.setCurrentIndex(0)
 
+
         self.user_tableWidget.horizontalHeader().setVisible(True)
         self.user_tableWidget.verticalHeader().setVisible(True)
         self.admin_tableWidget.horizontalHeader().setVisible(True)
         self.admin_tableWidget.verticalHeader().setVisible(True)
 
-        self.loginAgain_pushButton.clicked.connect(lambda: self.mainStackedWidget.setCurrentIndex(0))
-        self.logo_toolButton.clicked.connect(lambda: self.menuStackedWidget.setCurrentIndex(0))
-        self.getStarted_pushButton.clicked.connect(lambda: self.menuStackedWidget.setCurrentIndex(1))
-        self.camera_toolButton.clicked.connect(lambda: self.menuStackedWidget.setCurrentIndex(1))
-        self.language_toolButton.clicked.connect(lambda: self.menuStackedWidget.setCurrentIndex(8))
+        self.loginAgain_pushButton.clicked.connect(
+            lambda: self.mainStackedWidget.setCurrentIndex(0)
+        )
+        self.logo_toolButton.clicked.connect(
+            lambda: self.menuStackedWidget.setCurrentIndex(0)
+        )
+        self.getStarted_pushButton.clicked.connect(
+            lambda: self.menuStackedWidget.setCurrentIndex(1)
+        )
+        self.camera_toolButton.clicked.connect(
+            lambda: self.menuStackedWidget.setCurrentIndex(1)
+        )
+        self.language_toolButton.clicked.connect(
+            lambda: self.menuStackedWidget.setCurrentIndex(8)
+        )
 
+        self.cameras_label.hide()
+        self.cam01_pushButton.hide()
         self.cam02_pushButton.hide()
         self.cam03_pushButton.hide()
         self.cam04_pushButton.hide()
         self.cam05_pushButton.hide()
         self.cam06_pushButton.hide()
 
+        self.display_1.hide()
         self.display_2.hide()
         self.display_3.hide()
         self.display_4.hide()
         self.display_5.hide()
         self.display_6.hide()
 
+        self.displaycross_1.hide()
         self.displaycross_2.hide()
         self.displaycross_3.hide()
         self.displaycross_4.hide()
         self.displaycross_5.hide()
         self.displaycross_6.hide()
+        """
         ##########Code to display the anomaly video.. i have hidden it for now///////////////
         self.videoPathfield.hide()
         self.videoPathEnter_pushButton.hide()
@@ -86,6 +102,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.videoSlider.hide()
         self.videoDurationChanged.hide()
         ##########################################################
+        """
         self.login_pushButton.clicked.connect(self.login)
         self.logout_toolButton.clicked.connect(self.logout)
         self.account_toolButton.clicked.connect(self.showAccountinfo)
@@ -102,11 +119,21 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.openDir_pushButton.clicked.connect(self.openFile)
         self.addIPCam_pushButton.clicked.connect(self.openIPcam)
         self.openWebcam_pushButton.clicked.connect(self.openWebcam)
-        self.cancel_PushButton.clicked.connect(lambda: self.menuStackedWidget.setCurrentIndex(1))
-        self.userAdd_pushButton.clicked.connect(lambda: self.menuStackedWidget.setCurrentIndex(6))
-        self.adminAdd_pushButton.clicked.connect(lambda: self.menuStackedWidget.setCurrentIndex(6))
-        self.adminstable_radioButton.toggled.connect(lambda: self.stackedWidget.setCurrentIndex(1))
-        self.securitytable_radioButton.toggled.connect(lambda: self.stackedWidget.setCurrentIndex(0))
+        self.cancel_PushButton.clicked.connect(
+            lambda: self.menuStackedWidget.setCurrentIndex(1)
+        )
+        self.userAdd_pushButton.clicked.connect(
+            lambda: self.menuStackedWidget.setCurrentIndex(6)
+        )
+        self.adminAdd_pushButton.clicked.connect(
+            lambda: self.menuStackedWidget.setCurrentIndex(6)
+        )
+        self.adminstable_radioButton.toggled.connect(
+            lambda: self.stackedWidget.setCurrentIndex(1)
+        )
+        self.securitytable_radioButton.toggled.connect(
+            lambda: self.stackedWidget.setCurrentIndex(0)
+        )
 
         self.english_radioButton.toggled.connect(self.changeLanguagetoEnglish)
         self.urdu_radioButton.toggled.connect(self.changeLanguagetoUrdu)
@@ -115,13 +142,17 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.userDelete_pushButton.clicked.connect(self.deleteUser)
         self.adminDelete_pushButton.clicked.connect(self.deleteAdmin)
         self.addNewUser_pushButton.clicked.connect(self.addnewuser)
-        self.anomalyVideoDisplay.setStyleSheet("\n"
-                                               "background-color: rgb(0, 0, 0);\n"
-                                               "")
+        self.anomalyVideoDisplay.setStyleSheet(
+            "\n" "background-color: rgb(0, 0, 0);\n" ""
+        )
         ####################################Display video#########################################
         self.videoPathEnter_pushButton.clicked.connect(self.openVideo)
-        self.mediaPlayer = QMediaPlayer(None, QMediaPlayer.VideoSurface)  # create media player object
-        self.mediaPlayer.setVideoOutput(self.anomalyVideoDisplay)  # pass the widget where the video will be displayed
+        self.mediaPlayer = QMediaPlayer(
+            None, QMediaPlayer.VideoSurface
+        )  # create media player object
+        self.mediaPlayer.setVideoOutput(
+            self.anomalyVideoDisplay
+        )  # pass the widget where the video will be displayed
         self.play_pushButton.setEnabled(False)
         self.pause_pushButton.setEnabled(False)
         self.play_pushButton.clicked.connect(self.playVideo)
@@ -143,18 +174,23 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
     def displaycross1Action(self):
         self.display_1.setText("Nothing to display.")
         self.displaycross_1.hide()
+
     def displaycross2Action(self):
         self.display_2.setText("Nothing to display.")
         self.displaycross_2.hide()
+
     def displaycross3Action(self):
         self.display_3.setText("Nothing to display.")
         self.displaycross_3.hide()
+
     def displaycross4Action(self):
         self.display_4.setText("Nothing to display.")
         self.displaycross_4.hide()
+
     def displaycross5Action(self):
         self.display_5.setText("Nothing to display.")
         self.displaycross_5.hide()
+
     def displaycross6Action(self):
         self.display_6.setText("Nothing to display.")
         self.displaycross_6.hide()
@@ -162,14 +198,18 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
     def anomalySearchAction(self):
         if not self.anomalysearch:
             # text = self.anomalySearch_lineEdit.text()
-            items = self.alarm_tableWidget.findItems(self.anomalySearch_lineEdit.text(), QtCore.Qt.MatchContains)
+            items = self.alarm_tableWidget.findItems(
+                self.anomalySearch_lineEdit.text(), QtCore.Qt.MatchContains
+            )
             brush = qtg.QBrush(qtg.QColor("orange"))
             brush.setStyle(QtCore.Qt.SolidPattern)
             for item in items:
                 item.setForeground(brush)
             self.anomalysearch = True
         else:
-            items = self.alarm_tableWidget.findItems(self.anomalySearch_lineEdit.text(), QtCore.Qt.MatchContains)
+            items = self.alarm_tableWidget.findItems(
+                self.anomalySearch_lineEdit.text(), QtCore.Qt.MatchContains
+            )
             brush = qtg.QBrush(qtg.QColor("white"))
             brush.setStyle(QtCore.Qt.SolidPattern)
             for item in items:
@@ -189,16 +229,21 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
     def revealPassword(self):
         if not self.password_shown:
             icon = qtg.QIcon()
-            icon.addPixmap(qtg.QPixmap(":/logo/visible-24.png"), qtg.QIcon.Normal, qtg.QIcon.Off)
+            icon.addPixmap(
+                qtg.QPixmap(":/logo/visible-24.png"), qtg.QIcon.Normal, qtg.QIcon.Off
+            )
             self.eye_toolButton.setIcon(icon)
             self.password1_field.setEchoMode(QtWidgets.QLineEdit.Normal)
             self.password_shown = True
         else:
             icon = qtg.QIcon()
-            icon.addPixmap(qtg.QPixmap(":/logo/invisible-24.png"), qtg.QIcon.Normal, qtg.QIcon.Off)
+            icon.addPixmap(
+                qtg.QPixmap(":/logo/invisible-24.png"), qtg.QIcon.Normal, qtg.QIcon.Off
+            )
             self.eye_toolButton.setIcon(icon)
             self.password1_field.setEchoMode(QtWidgets.QLineEdit.Password)
             self.password_shown = False
+
     """
     def menuButtonColor(self):
         while True:
@@ -228,13 +273,13 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                 print("I AM NOT GONNA ENTER HEHE")
                 break
     """
+
     def openVideo(self):
         # fileName, _ = QFileDialog.getOpenFileName(self, "Open Movie",QDir.homePath())
         fileName = str(self.videoPathfield.text())
-        if fileName != '':
+        if fileName != "":
             print(fileName)
-            self.mediaPlayer.setMedia(
-                QMediaContent(QUrl.fromLocalFile(fileName)))
+            self.mediaPlayer.setMedia(QMediaContent(QUrl.fromLocalFile(fileName)))
             self.mediaPlayer.play()
             self.play_pushButton.setEnabled(True)
             self.pause_pushButton.setEnabled(True)
@@ -254,7 +299,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.videoSlider.setRange(0, duration)
         minutes = int(duration / 60000)
         seconds = int((duration - minutes * 60000) / 1000)
-        self.videoDurationChanged.setText('{}:{}'.format(minutes, seconds))
+        self.videoDurationChanged.setText("{}:{}".format(minutes, seconds))
 
     def setPosition(self, position):
         self.mediaPlayer.setPosition(position)
@@ -264,21 +309,22 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         mssg.setWindowTitle(title)
         mssg.setIcon(QMessageBox.Warning)
         mssg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
-        mssg.setStyleSheet("*{\n"
-                           "font-family: century gothic;\n"
-                           "background: white ;\n"
-                           "}\n"
-                           "QPushButton, QToolButton{\n"
-                           "font-weight:bold;\n"
-                           "background-color:#1C1D25;\n"
-                           "color:white ;\n"
-                           "background: #2A2F3C ;\n"
-                           "}\n"
-                           "QPushButton:hover{\n"
-                           "color:white;\n"
-                           "background-color:black;\n"
-                           "}\n"
-                           )
+        mssg.setStyleSheet(
+            "*{\n"
+            "font-family: century gothic;\n"
+            "background: white ;\n"
+            "}\n"
+            "QPushButton, QToolButton{\n"
+            "font-weight:bold;\n"
+            "background-color:#1C1D25;\n"
+            "color:white ;\n"
+            "background: #2A2F3C ;\n"
+            "}\n"
+            "QPushButton:hover{\n"
+            "color:white;\n"
+            "background-color:black;\n"
+            "}\n"
+        )
         mssg.setText(message)
         mssg.buttonClicked.connect(self.buttonClickeed)
         mssg.exec_()
@@ -286,11 +332,11 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
     def buttonClickeed(self, me):
         if me.text() == QMessageBox.Ok:
             self.mainStackedWidget.setCurrentIndex(2)
-            print('quit')
+            print("quit")
             quit()
 
     def logout(self):
-        self.MessagesProfile('Quit', 'Will you like to Logout?')
+        self.MessagesProfile("Quit", "Will you like to Logout?")
         self.mainStackedWidget.setCurrentIndex(2)
         # self.menuButtonColor()
         # quit()
@@ -311,10 +357,11 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         address = self.aAddress_field.toPlainText()
         try:
             curs.execute(
-                'INSERT INTO surveilia_admin (admin_fname,admin_lname,admin_username,admin_password,admin_contactno,admin_address) VALUES (?,?,?,?,?,?)',
-                (fname, lname, username, password, contactno, address))
+                "INSERT INTO surveilia_admin (admin_fname,admin_lname,admin_username,admin_password,admin_contactno,admin_address) VALUES (?,?,?,?,?,?)",
+                (fname, lname, username, password, contactno, address),
+            )
             connection.commit()
-            print('User added')
+            print("User added")
             self.Load_DatabaseAdmin()
             self.stackedWidget.setCurrentIndex(1)
         except Exception as error:
@@ -330,10 +377,11 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         address = self.aAddress_field.toPlainText()
         try:
             curs.execute(
-                'INSERT INTO surveilia_users (user_fname,user_lname,user_username,user_password,user_contactno,user_address) VALUES (?,?,?,?,?,?)',
-                (fname, lname, username, password, contactno, address))
+                "INSERT INTO surveilia_users (user_fname,user_lname,user_username,user_password,user_contactno,user_address) VALUES (?,?,?,?,?,?)",
+                (fname, lname, username, password, contactno, address),
+            )
             connection.commit()
-            print('User added')
+            print("User added")
             self.Load_DatabaseUsers()
         except Exception as error:
             print(error)
@@ -353,14 +401,17 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
             username = self.username1_field.text()
             password = self.password1_field.text()
             if username != "" and password != "":
-                if self.admin_radioButton.isChecked() == False and self.security_radioButton.isChecked() == False:
+                if (
+                        self.admin_radioButton.isChecked() == False
+                        and self.security_radioButton.isChecked() == False
+                ):
                     self.loginFlag_label.setText("No account type selected.")
                     break
                 if self.admin_radioButton.isChecked():
-                    find_user = ("SELECT * FROM surveilia_admin WHERE admin_username = ? AND admin_password = ?")
+                    find_user = "SELECT * FROM surveilia_admin WHERE admin_username = ? AND admin_password = ?"
 
                 elif self.security_radioButton.isChecked():
-                    find_user = ("SELECT * FROM surveilia_users WHERE user_username = ? AND user_password = ?")
+                    find_user = "SELECT * FROM surveilia_users WHERE user_username = ? AND user_password = ?"
             elif username == "" or password == "":
                 self.loginFlag_label.setText("Enter username or password.")
                 break
@@ -397,9 +448,9 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
             username = self.username1_field.text()
             password = self.password1_field.text()
             if self.admin_radioButton.isChecked():
-                find_user = ("SELECT * FROM surveilia_admin WHERE admin_username = ? AND admin_password = ?")
+                find_user = "SELECT * FROM surveilia_admin WHERE admin_username = ? AND admin_password = ?"
             elif self.security_radioButton.isChecked():
-                find_user = ("SELECT * FROM surveilia_users WHERE user_username = ? AND user_password = ?")
+                find_user = "SELECT * FROM surveilia_users WHERE user_username = ? AND user_password = ?"
 
             curs.execute(find_user, [(username), (password)])
             results = curs.fetchall()
@@ -432,7 +483,8 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                 address = data[6]
                 curs.execute(
                     "DELETE FROM surveilia_users WHERE user_id=? AND user_fname=? AND user_lname=? AND user_username = ? AND user_password = ? AND user_contactno =? AND user_address =? ",
-                    (id, fname, lname, username, password, contactno, address))
+                    (id, fname, lname, username, password, contactno, address),
+                )
                 connection.commit()
                 self.Load_DatabaseUsers()
         # self.user_tableWidget.removeRow(self.user_tableWidget.currentRow())
@@ -452,7 +504,8 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                 address = data[6]
                 curs.execute(
                     "DELETE FROM surveilia_admin WHERE admin_id=? AND admin_fname=? AND admin_lname=? AND admin_username = ? AND admin_password = ? AND admin_contactno =? AND admin_address =? ",
-                    (id, fname, lname, username, password, contactno, address))
+                    (id, fname, lname, username, password, contactno, address),
+                )
                 connection.commit()
                 self.Load_DatabaseAdmin()
         # self.admin_tableWidget.removeRow(self.user_tableWidget.currentRow())
@@ -462,12 +515,14 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         while self.user_tableWidget.rowCount() > 0:
             self.user_tableWidget.removeRow(0)
         # connection = sqlite3.connect('Surveilia_database.db')
-        content = 'SELECT * FROM surveilia_users'
+        content = "SELECT * FROM surveilia_users"
         res = connection.execute(content)
         for row_index, row_data in enumerate(res):
             self.user_tableWidget.insertRow(row_index)
             for colm_index, colm_data in enumerate(row_data):
-                self.user_tableWidget.setItem(row_index, colm_index, QtWidgets.QTableWidgetItem(str(colm_data)))
+                self.user_tableWidget.setItem(
+                    row_index, colm_index, QtWidgets.QTableWidgetItem(str(colm_data))
+                )
         # self.countLabel.setText("Total Users : " + str(self.user_tableWidget.rowCount()))
         return
 
@@ -476,31 +531,42 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         while self.admin_tableWidget.rowCount() > 0:
             self.admin_tableWidget.removeRow(0)
         # connection = sqlite3.connect('Surveilia_database.db')
-        content = 'SELECT * FROM surveilia_admin'
+        content = "SELECT * FROM surveilia_admin"
         res = connection.execute(content)
         for row_index, row_data in enumerate(res):
             self.admin_tableWidget.insertRow(row_index)
             for colm_index, colm_data in enumerate(row_data):
-                self.admin_tableWidget.setItem(row_index, colm_index, QtWidgets.QTableWidgetItem(str(colm_data)))
+                self.admin_tableWidget.setItem(
+                    row_index, colm_index, QtWidgets.QTableWidgetItem(str(colm_data))
+                )
         # self.countLabel.setText("Total Users : " + str(self.user_tableWidget.rowCount()))
         return
 
     #############################################################################################################################
 
     # Record Anaomlous event to a file
-    def getStatsOfAbnormalActivity(self, cameraID):
+    def getStatsOfAbnormalActivity(self, cameraID, videoPath):
         x = datetime.datetime.now()
         with open("./appData/Details.csv", mode="a") as csv_file:
-            fieldnames = ["CameraID", "Event", "Date", "Time"]
+            fieldnames = ["CameraID", "Event", "Date", "Time", "Video Path"]
             writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
             if csv_file.tell() == 0:
                 writer.writeheader()
             date = str(x.strftime("%A") + "/" + str(x.date()))
             time = str(x.strftime("%H:%M:%S"))
 
+
             writer.writerow(
-                {"CameraID": cameraID, "Event": "Abnormal", "Date": date, "Time": time}
+                {
+                    "CameraID": cameraID,
+                    "Event": "Abnormal",
+                    "Date": date,
+                    "Time": time,
+                    "Video Path": videoPath,
+                }
             )
+
+
 
     ######################READ CSV FILE TO DISPLAY DATA IN QTABLEWIDGET###################
 
@@ -516,10 +582,16 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
             for r in range(self.sheet.nrows)
         ]
         # print(self.data)
-        self.alarm_tableWidget.setColumnCount(4)
+        self.alarm_tableWidget.setColumnCount(5)
         self.alarm_tableWidget.setRowCount(
             self.sheet.nrows - 1
         )  # same no.of rows as of csv file
+        """
+        for index in range(self.alarm_tableWidget.rowCount()):
+            self.urlbtn = QtWidgets.QPushButton(self.alarm_tableWidget)
+            self.urlbtn.setText("Play Video")
+            self.alarm_tableWidget.setCellWidget(index, 4, self.urlbtn)
+        """
         for row, columnvalues in enumerate(self.data):
             for column, value in enumerate(columnvalues):
                 self.item = QtWidgets.QTableWidgetItem(
@@ -527,7 +599,8 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                 )  # str is to also display the integer values
                 self.alarm_tableWidget.setItem(row - 1, column, self.item)
                 # to set the elements read only
-                self.item.setFlags(QtCore.Qt.ItemIsEnabled)
+                ##############################*******************************CHECKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
+                # self.item.setFlags(QtCore.Qt.ItemIsEnabled)
 
     ##########################################MODEL######################################################
     def tsmmodel(self, f, check):
@@ -616,10 +689,10 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
 
         print("loading Video...")
         if f == emptyString:
-            print("cam")
+
             cap = cv2.VideoCapture(cv2.CAP_DSHOW)
         else:
-            print("cam")
+
             cap = cv2.VideoCapture(f)
 
         i_frame = -1
@@ -711,31 +784,33 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                     2,
                 )
                 if writer is None:
-                    fourcc = cv2.VideoWriter_fourcc(*"MJPG")
-                    (H, W) = img.shape[:2]
-                    path = "./appData/Anoamly_Clips/"
-                    name = len(glob.glob(path + "*.avi"))
+                    if c % 60 == 0:
+                        fourcc = cv2.VideoWriter_fourcc(*"MJPG")
+                        (H, W) = img.shape[:2]
+                        path = "./appData/Anoamly_Clips/"
+                        name = len(glob.glob(path + "*.avi"))
 
-                    getVidName = path + "Abnormal_Event_{}_Cam_{}.avi".format(
-                        name + 1, check
-                    )
-                    writer = cv2.VideoWriter(getVidName, fourcc, 30.0, (W, H), True)
+                        getVidName = path + "Abnormal_Event_{}_Cam_{}.avi".format(
+                            name + 1, check
+                        )
+                        self.getStatsOfAbnormalActivity(check, getVidName)
+                        writer = cv2.VideoWriter(getVidName, fourcc, 30.0, (W, H), True)
 
                 # Saving Anaomlous Event Image and Clip
                 if Abnormality:
                     writer.write(img)
                     # record stat every two seconds if exists
-                    if c % 60 == 0:
-                        self.getStatsOfAbnormalActivity(check)
-                        # if tempThres > 0.75:
+                    # if c % 60 == 0:
+                    #    self.getStatsOfAbnormalActivity(check)
+                    # if tempThres > 0.75:
 
-                        path = "./appData/Anoamly_Images/"
-                        index = len(glob.glob(path + "*.jpg"))
-                        # imageName = getFileName(path+'.jpg')
-                        imageName = path + "Abnormal_Event_{}_Cam_{}.jpg".format(
-                            index + 1, check
-                        )
-                        cv2.imwrite(imageName, img)
+                    path = "./appData/Anoamly_Images/"
+                    index = len(glob.glob(path + "*.jpg"))
+                    # imageName = getFileName(path+'.jpg')
+                    imageName = path + "Abnormal_Event_{}_Cam_{}.jpg".format(
+                        index + 1, check
+                    )
+                    cv2.imwrite(imageName, img)
 
                     # image_frame = np.concatenate((img, label), axis=0)
 
@@ -864,7 +939,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.input = 0
         url = str(self.addIPCam_field.text())
         self.menuStackedWidget.setCurrentIndex(1)
-        t = Thread(target=self.tsmmodel, args=(url, self.camSignal))
+        t = Thread(target=self.tsmmodel, daemon=True, args=(url, self.camSignal))
         t.start()
         cv2.waitKey(10)
 
@@ -875,7 +950,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.logic = 1
         cap = 0
         self.menuStackedWidget.setCurrentIndex(1)
-        t1 = Thread(target=self.tsmmodel, args=(cap, self.camSignal))
+        t1 = Thread(target=self.tsmmodel, daemon=True, args=(cap, self.camSignal))
         t1.start()
         # release everything when job is finished
         # cap.release()
@@ -925,7 +1000,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         fileName, _ = QFileDialog.getOpenFileName(
             self, "Open Video", "", "Video Files (*.mp4 *.flv *.ts *.mts *.avi *.wmv)"
         )
-        t2 = Thread(target=self.tsmmodel, args=(fileName, self.camSignal))
+        t2 = Thread(target=self.tsmmodel, daemon=True, args=(fileName, self.camSignal))
 
         if fileName != "":
             # self.displayImage(fileName, 1)
@@ -934,11 +1009,19 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
             print("NO FILE FOUND")
         # display_1.play()
         self.menuStackedWidget.setCurrentIndex(1)
-        self.menuStackedWidget.setCurrentIndex(1)
+        # self.menuStackedWidget.setCurrentIndex(1)
 
     # METHOD TO ADD NEW CAMERAS
     def addNewCamera(self):
-        if self.cam02_pushButton.isHidden():
+        self.cameras_label.show()
+    
+
+        if self.cam01_pushButton.isHidden():
+            self.cam01_pushButton.show()
+            self.display_1.show()
+            self.displaycross_1.show()
+
+        elif self.cam02_pushButton.isHidden():
             self.cam02_pushButton.show()
             self.display_2.show()
             self.displaycross_2.show()
@@ -1105,7 +1188,8 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.addNew_pushButton.setText("ADD NEW")
         self.alarmHistory_label.setText("ALARM HISTORY")
         self.alarmHistoryDetail_label.setText(
-            "The history of alarms is displayed here.")
+            "The history of alarms is displayed here."
+        )
         self.alarm_tableWidget.horizontalHeaderItem(0).setText("Camera ID")
         self.alarm_tableWidget.horizontalHeaderItem(1).setText("Event")
         self.alarm_tableWidget.horizontalHeaderItem(2).setText("Date")
