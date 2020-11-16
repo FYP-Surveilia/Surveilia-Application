@@ -18,7 +18,7 @@ from PyQt5 import QtCore, QtWidgets
 from PyQt5 import QtWidgets as qtw
 from PyQt5 import QtGui as qtg
 from PyQt5.QtCore import QUrl, pyqtSlot, QDate, QDateTime, QTime
-from PyQt5.QtWidgets import QFileDialog, QMessageBox
+from PyQt5.QtWidgets import QFileDialog, QMessageBox, QPushButton
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
 from surveiliaFrontEnd import Ui_surveiliaFrontEnd
 from playAnomalyVideo import Ui_playAnomalyVideo
@@ -40,98 +40,85 @@ curs.execute(
     "CREATE TABLE IF NOT EXISTS surveilia_admin(admin_id INTEGER PRIMARY KEY UNIQUE NOT NULL, admin_fname STRING NOT NULL, admin_lname STRING NOT NULL,admin_username STRING NOT NULL,admin_password STRING NOT NULL, admin_contactno NUMERIC,admin_address STRING)"
 )
 
+
 class camOptionsDialog(qtw.QMainWindow, Ui_camOptions):
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         super(camOptionsDialog, self).__init__(parent)
         self.setupUi(self)
-    
+
+
 class playAnomalyDialog(qtw.QMainWindow, Ui_playAnomalyVideo):
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         super(playAnomalyDialog, self).__init__(parent)
         self.setupUi(self)
 
+
 class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
-    def __init__(self, parent = None):
-        super(ControlMainWindow, self).__init__(parent)
+    """def __init__(self, parent=None):
+         super(ControlMainWindow, self).__init__(parent)
+         self.setupUi(self)
+     """
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.setupUi(self)
 
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self.setupUi(self)
+
         self.logic = 0
         self.flag = 0
         self.camSignal = 0
         self.mainStackedWidget.setCurrentIndex(0)
         self.menuStackedWidget.setCurrentIndex(0)
 
+        self.alarm_tableWidget.horizontalHeader().setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
+        self.alarm_tableWidget.horizontalHeader().setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
+        self.alarm_tableWidget.horizontalHeader().setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
+        self.alarm_tableWidget.horizontalHeader().setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
+        self.alarm_tableWidget.horizontalHeader().setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
+        self.admin_tableWidget.horizontalHeader().setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
+        self.admin_tableWidget.horizontalHeader().setSectionResizeMode(1, QtWidgets.QHeaderView.ResizeToContents)
+        self.admin_tableWidget.horizontalHeader().setSectionResizeMode(2, QtWidgets.QHeaderView.ResizeToContents)
+        self.admin_tableWidget.horizontalHeader().setSectionResizeMode(3, QtWidgets.QHeaderView.ResizeToContents)
+        self.admin_tableWidget.horizontalHeader().setSectionResizeMode(4, QtWidgets.QHeaderView.ResizeToContents)
+        self.admin_tableWidget.horizontalHeader().setSectionResizeMode(5, QtWidgets.QHeaderView.ResizeToContents)
+        self.admin_tableWidget.horizontalHeader().setSectionResizeMode(6, QtWidgets.QHeaderView.ResizeToContents)
+
         self.user_tableWidget.horizontalHeader().setVisible(True)
         self.user_tableWidget.verticalHeader().setVisible(True)
         self.admin_tableWidget.horizontalHeader().setVisible(True)
         self.admin_tableWidget.verticalHeader().setVisible(True)
+        self.alarm_tableWidget.horizontalHeader().setVisible(True)
 
-        self.loginAgain_pushButton.clicked.connect(
-            lambda: self.mainStackedWidget.setCurrentIndex(0)
-        )
-        self.logo_toolButton.clicked.connect(
-            lambda: self.menuStackedWidget.setCurrentIndex(0)
-        )
-        self.getStarted_pushButton.clicked.connect(
-            lambda: self.menuStackedWidget.setCurrentIndex(1)
-        )
-        self.camera_toolButton.clicked.connect(
-            lambda: self.menuStackedWidget.setCurrentIndex(1)
-        )
-        self.language_toolButton.clicked.connect(
-            lambda: self.menuStackedWidget.setCurrentIndex(8)
-        )
+        self.loginAgain_pushButton.clicked.connect(lambda: self.mainStackedWidget.setCurrentIndex(0))
+        self.logo_toolButton.clicked.connect(lambda: self.menuStackedWidget.setCurrentIndex(0))
+        self.getStarted_pushButton.clicked.connect(lambda: self.menuStackedWidget.setCurrentIndex(1))
+        self.camera_toolButton.clicked.connect(lambda: self.menuStackedWidget.setCurrentIndex(1))
+        self.language_toolButton.clicked.connect(lambda: self.menuStackedWidget.setCurrentIndex(6))
 
         self.cameras_label.hide()
-
         self.camLabel1.hide()
         self.camLabel2.hide()
         self.camLabel3.hide()
         self.camLabel4.hide()
         self.camLabel5.hide()
         self.camLabel6.hide()
-
         self.cam01_pushButton.hide()
         self.cam02_pushButton.hide()
         self.cam03_pushButton.hide()
         self.cam04_pushButton.hide()
         self.cam05_pushButton.hide()
         self.cam06_pushButton.hide()
-
         self.display_1.hide()
         self.display_2.hide()
         self.display_3.hide()
         self.display_4.hide()
         self.display_5.hide()
         self.display_6.hide()
-
         self.displaycross_1.hide()
         self.displaycross_2.hide()
         self.displaycross_3.hide()
         self.displaycross_4.hide()
         self.displaycross_5.hide()
         self.displaycross_6.hide()
-        """
-        ##########Code to display the anomaly video.. i have hidden it for now///////////////
-        self.videoPathfield.hide()
-        self.videoPathEnter_pushButton.hide()
-        self.anomalyVideoDisplay.hide()
-        self.play_pushButton.hide()
-        self.pause_pushButton.hide()
-        self.videoSlider.hide()
-        self.videoDurationChanged.hide()
-        ##########################################################
-        """
-        self.login_pushButton.clicked.connect(self.login)
-        self.logout_toolButton.clicked.connect(self.logout)
-        self.account_toolButton.clicked.connect(self.showAccountinfo)
-        self.users_toolButton.clicked.connect(self.userMenubutton)
-        self.addNew_pushButton.clicked.connect(self.addNewCamera)
-        # self.addNew_pushButton.clicked.connect(self.addNewCamera)
-        self.cancel_pushButton.clicked.connect(self.close)
 
         self.cam01_pushButton.clicked.connect(self.cam1clicked)
         self.cam02_pushButton.clicked.connect(self.cam2clicked)
@@ -139,20 +126,12 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.cam04_pushButton.clicked.connect(self.cam4clicked)
         self.cam05_pushButton.clicked.connect(self.cam5clicked)
         self.cam06_pushButton.clicked.connect(self.cam6clicked)
-
-        # self.cancel_PushButton.clicked.connect(lambda: self.menuStackedWidget.setCurrentIndex(1))
-        self.userAdd_pushButton.clicked.connect(
-            lambda: self.menuStackedWidget.setCurrentIndex(6)
-        )
-        self.adminAdd_pushButton.clicked.connect(
-            lambda: self.menuStackedWidget.setCurrentIndex(6)
-        )
-        self.adminstable_radioButton.toggled.connect(
-            lambda: self.stackedWidget.setCurrentIndex(1)
-        )
-        self.securitytable_radioButton.toggled.connect(
-            lambda: self.stackedWidget.setCurrentIndex(0)
-        )
+        self.displaycross_1.clicked.connect(self.displaycross1Action)
+        self.displaycross_2.clicked.connect(self.displaycross2Action)
+        self.displaycross_3.clicked.connect(self.displaycross3Action)
+        self.displaycross_4.clicked.connect(self.displaycross4Action)
+        self.displaycross_5.clicked.connect(self.displaycross5Action)
+        self.displaycross_6.clicked.connect(self.displaycross6Action)
 
         self.english_radioButton.toggled.connect(self.changeLanguagetoEnglish)
         self.urdu_radioButton.toggled.connect(self.changeLanguagetoUrdu)
@@ -161,28 +140,28 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.userDelete_pushButton.clicked.connect(self.deleteUser)
         self.adminDelete_pushButton.clicked.connect(self.deleteAdmin)
         self.addNewUser_pushButton.clicked.connect(self.addnewuser)
+        self.login_pushButton.clicked.connect(self.login)
+        self.logout_toolButton.clicked.connect(self.logout)
+        self.account_toolButton.clicked.connect(self.showAccountinfo)
+        self.users_toolButton.clicked.connect(self.userMenubutton)
+        self.addNew_pushButton.clicked.connect(self.addNewCamera)
+        self.cancel_pushButton.clicked.connect(self.close)
 
-        ####################################Display video#########################################
+        self.userAdd_pushButton.clicked.connect(lambda: self.menuStackedWidget.setCurrentIndex(5))
+        self.adminAdd_pushButton.clicked.connect(lambda: self.menuStackedWidget.setCurrentIndex(5))
+        self.adminstable_radioButton.toggled.connect(lambda: self.stackedWidget.setCurrentIndex(1))
+        self.securitytable_radioButton.toggled.connect(lambda: self.stackedWidget.setCurrentIndex(0))
 
         self.eye_toolButton.clicked.connect(self.revealPassword)
         self.password_shown = False
-        # self.anomalySearch_pushButton.clicked.connect(self.anomalySearchAction)
-        self.anomalySearch_pushButton.clicked.connect(self.openPlayAnomalyVideo)
+        self.anomalySearch_pushButton.clicked.connect(self.anomalySearchAction)
         self.anomalysearch = False
 
-        self.displaycross_1.clicked.connect(self.displaycross1Action)
-        self.displaycross_2.clicked.connect(self.displaycross2Action)
-        self.displaycross_3.clicked.connect(self.displaycross3Action)
-        self.displaycross_4.clicked.connect(self.displaycross4Action)
-        self.displaycross_5.clicked.connect(self.displaycross5Action)
-        self.displaycross_6.clicked.connect(self.displaycross6Action)
-
-    def conditionCross(self):
-        if self.cam01_pushButton.isHidden() and self.cam02_pushButton.isHidden() and self.cam03_pushButton.isHidden() and self.cam04_pushButton.isHidden() and self.cam05_pushButton.isHidden() and self.cam06_pushButton.isHidden():
-            self.cameras_label.hide()
-        else:
-            print("yay")
-
+        self.alarm_tableWidget.clicked.connect(self.checkk)
+    def checkk(self):
+        if self.alarm_tableWidget.currentColumn() == 4:
+            self.openPlayAnomalyVideo()
+    
     def openCamOptions(self):
         self.camOptions = camOptionsDialog()
         self.camOptions.openDir_pushButton.clicked.connect(self.openFile)
@@ -191,14 +170,16 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.camOptions.cancel_PushButton.clicked.connect(self.close)
         self.camOptions.show()
 
-
     def openPlayAnomalyVideo(self):
         self.playAnomalyVideo = playAnomalyDialog()
-
         self.playAnomalyVideo.anomalyVideoDisplay.setStyleSheet(
             "\n" "background-color: rgb(0, 0, 0);\n" ""
         )
-        self.playAnomalyVideo.videoPathEnter_pushButton.clicked.connect(self.openVideo)
+
+        self.alarm_tableWidget.clicked.connect(self.openVideo)
+        self.playAnomalyVideo.videoPathEnter_pushButton.hide()
+        self.playAnomalyVideo.videoPathfield.hide()
+        # self.playAnomalyVideo.videoPathEnter_pushButton.clicked.connect(self.openVideo)
         self.playAnomalyVideo.mediaPlayer = QMediaPlayer(
             None, QMediaPlayer.VideoSurface
         )  # create media player object
@@ -213,57 +194,8 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.playAnomalyVideo.mediaPlayer.durationChanged.connect(self.durationChanged)
         self.playAnomalyVideo.show()
 
-    def displaycross1Action(self):
-        # self.display_1.setText("Nothing to display.")
-        self.conditionCross()
-        self.display_1.hide()
-        self.displaycross_1.hide()
-        self.camLabel1.hide()
-        self.cam01_pushButton.hide()
-
-    def displaycross2Action(self):
-        # self.display_2.setText("Nothing to display.")
-        self.conditionCross()
-        self.display_2.hide()
-        self.displaycross_2.hide()
-        self.camLabel2.hide()
-        self.cam02_pushButton.hide()
-
-    def displaycross3Action(self):
-        # self.display_3.setText("Nothing to display.")
-        self.conditionCross()
-        self.display_3.hide()
-        self.displaycross_3.hide()
-        self.camLabel3.hide()
-        self.cam03_pushButton.hide()
-
-    def displaycross4Action(self):
-        # self.display_4.setText("Nothing to display.")
-        self.conditionCross()
-        self.display_4.hide()
-        self.displaycross_4.hide()
-        self.camLabel4.hide()
-        self.cam04_pushButton.hide()
-
-    def displaycross5Action(self):
-        # self.display_5.setText("Nothing to display.")
-        self.conditionCross()
-        self.display_5.hide()
-        self.displaycross_5.hide()
-        self.camLabel5.hide()
-        self.cam05_pushButton.hide()
-
-    def displaycross6Action(self):
-        # self.display_6.setText("Nothing to display.")
-        self.conditionCross()
-        self.display_6.hide()
-        self.displaycross_6.hide()
-        self.camLabel6.hide()
-        self.cam06_pushButton.hide()
-
     def anomalySearchAction(self):
         if not self.anomalysearch:
-            # text = self.anomalySearch_lineEdit.text()
             items = self.alarm_tableWidget.findItems(
                 self.anomalySearch_lineEdit.text(), QtCore.Qt.MatchContains
             )
@@ -281,16 +213,12 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
             for item in items:
                 item.setForeground(brush)
             self.anomalysearch = False
-        """
-        items = self.alarm_tableWidget.findItems(self.anomalySearch_lineEdit.text(), QtCore.Qt.MatchExactly)
-        if items:
-            results = '\n'.join(
-                'row %d column %d' % (item.row() + 1, item.column() + 1)
-                for item in items)
+
+    def conditionCross(self):
+        if self.cam01_pushButton.isHidden() and self.cam02_pushButton.isHidden() and self.cam03_pushButton.isHidden() and self.cam04_pushButton.isHidden() and self.cam05_pushButton.isHidden() and self.cam06_pushButton.isHidden():
+            self.cameras_label.hide()
         else:
-            results = 'Found Nothing'
-        QMessageBox().information(self, 'Search Results', results)
-        """
+            print("cant hide the cameras label")
 
     def revealPassword(self):
         if not self.password_shown:
@@ -310,41 +238,14 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
             self.password1_field.setEchoMode(QtWidgets.QLineEdit.Password)
             self.password_shown = False
 
-    """
-    def menuButtonColor(self):
-        while True:
-            if self.menuStackedWidget.setCurrentIndex(1) == True:
-                print("NOOOO")
-                self.camera_toolButton.setStyleSheet("background-color:white;")
-                break
-            elif self.menuStackedWidget.currentIndex() == 2:
-                print("in 2")
-                self.alarm_toolButton.setStyleSheet("background-color:#2A2F3C;")
-                break
-            elif self.menuStackedWidget.currentIndex() == 3:
-                print("3rd logic worked hehe")
-                self.storage_toolButton.setStyleSheet("background-color:#2A2F3C;")
-                break
-            elif self.menuStackedWidget.currentIndex() == 4:
-                self.account_toolButton.setStyleSheet("background-color:#2A2F3C;")
-                break
-            elif self.menuStackedWidget.currentIndex() == 5:
-                self.user_toolButton.setStyleSheet("background-color:#2A2F3C;")
-                break
-            elif self.menuStackedWidget.currentIndex() == 6:
-                self.language_toolButton.setStyleSheet("background-color:#2A2F3C;")
-                break
-            else:
-                self.logout_toolButton.setStyleSheet("background-color:#2A2F3C;")
-                print("I AM NOT GONNA ENTER HEHE")
-                break
-    """
-
     def openVideo(self):
-        # fileName, _ = QFileDialog.getOpenFileName(self, "Open Movie",QDir.homePath())
-        fileName = str(self.playAnomalyVideo.videoPathfield.text())
+
+        index = (self.alarm_tableWidget.selectionModel().currentIndex())
+        self.value = index.sibling(index.row(), index.column()).data()
+        # fileName = str(self.playAnomalyVideo.videoPathfield.text())
+        fileName = str(self.value)
         if fileName != "":
-            print(fileName)
+            # print(fileName)
             self.playAnomalyVideo.mediaPlayer.setMedia(QMediaContent(QUrl.fromLocalFile(fileName)))
             self.playAnomalyVideo.mediaPlayer.play()
             self.playAnomalyVideo.play_pushButton.setEnabled(True)
@@ -404,15 +305,14 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
     def logout(self):
         self.MessagesProfile("Quit", "Will you like to Logout?")
         self.mainStackedWidget.setCurrentIndex(2)
-        # self.menuButtonColor()
         # quit()
-        # connection.close()
 
     def addnewuser(self):
         if self.aAdmin_radioButton.isChecked():
             self.addAdmin()
         elif self.aSecurity_radioButton.isChecked():
             self.addUser()
+        self.menuStackedWidget.setCurrentIndex(4)
 
     def addAdmin(self):
         fname = self.afname_field.text()
@@ -430,9 +330,9 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
             print("User added")
             self.Load_DatabaseAdmin()
             self.stackedWidget.setCurrentIndex(1)
+            self.menuStackedWidget.setCurrentIndex(4)
         except Exception as error:
             print(error)
-        self.menuStackedWidget.setCurrentIndex(5)
 
     def addUser(self):
         fname = self.afname_field.text()
@@ -455,12 +355,11 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
 
     def userMenubutton(self):
         if self.admin_radioButton.isChecked():
-            self.menuStackedWidget.setCurrentIndex(5)
+            self.menuStackedWidget.setCurrentIndex(4)
             self.Load_DatabaseUsers()
             self.Load_DatabaseAdmin()
-
         elif self.security_radioButton.isChecked():
-            self.menuStackedWidget.setCurrentIndex(9)
+            self.menuStackedWidget.setCurrentIndex(7)
 
     def login(self):
         while True:
@@ -484,11 +383,8 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
             else:
                 self.loginFlag_label.setText("Unknown Error Occured.")
                 break
-            # datetime = QDateTime.currentDateTime()
-
             now = QDate.currentDate()
             now1 = QTime.currentTime()
-
             curs.execute(find_user, [(username), (password)])
             results = curs.fetchall()
             if results:
@@ -498,7 +394,8 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                     # self.menuButtonColor()
                     self.welcomeName_label.setText(i[1] + " " + i[2])
                     self.userName_label.setText(i[1] + " " + i[2])
-                    self.dateTime_label.setText(now.toString(QtCore.Qt.ISODate) + " " + now1.toString(QtCore.Qt.DefaultLocaleLongDate))
+                    self.dateTime_label.setText(
+                        now.toString(QtCore.Qt.ISODate) + " " + now1.toString(QtCore.Qt.DefaultLocaleLongDate))
                 break
             else:
                 print("Username & password not recognized")
@@ -506,8 +403,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                 break
 
     def showAccountinfo(self):
-        self.menuStackedWidget.setCurrentIndex(4)
-        # if self.security_radioButton.isChecked():
+        self.menuStackedWidget.setCurrentIndex(3)
         self.edit_pushButton.hide()
         self.fname_field.setReadOnly(True)
         self.lname_field.setReadOnly(True)
@@ -522,7 +418,6 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                 find_user = "SELECT * FROM surveilia_admin WHERE admin_username = ? AND admin_password = ?"
             elif self.security_radioButton.isChecked():
                 find_user = "SELECT * FROM surveilia_users WHERE user_username = ? AND user_password = ?"
-
             curs.execute(find_user, [(username), (password)])
             results = curs.fetchall()
             if results:
@@ -539,7 +434,6 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                 break
 
     def deleteUser(self):
-        # print('ifrah')
         content = "SELECT * FROM surveilia_users"
         res = curs.execute(content)
         for row in enumerate(res):
@@ -582,7 +476,6 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         # self.admin_tableWidget.removeRow(self.user_tableWidget.currentRow())
 
     def Load_DatabaseUsers(self):
-
         while self.user_tableWidget.rowCount() > 0:
             self.user_tableWidget.removeRow(0)
         # connection = sqlite3.connect('Surveilia_database.db')
@@ -598,7 +491,6 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         return
 
     def Load_DatabaseAdmin(self):
-
         while self.admin_tableWidget.rowCount() > 0:
             self.admin_tableWidget.removeRow(0)
         # connection = sqlite3.connect('Surveilia_database.db')
@@ -625,7 +517,6 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                 writer.writeheader()
             date = str(x.strftime("%A") + "/" + str(x.date()))
             time = str(x.strftime("%H:%M:%S"))
-
 
             writer.writerow(
                 {
@@ -658,8 +549,8 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         """
         for index in range(self.alarm_tableWidget.rowCount()):
             self.urlbtn = QtWidgets.QPushButton(self.alarm_tableWidget)
-            self.urlbtn.setText("Play Video")
-            self.alarm_tableWidget.setCellWidget(index, 4, self.urlbtn)
+            self.urlbtn.setText("Play")
+            self.alarm_tableWidget.setCellWidget(index, 5, self.urlbtn)
         """
         for row, columnvalues in enumerate(self.data):
             for column, value in enumerate(columnvalues):
@@ -668,8 +559,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                 )  # str is to also display the integer values
                 self.alarm_tableWidget.setItem(row - 1, column, self.item)
                 # to set the elements read only
-                ##############################*******************************CHECKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
-                # self.item.setFlags(QtCore.Qt.ItemIsEnabled)
+                self.item.setFlags(QtCore.Qt.ItemIsEnabled)
 
     ##########################################MODEL######################################################
     def tsmmodel(self, f, check):
@@ -1009,8 +899,51 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         # self.menuStackedWidget.setCurrentIndex(7)
         self.openCamOptions()
 
+
+    def displaycross1Action(self):
+        self.conditionCross()
+        self.display_1.hide()
+        self.displaycross_1.hide()
+        self.camLabel1.hide()
+        self.cam01_pushButton.hide()
+
+    def displaycross2Action(self):
+        self.conditionCross()
+        self.display_2.hide()
+        self.displaycross_2.hide()
+        self.camLabel2.hide()
+        self.cam02_pushButton.hide()
+
+    def displaycross3Action(self):
+        self.conditionCross()
+        self.display_3.hide()
+        self.displaycross_3.hide()
+        self.camLabel3.hide()
+        self.cam03_pushButton.hide()
+
+    def displaycross4Action(self):
+        self.conditionCross()
+        self.display_4.hide()
+        self.displaycross_4.hide()
+        self.camLabel4.hide()
+        self.cam04_pushButton.hide()
+
+    def displaycross5Action(self):
+        self.conditionCross()
+        self.display_5.hide()
+        self.displaycross_5.hide()
+        self.camLabel5.hide()
+        self.cam05_pushButton.hide()
+
+    def displaycross6Action(self):
+        self.conditionCross()
+        self.display_6.hide()
+        self.displaycross_6.hide()
+        self.camLabel6.hide()
+        self.cam06_pushButton.hide()
     # METHOD TO OPEN THE IP CAM THROUGH IP ADDRESS
     def openIPcam(self):
+        self.camOptions.close()
         self.input = 0
         url = str(self.camOptions.addIPCam_field.text())
         # self.menuStackedWidget.setCurrentIndex(1)
@@ -1018,9 +951,11 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         t.start()
         cv2.waitKey(10)
 
+
     # METHOD TO OPEN WEB CAM
     @pyqtSlot()
     def openWebcam(self):
+        self.camOptions.close()
         self.input = 0
         self.logic = 1
         cap = 0
@@ -1071,6 +1006,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
 
     # METHOD TO OPEN FILE DIALOG
     def openFile(self):
+        self.camOptions.close()
         self.input = 0
         fileName, _ = QFileDialog.getOpenFileName(
             self, "Open Video", "", "Video Files (*.mp4 *.flv *.ts *.mts *.avi *.wmv)"

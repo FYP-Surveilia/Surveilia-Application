@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1280</width>
+    <width>1257</width>
     <height>800</height>
    </rect>
   </property>
@@ -988,7 +988,7 @@ background-color:black;
 </string>
               </property>
               <property name="currentIndex">
-               <number>3</number>
+               <number>1</number>
               </property>
               <widget class="QWidget" name="welcome_page">
                <property name="styleSheet">
@@ -2088,7 +2088,7 @@ QTableWidget QTableCornerButton::section {
                        <bool>true</bool>
                       </attribute>
                       <attribute name="horizontalHeaderDefaultSectionSize">
-                       <number>200</number>
+                       <number>160</number>
                       </attribute>
                       <attribute name="horizontalHeaderMinimumSectionSize">
                        <number>60</number>
@@ -2171,334 +2171,6 @@ QTableWidget QTableCornerButton::section {
                      </spacer>
                     </item>
                    </layout>
-                  </item>
-                 </layout>
-                </item>
-               </layout>
-              </widget>
-              <widget class="QWidget" name="storage_page">
-               <property name="styleSheet">
-                <string notr="true">*{
-font-family: century gothic;
-background: #2A2F3C ;
-}
-QLineEdit, QTextEdit{
-background: #201f1f;
-border:#201f1f;
-color:white;
-font-size:18px;
-}
-QLabel{
-color: white;
-font-size: 18px;
-
-}
-QPushButton, QToolButton{
-font-weight:bold;
-color:white ;
-background: #2A2F3C ;
-}
-QPushButton:hover{
-color:white;
-background-color:black;
-}
-</string>
-               </property>
-               <layout class="QVBoxLayout" name="verticalLayout_4">
-                <item>
-                 <spacer name="verticalSpacer_3">
-                  <property name="orientation">
-                   <enum>Qt::Vertical</enum>
-                  </property>
-                  <property name="sizeType">
-                   <enum>QSizePolicy::Minimum</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>20</width>
-                    <height>30</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_9">
-                  <item>
-                   <spacer name="horizontalSpacer_9">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeType">
-                     <enum>QSizePolicy::Fixed</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                  <item>
-                   <widget class="QLabel" name="storage_label">
-                    <property name="styleSheet">
-                     <string notr="true">FONT-WEIGHT:BOLD;
-font-size:24px</string>
-                    </property>
-                    <property name="text">
-                     <string>STORAGE</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <spacer name="horizontalSpacer_10">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <spacer name="verticalSpacer_12">
-                  <property name="orientation">
-                   <enum>Qt::Vertical</enum>
-                  </property>
-                  <property name="sizeType">
-                   <enum>QSizePolicy::Minimum</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>20</width>
-                    <height>10</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_8">
-                  <item>
-                   <widget class="QLabel" name="show_label">
-                    <property name="text">
-                     <string>           Show:</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <spacer name="horizontalSpacer_7">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeType">
-                     <enum>QSizePolicy::Fixed</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>300</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                  <item>
-                   <widget class="QCheckBox" name="anomalyClip_checkBox">
-                    <property name="styleSheet">
-                     <string notr="true">
-font-size:16px;
-color:white;</string>
-                    </property>
-                    <property name="text">
-                     <string>Anomaly Clip</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QCheckBox" name="cameraFeed_checkBox">
-                    <property name="styleSheet">
-                     <string notr="true">
-font-size:16px;
-color:white;</string>
-                    </property>
-                    <property name="text">
-                     <string>Camera Feed</string>
-                    </property>
-                    <property name="iconSize">
-                     <size>
-                      <width>30</width>
-                      <height>30</height>
-                     </size>
-                    </property>
-                    <property name="checked">
-                     <bool>false</bool>
-                    </property>
-                    <property name="autoRepeat">
-                     <bool>false</bool>
-                    </property>
-                    <property name="autoExclusive">
-                     <bool>false</bool>
-                    </property>
-                    <property name="tristate">
-                     <bool>false</bool>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <spacer name="horizontalSpacer_8">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_7">
-                  <item>
-                   <spacer name="horizontalSpacer_6">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeType">
-                     <enum>QSizePolicy::Fixed</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                  <item>
-                   <widget class="QTableWidget" name="storage_tableWidget">
-                    <property name="minimumSize">
-                     <size>
-                      <width>700</width>
-                      <height>0</height>
-                     </size>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true">QTableWidget{ 
-  width: 100%;
-   padding: 10px;
-  text-align: left;
-color: white;
-}
-
-
-QHeaderView::section {
-color:white;
-    background-color:#1C1D25;
-
-    padding: 2px;
-    border: 1px solid black;
-    font-size: 12px;
-font-weight:bold;
-
-}
-
-QTableWidget {
-    gridline-color: black;
-    font-size: 14px;
-}
-
-QTableWidget QTableCornerButton::section {
-    background-color: #2A2F3C
-    border: 1px solid black;
-}</string>
-                    </property>
-                    <property name="frameShape">
-                     <enum>QFrame::NoFrame</enum>
-                    </property>
-                    <attribute name="horizontalHeaderCascadingSectionResizes">
-                     <bool>true</bool>
-                    </attribute>
-                    <attribute name="horizontalHeaderDefaultSectionSize">
-                     <number>150</number>
-                    </attribute>
-                    <attribute name="horizontalHeaderStretchLastSection">
-                     <bool>true</bool>
-                    </attribute>
-                    <attribute name="verticalHeaderVisible">
-                     <bool>false</bool>
-                    </attribute>
-                    <attribute name="verticalHeaderHighlightSections">
-                     <bool>false</bool>
-                    </attribute>
-                    <row>
-                     <property name="text">
-                      <string>1</string>
-                     </property>
-                    </row>
-                    <row>
-                     <property name="text">
-                      <string>2</string>
-                     </property>
-                    </row>
-                    <row>
-                     <property name="text">
-                      <string>3</string>
-                     </property>
-                    </row>
-                    <row>
-                     <property name="text">
-                      <string>4</string>
-                     </property>
-                    </row>
-                    <row>
-                     <property name="text">
-                      <string>5</string>
-                     </property>
-                    </row>
-                    <row>
-                     <property name="text">
-                      <string>6</string>
-                     </property>
-                    </row>
-                    <column>
-                     <property name="text">
-                      <string>Filename</string>
-                     </property>
-                    </column>
-                    <column>
-                     <property name="text">
-                      <string>Date</string>
-                     </property>
-                    </column>
-                    <column>
-                     <property name="text">
-                      <string>Size</string>
-                     </property>
-                    </column>
-                   </widget>
-                  </item>
-                  <item>
-                   <spacer name="horizontalSpacer_5">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
                   </item>
                  </layout>
                 </item>
@@ -3534,7 +3206,6 @@ font-size: 16px;</string>
                 </item>
                </layout>
               </widget>
-              <widget class="QWidget" name="dialog_page"/>
               <widget class="QWidget" name="language_page">
                <widget class="QRadioButton" name="english_radioButton">
                 <property name="geometry">
