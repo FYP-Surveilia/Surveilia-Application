@@ -1,5 +1,8 @@
 <RCC>
   <qresource prefix="logo">
+    <file>x-mark-24.png</file>
+    <file>edit-2-24.png</file>
+    <file>plus-8-24.png</file>
     <file>search-13-24.png</file>
     <file>visible-24.png</file>
     <file>invisible-24.png</file>

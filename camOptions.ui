@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>camOptions</class>
+ <widget class="QMainWindow" name="camOptions">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>398</width>
+    <height>378</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">*{
+font-family: century gothic;
+background: #2A2F3C ;
+}
+QLineEdit, QTextEdit{
+background-color:#1C1D25;
+border:#1C1D25;
+color:white;
+font-size:18px;
+}
+QLabel{
+color: white;
+font-size: 20px;
+
+}
+QPushButton, QToolButton{
+font-weight:bold;
+color:white ;
+background:#1C1D25;
+}
+QPushButton:hover{
+color:white;
+background-color:black;
+}
+</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QFrame" name="frame">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_9">
+       <item>
+        <widget class="QLabel" name="addIPCam_label">
+         <property name="text">
+          <string>Add camera using IP Address</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="addIPCam_field">
+         <property name="text">
+          <string>ENTER IP ADDRESS HERE</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="addIPCam_pushButton">
+         <property name="text">
+          <string>ADD</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="openDir_label">
+         <property name="text">
+          <string>Add video by file from Directory</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="openDir_pushButton">
+         <property name="text">
+          <string>OPEN</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="openWebcam_label">
+         <property name="text">
+          <string>Add using Webcam</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="openWebcam_pushButton">
+         <property name="text">
+          <string>OPEN WEBCAM</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="cancel_PushButton">
+         <property name="text">
+          <string>CANCEL</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

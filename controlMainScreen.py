@@ -17,10 +17,12 @@ import sqlite3
 from PyQt5 import QtCore, QtWidgets
 from PyQt5 import QtWidgets as qtw
 from PyQt5 import QtGui as qtg
-from PyQt5.QtCore import QUrl, pyqtSlot
+from PyQt5.QtCore import QUrl, pyqtSlot, QDate, QDateTime, QTime
 from PyQt5.QtWidgets import QFileDialog, QMessageBox
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
 from surveiliaFrontEnd import Ui_surveiliaFrontEnd
+from playAnomalyVideo import Ui_playAnomalyVideo
+from camOptions import Ui_camOptions
 from PIL import Image
 from tsm_model.ops.models import TSN
 from tsm_model.ops.transforms import *
@@ -38,17 +40,29 @@ curs.execute(
     "CREATE TABLE IF NOT EXISTS surveilia_admin(admin_id INTEGER PRIMARY KEY UNIQUE NOT NULL, admin_fname STRING NOT NULL, admin_lname STRING NOT NULL,admin_username STRING NOT NULL,admin_password STRING NOT NULL, admin_contactno NUMERIC,admin_address STRING)"
 )
 
+class camOptionsDialog(qtw.QMainWindow, Ui_camOptions):
+    def __init__(self, parent = None):
+        super(camOptionsDialog, self).__init__(parent)
+        self.setupUi(self)
+    
+class playAnomalyDialog(qtw.QMainWindow, Ui_playAnomalyVideo):
+    def __init__(self, parent = None):
+        super(playAnomalyDialog, self).__init__(parent)
+        self.setupUi(self)
 
 class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, parent = None):
+        super(ControlMainWindow, self).__init__(parent)
         self.setupUi(self)
+
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.setupUi(self)
         self.logic = 0
         self.flag = 0
         self.camSignal = 0
         self.mainStackedWidget.setCurrentIndex(0)
         self.menuStackedWidget.setCurrentIndex(0)
-
 
         self.user_tableWidget.horizontalHeader().setVisible(True)
         self.user_tableWidget.verticalHeader().setVisible(True)
@@ -72,6 +86,14 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         )
 
         self.cameras_label.hide()
+
+        self.camLabel1.hide()
+        self.camLabel2.hide()
+        self.camLabel3.hide()
+        self.camLabel4.hide()
+        self.camLabel5.hide()
+        self.camLabel6.hide()
+
         self.cam01_pushButton.hide()
         self.cam02_pushButton.hide()
         self.cam03_pushButton.hide()
@@ -108,6 +130,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.account_toolButton.clicked.connect(self.showAccountinfo)
         self.users_toolButton.clicked.connect(self.userMenubutton)
         self.addNew_pushButton.clicked.connect(self.addNewCamera)
+        # self.addNew_pushButton.clicked.connect(self.addNewCamera)
         self.cancel_pushButton.clicked.connect(self.close)
 
         self.cam01_pushButton.clicked.connect(self.cam1clicked)
@@ -116,12 +139,8 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.cam04_pushButton.clicked.connect(self.cam4clicked)
         self.cam05_pushButton.clicked.connect(self.cam5clicked)
         self.cam06_pushButton.clicked.connect(self.cam6clicked)
-        self.openDir_pushButton.clicked.connect(self.openFile)
-        self.addIPCam_pushButton.clicked.connect(self.openIPcam)
-        self.openWebcam_pushButton.clicked.connect(self.openWebcam)
-        self.cancel_PushButton.clicked.connect(
-            lambda: self.menuStackedWidget.setCurrentIndex(1)
-        )
+
+        # self.cancel_PushButton.clicked.connect(lambda: self.menuStackedWidget.setCurrentIndex(1))
         self.userAdd_pushButton.clicked.connect(
             lambda: self.menuStackedWidget.setCurrentIndex(6)
         )
@@ -142,26 +161,13 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.userDelete_pushButton.clicked.connect(self.deleteUser)
         self.adminDelete_pushButton.clicked.connect(self.deleteAdmin)
         self.addNewUser_pushButton.clicked.connect(self.addnewuser)
-        self.anomalyVideoDisplay.setStyleSheet(
-            "\n" "background-color: rgb(0, 0, 0);\n" ""
-        )
+
         ####################################Display video#########################################
-        self.videoPathEnter_pushButton.clicked.connect(self.openVideo)
-        self.mediaPlayer = QMediaPlayer(
-            None, QMediaPlayer.VideoSurface
-        )  # create media player object
-        self.mediaPlayer.setVideoOutput(
-            self.anomalyVideoDisplay
-        )  # pass the widget where the video will be displayed
-        self.play_pushButton.setEnabled(False)
-        self.pause_pushButton.setEnabled(False)
-        self.play_pushButton.clicked.connect(self.playVideo)
-        self.pause_pushButton.clicked.connect(self.pauseVideo)
-        self.mediaPlayer.positionChanged.connect(self.positionChanged)
-        self.mediaPlayer.durationChanged.connect(self.durationChanged)
+
         self.eye_toolButton.clicked.connect(self.revealPassword)
         self.password_shown = False
-        self.anomalySearch_pushButton.clicked.connect(self.anomalySearchAction)
+        # self.anomalySearch_pushButton.clicked.connect(self.anomalySearchAction)
+        self.anomalySearch_pushButton.clicked.connect(self.openPlayAnomalyVideo)
         self.anomalysearch = False
 
         self.displaycross_1.clicked.connect(self.displaycross1Action)
@@ -171,29 +177,89 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.displaycross_5.clicked.connect(self.displaycross5Action)
         self.displaycross_6.clicked.connect(self.displaycross6Action)
 
+    def conditionCross(self):
+        if self.cam01_pushButton.isHidden() and self.cam02_pushButton.isHidden() and self.cam03_pushButton.isHidden() and self.cam04_pushButton.isHidden() and self.cam05_pushButton.isHidden() and self.cam06_pushButton.isHidden():
+            self.cameras_label.hide()
+        else:
+            print("yay")
+
+    def openCamOptions(self):
+        self.camOptions = camOptionsDialog()
+        self.camOptions.openDir_pushButton.clicked.connect(self.openFile)
+        self.camOptions.addIPCam_pushButton.clicked.connect(self.openIPcam)
+        self.camOptions.openWebcam_pushButton.clicked.connect(self.openWebcam)
+        self.camOptions.cancel_PushButton.clicked.connect(self.close)
+        self.camOptions.show()
+
+
+    def openPlayAnomalyVideo(self):
+        self.playAnomalyVideo = playAnomalyDialog()
+
+        self.playAnomalyVideo.anomalyVideoDisplay.setStyleSheet(
+            "\n" "background-color: rgb(0, 0, 0);\n" ""
+        )
+        self.playAnomalyVideo.videoPathEnter_pushButton.clicked.connect(self.openVideo)
+        self.playAnomalyVideo.mediaPlayer = QMediaPlayer(
+            None, QMediaPlayer.VideoSurface
+        )  # create media player object
+        self.playAnomalyVideo.mediaPlayer.setVideoOutput(
+            self.playAnomalyVideo.anomalyVideoDisplay
+        )  # pass the widget where the video will be displayed
+        self.playAnomalyVideo.play_pushButton.setEnabled(False)
+        self.playAnomalyVideo.pause_pushButton.setEnabled(False)
+        self.playAnomalyVideo.play_pushButton.clicked.connect(self.playVideo)
+        self.playAnomalyVideo.pause_pushButton.clicked.connect(self.pauseVideo)
+        self.playAnomalyVideo.mediaPlayer.positionChanged.connect(self.positionChanged)
+        self.playAnomalyVideo.mediaPlayer.durationChanged.connect(self.durationChanged)
+        self.playAnomalyVideo.show()
+
     def displaycross1Action(self):
-        self.display_1.setText("Nothing to display.")
+        # self.display_1.setText("Nothing to display.")
+        self.conditionCross()
+        self.display_1.hide()
         self.displaycross_1.hide()
+        self.camLabel1.hide()
+        self.cam01_pushButton.hide()
 
     def displaycross2Action(self):
-        self.display_2.setText("Nothing to display.")
+        # self.display_2.setText("Nothing to display.")
+        self.conditionCross()
+        self.display_2.hide()
         self.displaycross_2.hide()
+        self.camLabel2.hide()
+        self.cam02_pushButton.hide()
 
     def displaycross3Action(self):
-        self.display_3.setText("Nothing to display.")
+        # self.display_3.setText("Nothing to display.")
+        self.conditionCross()
+        self.display_3.hide()
         self.displaycross_3.hide()
+        self.camLabel3.hide()
+        self.cam03_pushButton.hide()
 
     def displaycross4Action(self):
-        self.display_4.setText("Nothing to display.")
+        # self.display_4.setText("Nothing to display.")
+        self.conditionCross()
+        self.display_4.hide()
         self.displaycross_4.hide()
+        self.camLabel4.hide()
+        self.cam04_pushButton.hide()
 
     def displaycross5Action(self):
-        self.display_5.setText("Nothing to display.")
+        # self.display_5.setText("Nothing to display.")
+        self.conditionCross()
+        self.display_5.hide()
         self.displaycross_5.hide()
+        self.camLabel5.hide()
+        self.cam05_pushButton.hide()
 
     def displaycross6Action(self):
-        self.display_6.setText("Nothing to display.")
+        # self.display_6.setText("Nothing to display.")
+        self.conditionCross()
+        self.display_6.hide()
         self.displaycross_6.hide()
+        self.camLabel6.hide()
+        self.cam06_pushButton.hide()
 
     def anomalySearchAction(self):
         if not self.anomalysearch:
@@ -276,33 +342,33 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
 
     def openVideo(self):
         # fileName, _ = QFileDialog.getOpenFileName(self, "Open Movie",QDir.homePath())
-        fileName = str(self.videoPathfield.text())
+        fileName = str(self.playAnomalyVideo.videoPathfield.text())
         if fileName != "":
             print(fileName)
-            self.mediaPlayer.setMedia(QMediaContent(QUrl.fromLocalFile(fileName)))
-            self.mediaPlayer.play()
-            self.play_pushButton.setEnabled(True)
-            self.pause_pushButton.setEnabled(True)
+            self.playAnomalyVideo.mediaPlayer.setMedia(QMediaContent(QUrl.fromLocalFile(fileName)))
+            self.playAnomalyVideo.mediaPlayer.play()
+            self.playAnomalyVideo.play_pushButton.setEnabled(True)
+            self.playAnomalyVideo.pause_pushButton.setEnabled(True)
         else:
             print("Video not played")
 
     def playVideo(self):
-        self.mediaPlayer.play()
+        self.playAnomalyVideo.mediaPlayer.play()
 
     def pauseVideo(self):
-        self.mediaPlayer.pause()
+        self.playAnomalyVideo.mediaPlayer.pause()
 
     def positionChanged(self, position):
-        self.videoSlider.setValue(position)
+        self.playAnomalyVideo.videoSlider.setValue(position)
 
     def durationChanged(self, duration):
-        self.videoSlider.setRange(0, duration)
+        self.playAnomalyVideo.videoSlider.setRange(0, duration)
         minutes = int(duration / 60000)
         seconds = int((duration - minutes * 60000) / 1000)
-        self.videoDurationChanged.setText("{}:{}".format(minutes, seconds))
+        self.playAnomalyVideo.videoDurationChanged.setText("{}:{}".format(minutes, seconds))
 
     def setPosition(self, position):
-        self.mediaPlayer.setPosition(position)
+        self.playAnomalyVideo.mediaPlayer.setPosition(position)
 
     def MessagesProfile(self, title, message):
         mssg = QMessageBox()
@@ -418,6 +484,10 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
             else:
                 self.loginFlag_label.setText("Unknown Error Occured.")
                 break
+            # datetime = QDateTime.currentDateTime()
+
+            now = QDate.currentDate()
+            now1 = QTime.currentTime()
 
             curs.execute(find_user, [(username), (password)])
             results = curs.fetchall()
@@ -428,6 +498,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                     # self.menuButtonColor()
                     self.welcomeName_label.setText(i[1] + " " + i[2])
                     self.userName_label.setText(i[1] + " " + i[2])
+                    self.dateTime_label.setText(now.toString(QtCore.Qt.ISODate) + " " + now1.toString(QtCore.Qt.DefaultLocaleLongDate))
                 break
             else:
                 print("Username & password not recognized")
@@ -565,8 +636,6 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                     "Video Path": videoPath,
                 }
             )
-
-
 
     ######################READ CSV FILE TO DISPLAY DATA IN QTABLEWIDGET###################
 
@@ -912,33 +981,39 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
 
     def cam1clicked(self):
         self.camSignal = 1
-        self.menuStackedWidget.setCurrentIndex(7)
+        # self.menuStackedWidget.setCurrentIndex(7)
+        self.openCamOptions()
 
     def cam2clicked(self):
         self.camSignal = 2
-        self.menuStackedWidget.setCurrentIndex(7)
+        # self.menuStackedWidget.setCurrentIndex(7)
+        self.openCamOptions()
 
     def cam3clicked(self):
         self.camSignal = 3
-        self.menuStackedWidget.setCurrentIndex(7)
+        # self.menuStackedWidget.setCurrentIndex(7)
+        self.openCamOptions()
 
     def cam4clicked(self):
         self.camSignal = 4
-        self.menuStackedWidget.setCurrentIndex(7)
+        # self.menuStackedWidget.setCurrentIndex(7)
+        self.openCamOptions()
 
     def cam5clicked(self):
         self.camSignal = 5
-        self.menuStackedWidget.setCurrentIndex(7)
+        # self.menuStackedWidget.setCurrentIndex(7)
+        self.openCamOptions()
 
     def cam6clicked(self):
         self.camSignal = 6
-        self.menuStackedWidget.setCurrentIndex(7)
+        # self.menuStackedWidget.setCurrentIndex(7)
+        self.openCamOptions()
 
     # METHOD TO OPEN THE IP CAM THROUGH IP ADDRESS
     def openIPcam(self):
         self.input = 0
-        url = str(self.addIPCam_field.text())
-        self.menuStackedWidget.setCurrentIndex(1)
+        url = str(self.camOptions.addIPCam_field.text())
+        # self.menuStackedWidget.setCurrentIndex(1)
         t = Thread(target=self.tsmmodel, daemon=True, args=(url, self.camSignal))
         t.start()
         cv2.waitKey(10)
@@ -949,7 +1024,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.input = 0
         self.logic = 1
         cap = 0
-        self.menuStackedWidget.setCurrentIndex(1)
+        # self.menuStackedWidget.setCurrentIndex(1)
         t1 = Thread(target=self.tsmmodel, daemon=True, args=(cap, self.camSignal))
         t1.start()
         # release everything when job is finished
@@ -1008,43 +1083,72 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         else:
             print("NO FILE FOUND")
         # display_1.play()
-        self.menuStackedWidget.setCurrentIndex(1)
+        # self.menuStackedWidget.setCurrentIndex(1)
         # self.menuStackedWidget.setCurrentIndex(1)
 
     # METHOD TO ADD NEW CAMERAS
     def addNewCamera(self):
+
         self.cameras_label.show()
-    
 
         if self.cam01_pushButton.isHidden():
             self.cam01_pushButton.show()
             self.display_1.show()
             self.displaycross_1.show()
+            self.camLabel1.show()
+            self.camSignal = 1
+            self.openCamOptions()
+            # self.menuStackedWidget.setCurrentIndex(7)
+
 
         elif self.cam02_pushButton.isHidden():
             self.cam02_pushButton.show()
             self.display_2.show()
             self.displaycross_2.show()
+            self.camLabel2.show()
+            self.camSignal = 2
+            self.openCamOptions()
+            # self.menuStackedWidget.setCurrentIndex(7)
+
 
         elif self.cam03_pushButton.isHidden():
             self.cam03_pushButton.show()
             self.display_3.show()
             self.displaycross_3.show()
+            self.camLabel3.show()
+            self.camSignal = 3
+            self.openCamOptions()
+            # self.menuStackedWidget.setCurrentIndex(7)
 
         elif self.cam04_pushButton.isHidden():
             self.cam04_pushButton.show()
             self.display_4.show()
             self.displaycross_4.show()
+            self.camLabel4.show()
+            self.camSignal = 4
+            self.openCamOptions()
+            # self.menuStackedWidget.setCurrentIndex(7)
+
 
         elif self.cam05_pushButton.isHidden():
             self.cam05_pushButton.show()
             self.display_5.show()
             self.displaycross_5.show()
+            self.camLabel5.show()
+            self.camSignal = 5
+            self.openCamOptions()
+            # self.menuStackedWidget.setCurrentIndex(7)
+
 
         elif self.cam06_pushButton.isHidden():
             self.cam06_pushButton.show()
             self.display_6.show()
             self.displaycross_6.show()
+            self.camLabel6.show()
+            self.camSignal = 6
+            self.openCamOptions()
+            # self.menuStackedWidget.setCurrentIndex(7)
+
 
         else:
             self.addNew_pushButton.setEnabled(False)
@@ -1140,14 +1244,14 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.aAdmin_radioButton.setText("ایڈمن")
         self.aSecurity_radioButton.setText("سکیورٹی گارڈ")
         self.accountType_label.setText("اکاؤنٹ ٹاعپ")
-        self.addIPCam_label.setText(" ایڈریس کا استعمال کرتے ہوئے کیمرا شامل کریں")
-        self.addIPCam_field.setText("IP ایڈریس یہاں داخل کریں")
-        self.addIPCam_pushButton.setText("شامل کریں")
-        self.openDir_label.setText("ڈائریکٹری سے ویڈیو شامل کریں")
-        self.openDir_pushButton.setText("کھولیں")
-        self.openWebcam_label.setText("ویب کیم کا استعمال کرتے ہوئے شامل کریں")
-        self.openWebcam_pushButton.setText("ویب کیم کھولیں")
-        self.cancel_PushButton.setText("منسوخ کریں")
+        # self.addIPCam_label.setText(" ایڈریس کا استعمال کرتے ہوئے کیمرا شامل کریں")
+        # self.addIPCam_field.setText("IP ایڈریس یہاں داخل کریں")
+        # self.addIPCam_pushButton.setText("شامل کریں")
+        # self.openDir_label.setText("ڈائریکٹری سے ویڈیو شامل کریں")
+        # self.openDir_pushButton.setText("کھولیں")
+        # self.openWebcam_label.setText("ویب کیم کا استعمال کرتے ہوئے شامل کریں")
+        # self.openWebcam_pushButton.setText("ویب کیم کھولیں")
+        # self.cancel_PushButton.setText("منسوخ کریں")
         self.english_radioButton.setText("English")
         self.chooseLanguage_label.setText("زبان کا انتخاب کریں:")
         self.urdu_radioButton.setText("Urdu")
@@ -1241,15 +1345,15 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.ausername_label.setText("Username:")
         self.aAdmin_radioButton.setText("Admin")
         self.aSecurity_radioButton.setText("Security Guard")
-        self.accountType_label.setText("Account Type:")
-        self.addIPCam_label.setText("Add camera using IP Address")
-        self.addIPCam_field.setText("ENTER IP ADDRESS HERE")
-        self.addIPCam_pushButton.setText("ADD")
-        self.openDir_label.setText("Add video by file from Directory")
-        self.openDir_pushButton.setText("OPEN")
-        self.openWebcam_label.setText("Add using Webcam")
-        self.openWebcam_pushButton.setText("OPEN WEBCAM")
-        self.cancel_PushButton.setText("CANCEL")
+        # self.accountType_label.setText("Account Type:")
+        # self.addIPCam_label.setText("Add camera using IP Address")
+        # self.addIPCam_field.setText("ENTER IP ADDRESS HERE")
+        # self.addIPCam_pushButton.setText("ADD")
+        # self.openDir_label.setText("Add video by file from Directory")
+        # self.openDir_pushButton.setText("OPEN")
+        # self.openWebcam_label.setText("Add using Webcam")
+        # self.openWebcam_pushButton.setText("OPEN WEBCAM")
+        # self.cancel_PushButton.setText("CANCEL")
         self.english_radioButton.setText("English")
         self.chooseLanguage_label.setText("Choose Language:")
         self.urdu_radioButton.setText("Urdu")
