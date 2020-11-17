@@ -298,14 +298,14 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
 
     def buttonClickeed(self, me):
         if me.text() == QMessageBox.Ok:
-            self.mainStackedWidget.setCurrentIndex(2)
+            # self.mainStackedWidget.setCurrentIndex(2)
             print("quit")
             quit()
 
     def logout(self):
         self.MessagesProfile("Quit", "Will you like to Logout?")
-        self.mainStackedWidget.setCurrentIndex(2)
-        # quit()
+        # self.mainStackedWidget.setCurrentIndex(2)
+        quit()
 
     def addnewuser(self):
         if self.aAdmin_radioButton.isChecked():
@@ -1234,13 +1234,13 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.alarm_tableWidget.horizontalHeaderItem(1).setText("Event")
         self.alarm_tableWidget.horizontalHeaderItem(2).setText("Date")
         self.alarm_tableWidget.horizontalHeaderItem(3).setText("Time")
-        self.storage_label.setText("STORAGE")
-        self.show_label.setText("           Show:")
-        self.anomalyClip_checkBox.setText("Anomaly Clip")
-        self.cameraFeed_checkBox.setText("Camera Feed")
-        self.storage_tableWidget.horizontalHeaderItem(0).setText("Filename")
-        self.storage_tableWidget.horizontalHeaderItem(1).setText("Date")
-        self.storage_tableWidget.horizontalHeaderItem(2).setText("Size")
+        # self.storage_label.setText("STORAGE")
+        # self.show_label.setText("           Show:")
+        # self.anomalyClip_checkBox.setText("Anomaly Clip")
+        # self.cameraFeed_checkBox.setText("Camera Feed")
+        # self.storage_tableWidget.horizontalHeaderItem(0).setText("Filename")
+        # self.storage_tableWidget.horizontalHeaderItem(1).setText("Date")
+        # self.storage_tableWidget.horizontalHeaderItem(2).setText("Size")
         self.accountInfo_label.setText("ACCOUNT INFORMATION")
         self.fname_label.setText("First Name:")
         self.lname_label.setText("Last Name:")
