@@ -22,120 +22,121 @@ class Ui_surveiliaFrontEnd(object):
         surveiliaFrontEnd.setMaximumSize(QtCore.QSize(16777215, 16777215))
         surveiliaFrontEnd.setSizeIncrement(QtCore.QSize(0, 0))
         surveiliaFrontEnd.setStyleSheet("*{\n"
-"font-family: century gothic;\n"
-"font-size: 30px;\n"
-"background-color:#1C1D25;\n"
-"}\n"
-"QFrame{\n"
-"background: #2A2F3C ;\n"
-"border-radius:10px;\n"
-"\n"
-"}\n"
-"QLabel{\n"
-"color:white;\n"
-"font-weight: bold;\n"
-"}\n"
-"QToolButton{\n"
-"background:white;\n"
-"border-radius:60px;\n"
-"}\n"
-"QLineEdit{\n"
-"background: transparent;\n"
-"border:none;\n"
-"color:BLACK;\n"
-"border-bottom:1px solid black;\n"
-"font-size:20px;\n"
-"}\n"
-"QPushButton{\n"
-"font-size:18px;\n"
-"font-weight:bold;\n"
-"color:white ;\n"
-"background:#1C1D25;\n"
-"}\n"
-"QPushButton:hover{\n"
-"color:white;\n"
-"background-color:black;\n"
-"}\n"
-"#logoLabel{\n"
-"background:transparent;\n"
-"}")
+                                        "font-family: century gothic;\n"
+                                        "font-size: 30px;\n"
+                                        "background-color:#1C1D25;\n"
+                                        "}\n"
+                                        "QFrame{\n"
+                                        "background: #2A2F3C ;\n"
+                                        "border-radius:10px;\n"
+                                        "\n"
+                                        "}\n"
+                                        "QLabel{\n"
+                                        "color:white;\n"
+                                        "font-weight: bold;\n"
+                                        "}\n"
+                                        "QToolButton{\n"
+                                        "background:white;\n"
+                                        "border-radius:60px;\n"
+                                        "}\n"
+                                        "QLineEdit{\n"
+                                        "background: transparent;\n"
+                                        "border:none;\n"
+                                        "color:BLACK;\n"
+                                        "border-bottom:1px solid black;\n"
+                                        "font-size:20px;\n"
+                                        "}\n"
+                                        "QPushButton{\n"
+                                        "font-size:18px;\n"
+                                        "font-weight:bold;\n"
+                                        "color:white ;\n"
+                                        "background:#1C1D25;\n"
+                                        "}\n"
+                                        "QPushButton:hover{\n"
+                                        "color:white;\n"
+                                        "background-color:black;\n"
+                                        "}\n"
+                                        "#logoLabel{\n"
+                                        "background:transparent;\n"
+                                        "}")
         self.centralwidget = QtWidgets.QWidget(surveiliaFrontEnd)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.mainStackedWidget = QtWidgets.QStackedWidget(self.centralwidget)
         self.mainStackedWidget.setStyleSheet("*{\n"
-"font-family: century gothic;\n"
-"background-color:#1C1D25;\n"
-"}\n"
-"QLineEdit, QTextEdit{\n"
-"background: #1C1D25;\n"
-"border:#1C1D25;\n"
-"color:white;\n"
-"font-size:18px;\n"
-"}\n"
-"QLabel{\n"
-"color: white;\n"
-"font-size: 18px;\n"
-"\n"
-"}\n"
-"QPushButton, QToolButton{\n"
-"font-weight:bold;\n"
-"color:white ;\n"
-"background:#1C1D25;\n"
-"}\n"
-"QPushButton:hover{\n"
-"color:white;\n"
-"background-color:black;\n"
-"}\n"
-"")
+                                             "font-family: century gothic;\n"
+                                             "background-color:#1C1D25;\n"
+                                             "}\n"
+                                             "QLineEdit, QTextEdit{\n"
+                                             "background: #1C1D25;\n"
+                                             "border:#1C1D25;\n"
+                                             "color:white;\n"
+                                             "font-size:18px;\n"
+                                             "}\n"
+                                             "QLabel{\n"
+                                             "color: white;\n"
+                                             "font-size: 18px;\n"
+                                             "\n"
+                                             "}\n"
+                                             "QPushButton, QToolButton{\n"
+                                             "font-weight:bold;\n"
+                                             "color:white ;\n"
+                                             "background:#1C1D25;\n"
+                                             "}\n"
+                                             "QPushButton:hover{\n"
+                                             "color:white;\n"
+                                             "background-color:black;\n"
+                                             "}\n"
+                                             "")
         self.mainStackedWidget.setObjectName("mainStackedWidget")
         self.login_page = QtWidgets.QWidget()
         self.login_page.setStyleSheet("*{\n"
-"font-family: century gothic;\n"
-"font-size: 30px;\n"
-"background-color:#1C1D25;\n"
-"}\n"
-"QFrame{\n"
-"background: #2A2F3C ;\n"
-"border-radius:10px;\n"
-"\n"
-"}\n"
-"QLabel{\n"
-"color:white;\n"
-"font-weight: bold;\n"
-"}\n"
-"QToolButton{\n"
-"background:white;\n"
-"border-radius:60px;\n"
-"}\n"
-"QLineEdit{\n"
-"background: transparent;\n"
-"border:none;\n"
-"color:WHITE;\n"
-"border-bottom:1px solid WHITE;\n"
-"font-size:20px;\n"
-"\n"
-"}\n"
-"QPushButton{\n"
-"font-size:18px;\n"
-"font-weight:bold;\n"
-"color:white ;\n"
-"background-color:#1C1D25;\n"
-"}\n"
-"QPushButton:hover{\n"
-"color:white;\n"
-"background-color:black;\n"
-"}\n"
-"#logoLabel{\n"
-"background:transparent;\n"
-"}")
+                                      "font-family: century gothic;\n"
+                                      "font-size: 30px;\n"
+                                      "background-color:#1C1D25;\n"
+                                      "}\n"
+                                      "QFrame{\n"
+                                      "background: #2A2F3C ;\n"
+                                      "border-radius:10px;\n"
+                                      "\n"
+                                      "}\n"
+                                      "QLabel{\n"
+                                      "color:white;\n"
+                                      "font-weight: bold;\n"
+                                      "}\n"
+                                      "QToolButton{\n"
+                                      "background:white;\n"
+                                      "border-radius:60px;\n"
+                                      "}\n"
+                                      "QLineEdit{\n"
+                                      "background: transparent;\n"
+                                      "border:none;\n"
+                                      "color:WHITE;\n"
+                                      "border-bottom:1px solid WHITE;\n"
+                                      "font-size:20px;\n"
+                                      "\n"
+                                      "}\n"
+                                      "QPushButton{\n"
+                                      "font-size:18px;\n"
+                                      "font-weight:bold;\n"
+                                      "color:white ;\n"
+                                      "background-color:#1C1D25;\n"
+                                      "}\n"
+                                      "QPushButton:hover{\n"
+                                      "color:white;\n"
+                                      "background-color:black;\n"
+                                      "}\n"
+                                      "#logoLabel{\n"
+                                      "background:transparent;\n"
+                                      "}")
         self.login_page.setObjectName("login_page")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.login_page)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        spacerItem = QtWidgets.QSpacerItem(200, 20, QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(200, 20, QtWidgets.QSizePolicy.MinimumExpanding,
+                                           QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.login_widget = QtWidgets.QWidget(self.login_page)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
@@ -174,43 +175,43 @@ class Ui_surveiliaFrontEnd(object):
         self.security_radioButton = QtWidgets.QRadioButton(self.loginForm_frame)
         self.security_radioButton.setGeometry(QtCore.QRect(170, 380, 151, 21))
         self.security_radioButton.setStyleSheet("QRadioButton{\n"
-"color:WHITE;\n"
-"font-size:16px;\n"
-"background:transparent;\n"
-"\n"
-"\n"
-"}")
+                                                "color:WHITE;\n"
+                                                "font-size:16px;\n"
+                                                "background:transparent;\n"
+                                                "\n"
+                                                "\n"
+                                                "}")
         self.security_radioButton.setObjectName("security_radioButton")
         self.admin_radioButton = QtWidgets.QRadioButton(self.loginForm_frame)
         self.admin_radioButton.setGeometry(QtCore.QRect(170, 340, 141, 20))
         self.admin_radioButton.setStyleSheet("QRadioButton{\n"
-"color:WHITE;\n"
-"font-size:16px;\n"
-"background:transparent;\n"
-"\n"
-"}")
+                                             "color:WHITE;\n"
+                                             "font-size:16px;\n"
+                                             "background:transparent;\n"
+                                             "\n"
+                                             "}")
         self.admin_radioButton.setObjectName("admin_radioButton")
         self.loginas1_label = QtWidgets.QLabel(self.loginForm_frame)
         self.loginas1_label.setGeometry(QtCore.QRect(50, 330, 91, 41))
         self.loginas1_label.setStyleSheet("*{\n"
-"background: transparent;\n"
-"border:none;\n"
-"color:WHITE;\n"
-"font-size:18px;\n"
-"font-weight:500;\n"
-"\n"
-"}")
+                                          "background: transparent;\n"
+                                          "border:none;\n"
+                                          "color:WHITE;\n"
+                                          "font-size:18px;\n"
+                                          "font-weight:500;\n"
+                                          "\n"
+                                          "}")
         self.loginas1_label.setObjectName("loginas1_label")
         self.loginFlag_label = QtWidgets.QLabel(self.loginForm_frame)
         self.loginFlag_label.setGeometry(QtCore.QRect(50, 290, 301, 16))
         self.loginFlag_label.setStyleSheet("font-size:16px;\n"
-"COLOR:red;")
+                                           "COLOR:red;")
         self.loginFlag_label.setText("")
         self.loginFlag_label.setObjectName("loginFlag_label")
         self.eye_toolButton = QtWidgets.QToolButton(self.loginForm_frame)
         self.eye_toolButton.setGeometry(QtCore.QRect(320, 250, 27, 22))
         self.eye_toolButton.setStyleSheet("background: #2A2F3C ;\n"
-"")
+                                          "")
         self.eye_toolButton.setText("")
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/logo/invisible-24.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -224,7 +225,8 @@ class Ui_surveiliaFrontEnd(object):
         self.logo1_toolButton.raise_()
         self.logo1_label.raise_()
         self.horizontalLayout.addWidget(self.login_widget)
-        spacerItem1 = QtWidgets.QSpacerItem(200, 20, QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem1 = QtWidgets.QSpacerItem(200, 20, QtWidgets.QSizePolicy.MinimumExpanding,
+                                            QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem1)
         self.horizontalLayout_2.addLayout(self.horizontalLayout)
         self.mainStackedWidget.addWidget(self.login_page)
@@ -236,14 +238,14 @@ class Ui_surveiliaFrontEnd(object):
         self.menuBar.setMinimumSize(QtCore.QSize(90, 0))
         self.menuBar.setMaximumSize(QtCore.QSize(80, 16777215))
         self.menuBar.setStyleSheet("*{background: #1C1D25;\n"
-"font-size: 16px;\n"
-"}\n"
-"QToolButton:hover{\n"
-"     background-color:#2A2F3C;\n"
-"}\n"
-"QToolButton:pressed{\n"
-"     background-color: #2A2F3C ;     \n"
-"}")
+                                   "font-size: 16px;\n"
+                                   "}\n"
+                                   "QToolButton:hover{\n"
+                                   "     background-color:#2A2F3C;\n"
+                                   "}\n"
+                                   "QToolButton:pressed{\n"
+                                   "     background-color: #2A2F3C ;     \n"
+                                   "}")
         self.menuBar.setObjectName("menuBar")
         self.camera_toolButton = QtWidgets.QToolButton(self.menuBar)
         self.camera_toolButton.setGeometry(QtCore.QRect(0, 100, 90, 71))
@@ -304,7 +306,7 @@ class Ui_surveiliaFrontEnd(object):
         font.setWeight(75)
         self.language_toolButton.setFont(font)
         self.language_toolButton.setStyleSheet("font-size:16px;\n"
-"background-repeat:no-repeat;")
+                                               "background-repeat:no-repeat;")
         icon4 = QtGui.QIcon()
         icon4.addPixmap(QtGui.QPixmap(":/logo/geography-24.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.language_toolButton.setIcon(icon4)
@@ -382,7 +384,7 @@ class Ui_surveiliaFrontEnd(object):
         self.titleBar2.setMinimumSize(QtCore.QSize(0, 80))
         self.titleBar2.setMaximumSize(QtCore.QSize(16777215, 80))
         self.titleBar2.setStyleSheet("background: #1C1D25;\n"
-"font-size: 24px;")
+                                     "font-size: 24px;")
         self.titleBar2.setObjectName("titleBar2")
         self.horizontalLayout_19 = QtWidgets.QHBoxLayout(self.titleBar2)
         self.horizontalLayout_19.setObjectName("horizontalLayout_19")
@@ -401,8 +403,8 @@ class Ui_surveiliaFrontEnd(object):
         self.verticalLayout_21.addItem(spacerItem4)
         self.userName_label = QtWidgets.QLabel(self.titleBar2)
         self.userName_label.setStyleSheet("font-size:15px;\n"
-"text-align: right;\n"
-"")
+                                          "text-align: right;\n"
+                                          "")
         self.userName_label.setText("")
         self.userName_label.setAlignment(QtCore.Qt.AlignCenter)
         self.userName_label.setObjectName("userName_label")
@@ -411,7 +413,7 @@ class Ui_surveiliaFrontEnd(object):
         self.verticalLayout_21.addItem(spacerItem5)
         self.dateTime_label = QtWidgets.QLabel(self.titleBar2)
         self.dateTime_label.setStyleSheet("text-align: right;\n"
-"font-size:15px;")
+                                          "font-size:15px;")
         self.dateTime_label.setText("")
         self.dateTime_label.setAlignment(QtCore.Qt.AlignCenter)
         self.dateTime_label.setObjectName("dateTime_label")
@@ -425,30 +427,30 @@ class Ui_surveiliaFrontEnd(object):
         self.verticalLayout_2.addWidget(self.titleBar2)
         self.menuStackedWidget = QtWidgets.QStackedWidget(self.main_page)
         self.menuStackedWidget.setStyleSheet("*{\n"
-"font-family: century gothic;\n"
-"background: #2A2F3C ;\n"
-"}\n"
-"QLineEdit, QTextEdit{\n"
-"background-color:#1C1D25;\n"
-"border:#1C1D25;\n"
-"color:white;\n"
-"font-size:18px;\n"
-"}\n"
-"QLabel{\n"
-"color: white;\n"
-"font-size: 20px;\n"
-"\n"
-"}\n"
-"QPushButton, QToolButton{\n"
-"font-weight:bold;\n"
-"color:white ;\n"
-"background:#1C1D25;\n"
-"}\n"
-"QPushButton:hover{\n"
-"color:white;\n"
-"background-color:black;\n"
-"}\n"
-"")
+                                             "font-family: century gothic;\n"
+                                             "background: #2A2F3C ;\n"
+                                             "}\n"
+                                             "QLineEdit, QTextEdit{\n"
+                                             "background-color:#1C1D25;\n"
+                                             "border:#1C1D25;\n"
+                                             "color:white;\n"
+                                             "font-size:18px;\n"
+                                             "}\n"
+                                             "QLabel{\n"
+                                             "color: white;\n"
+                                             "font-size: 20px;\n"
+                                             "\n"
+                                             "}\n"
+                                             "QPushButton, QToolButton{\n"
+                                             "font-weight:bold;\n"
+                                             "color:white ;\n"
+                                             "background:#1C1D25;\n"
+                                             "}\n"
+                                             "QPushButton:hover{\n"
+                                             "color:white;\n"
+                                             "background-color:black;\n"
+                                             "}\n"
+                                             "")
         self.menuStackedWidget.setObjectName("menuStackedWidget")
         self.welcome_page = QtWidgets.QWidget()
         self.welcome_page.setStyleSheet("BACKGROUND-COLOR:#2C313F;")
@@ -465,9 +467,9 @@ class Ui_surveiliaFrontEnd(object):
         self.frame_3.setSizePolicy(sizePolicy)
         self.frame_3.setMaximumSize(QtCore.QSize(470, 500))
         self.frame_3.setStyleSheet("QPushButton:hover{\n"
-"color:white;\n"
-"background-color:black;\n"
-"}")
+                                   "color:white;\n"
+                                   "background-color:black;\n"
+                                   "}")
         self.frame_3.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_3.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_3.setObjectName("frame_3")
@@ -490,7 +492,7 @@ class Ui_surveiliaFrontEnd(object):
         self.getStarted_pushButton = QtWidgets.QPushButton(self.frame_3)
         self.getStarted_pushButton.setGeometry(QtCore.QRect(60, 357, 251, 41))
         self.getStarted_pushButton.setStyleSheet("background-color:#1C1D25;\n"
-"")
+                                                 "")
         self.getStarted_pushButton.setObjectName("getStarted_pushButton")
         self.welcomeName_label = QtWidgets.QLabel(self.frame_3)
         self.welcomeName_label.setGeometry(QtCore.QRect(10, 260, 341, 21))
@@ -504,30 +506,30 @@ class Ui_surveiliaFrontEnd(object):
         self.menuStackedWidget.addWidget(self.welcome_page)
         self.camera_page = QtWidgets.QWidget()
         self.camera_page.setStyleSheet("*{\n"
-"font-family: century gothic;\n"
-"background: #2A2F3C ;\n"
-"}\n"
-"QLineEdit, QTextEdit{\n"
-"background-color:#1C1D25;\n"
-"background-color:#1C1D25;\n"
-"color:white;\n"
-"font-size:18px;\n"
-"}\n"
-"QLabel{\n"
-"color: white;\n"
-"font-size: 18px;\n"
-"\n"
-"}\n"
-"QPushButton, QToolButton{\n"
-"font-weight:bold;\n"
-"color:white ;\n"
-"background-color:#1C1D25;\n"
-"}\n"
-"QPushButton:hover{\n"
-"color:white;\n"
-"background-color:black;\n"
-"}\n"
-"")
+                                       "font-family: century gothic;\n"
+                                       "background: #2A2F3C ;\n"
+                                       "}\n"
+                                       "QLineEdit, QTextEdit{\n"
+                                       "background-color:#1C1D25;\n"
+                                       "background-color:#1C1D25;\n"
+                                       "color:white;\n"
+                                       "font-size:18px;\n"
+                                       "}\n"
+                                       "QLabel{\n"
+                                       "color: white;\n"
+                                       "font-size: 18px;\n"
+                                       "\n"
+                                       "}\n"
+                                       "QPushButton, QToolButton{\n"
+                                       "font-weight:bold;\n"
+                                       "color:white ;\n"
+                                       "background-color:#1C1D25;\n"
+                                       "}\n"
+                                       "QPushButton:hover{\n"
+                                       "color:white;\n"
+                                       "background-color:black;\n"
+                                       "}\n"
+                                       "")
         self.camera_page.setObjectName("camera_page")
         self.horizontalLayout_36 = QtWidgets.QHBoxLayout(self.camera_page)
         self.horizontalLayout_36.setObjectName("horizontalLayout_36")
@@ -586,18 +588,18 @@ class Ui_surveiliaFrontEnd(object):
         self.widget.setMinimumSize(QtCore.QSize(200, 500))
         self.widget.setMaximumSize(QtCore.QSize(200, 16777215))
         self.widget.setStyleSheet("*{\n"
-"background: #1C1D25;\n"
-"}\n"
-"QToolButton{\n"
-"background: #2A2F3C ;\n"
-"}\n"
-"\n"
-"QToolButton:hover{\n"
-"background:#2A2F3C ;\n"
-"}\n"
-"QToolButton:pressed{\n"
-"background:#1C1D25;\n"
-"}")
+                                  "background: #1C1D25;\n"
+                                  "}\n"
+                                  "QToolButton{\n"
+                                  "background: #2A2F3C ;\n"
+                                  "}\n"
+                                  "\n"
+                                  "QToolButton:hover{\n"
+                                  "background:#2A2F3C ;\n"
+                                  "}\n"
+                                  "QToolButton:pressed{\n"
+                                  "background:#1C1D25;\n"
+                                  "}")
         self.widget.setObjectName("widget")
         self.verticalLayout_22 = QtWidgets.QVBoxLayout(self.widget)
         self.verticalLayout_22.setObjectName("verticalLayout_22")
@@ -611,15 +613,15 @@ class Ui_surveiliaFrontEnd(object):
         self.addNew_pushButton.setMinimumSize(QtCore.QSize(0, 100))
         self.addNew_pushButton.setMaximumSize(QtCore.QSize(16777215, 100))
         self.addNew_pushButton.setStyleSheet("*{\n"
-"FONT-SIZE: 18px;\n"
-"background: #2A2F3C ;\n"
-"}\n"
-"QToolButton:hover{\n"
-"background:#2A2F3C ;\n"
-"}\n"
-"QToolButton:pressed{\n"
-"background:#1C1D25;\n"
-"}")
+                                             "FONT-SIZE: 18px;\n"
+                                             "background: #2A2F3C ;\n"
+                                             "}\n"
+                                             "QToolButton:hover{\n"
+                                             "background:#2A2F3C ;\n"
+                                             "}\n"
+                                             "QToolButton:pressed{\n"
+                                             "background:#1C1D25;\n"
+                                             "}")
         icon8 = QtGui.QIcon()
         icon8.addPixmap(QtGui.QPixmap(":/logo/plus-8-24.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.addNew_pushButton.setIcon(icon8)
@@ -764,45 +766,45 @@ class Ui_surveiliaFrontEnd(object):
         self.menuStackedWidget.addWidget(self.camera_page)
         self.alarm_page = QtWidgets.QWidget()
         self.alarm_page.setStyleSheet("*{\n"
-"font-family: century gothic;\n"
-"background: #2A2F3C ;\n"
-"}\n"
-"QLabel{\n"
-"color: white;\n"
-"font-size: 18px;\n"
-"}\n"
-"QTableWidget{ \n"
-"  width: 100%;\n"
-"   padding: 10px;\n"
-"  text-align: left;\n"
-"color: white;\n"
-" gridline-color: black;\n"
-"    font-size: 14px;\n"
-"}\n"
-"QHeaderView::section {\n"
-"background: #2A2F3C ;\n"
-"color:white;\n"
-"    \n"
-"    padding: 2px;\n"
-"    border: 1px solid black;\n"
-"    font-size: 12px;\n"
-"font-weight:bold;\n"
-"\n"
-"}\n"
-"QTableWidget QTableCornerButton::section {\n"
-"    background-color: #646464;\n"
-"    border: 1px solid black;\n"
-"}\n"
-"QPushButton{\n"
-"font-weight:bold;\n"
-"color:white ;\n"
-"background:#1C1D25;\n"
-"}\n"
-"QPushButton:hover{\n"
-"color:white;\n"
-"background-color:black;\n"
-"}\n"
-"")
+                                      "font-family: century gothic;\n"
+                                      "background: #2A2F3C ;\n"
+                                      "}\n"
+                                      "QLabel{\n"
+                                      "color: white;\n"
+                                      "font-size: 18px;\n"
+                                      "}\n"
+                                      "QTableWidget{ \n"
+                                      "  width: 100%;\n"
+                                      "   padding: 10px;\n"
+                                      "  text-align: left;\n"
+                                      "color: white;\n"
+                                      " gridline-color: black;\n"
+                                      "    font-size: 14px;\n"
+                                      "}\n"
+                                      "QHeaderView::section {\n"
+                                      "background: #2A2F3C ;\n"
+                                      "color:white;\n"
+                                      "    \n"
+                                      "    padding: 2px;\n"
+                                      "    border: 1px solid black;\n"
+                                      "    font-size: 12px;\n"
+                                      "font-weight:bold;\n"
+                                      "\n"
+                                      "}\n"
+                                      "QTableWidget QTableCornerButton::section {\n"
+                                      "    background-color: #646464;\n"
+                                      "    border: 1px solid black;\n"
+                                      "}\n"
+                                      "QPushButton{\n"
+                                      "font-weight:bold;\n"
+                                      "color:white ;\n"
+                                      "background:#1C1D25;\n"
+                                      "}\n"
+                                      "QPushButton:hover{\n"
+                                      "color:white;\n"
+                                      "background-color:black;\n"
+                                      "}\n"
+                                      "")
         self.alarm_page.setObjectName("alarm_page")
         self.verticalLayout_12 = QtWidgets.QVBoxLayout(self.alarm_page)
         self.verticalLayout_12.setObjectName("verticalLayout_12")
@@ -814,8 +816,8 @@ class Ui_surveiliaFrontEnd(object):
         self.horizontalLayout_24.addItem(spacerItem23)
         self.alarmHistory_label = QtWidgets.QLabel(self.alarm_page)
         self.alarmHistory_label.setStyleSheet("FONT-WEIGHT:BOLD;\n"
-"font-size:24px")
-        self.alarmHistory_label.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+                                              "font-size:24px")
+        self.alarmHistory_label.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
         self.alarmHistory_label.setObjectName("alarmHistory_label")
         self.horizontalLayout_24.addWidget(self.alarmHistory_label)
         spacerItem24 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -853,11 +855,11 @@ class Ui_surveiliaFrontEnd(object):
         self.anomalySearch_lineEdit.setSizePolicy(sizePolicy)
         self.anomalySearch_lineEdit.setMinimumSize(QtCore.QSize(300, 31))
         self.anomalySearch_lineEdit.setStyleSheet("QLineEdit{\n"
-"background-color:#1C1D25;\n"
-"border:#1C1D25;\n"
-"color:white;\n"
-"font-size:18px;\n"
-"}")
+                                                  "background-color:#1C1D25;\n"
+                                                  "border:#1C1D25;\n"
+                                                  "color:white;\n"
+                                                  "font-size:18px;\n"
+                                                  "}")
         self.anomalySearch_lineEdit.setObjectName("anomalySearch_lineEdit")
         self.horizontalLayout_29.addWidget(self.anomalySearch_lineEdit)
         self.anomalySearch_pushButton = QtWidgets.QPushButton(self.alarm_page)
@@ -874,33 +876,33 @@ class Ui_surveiliaFrontEnd(object):
         self.alarm_tableWidget.setSizePolicy(sizePolicy)
         self.alarm_tableWidget.setMinimumSize(QtCore.QSize(650, 0))
         self.alarm_tableWidget.setStyleSheet("QTableWidget{ \n"
-"  width: 100%;\n"
-"   padding: 10px;\n"
-"  text-align: left;\n"
-"color: white;\n"
-"}\n"
-"\n"
-"\n"
-"QHeaderView::section {\n"
-"color:white;\n"
-"    background-color:#1C1D25;\n"
-"\n"
-"    padding: 2px;\n"
-"    border: 1px solid black;\n"
-"    font-size: 15px;\n"
-"font-weight:bold;\n"
-"\n"
-"}\n"
-"\n"
-"QTableWidget {\n"
-"    gridline-color: black;\n"
-"    font-size: 16px;\n"
-"}\n"
-"\n"
-"QTableWidget QTableCornerButton::section {\n"
-"    background-color: #2A2F3C\n"
-"    border: 1px solid black;\n"
-"}")
+                                             "  width: 100%;\n"
+                                             "   padding: 10px;\n"
+                                             "  text-align: left;\n"
+                                             "color: white;\n"
+                                             "}\n"
+                                             "\n"
+                                             "\n"
+                                             "QHeaderView::section {\n"
+                                             "color:white;\n"
+                                             "    background-color:#1C1D25;\n"
+                                             "\n"
+                                             "    padding: 2px;\n"
+                                             "    border: 1px solid black;\n"
+                                             "    font-size: 15px;\n"
+                                             "font-weight:bold;\n"
+                                             "\n"
+                                             "}\n"
+                                             "\n"
+                                             "QTableWidget {\n"
+                                             "    gridline-color: black;\n"
+                                             "    font-size: 16px;\n"
+                                             "}\n"
+                                             "\n"
+                                             "QTableWidget QTableCornerButton::section {\n"
+                                             "    background-color: #2A2F3C\n"
+                                             "    border: 1px solid black;\n"
+                                             "}")
         self.alarm_tableWidget.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.alarm_tableWidget.setFrameShadow(QtWidgets.QFrame.Plain)
         self.alarm_tableWidget.setObjectName("alarm_tableWidget")
@@ -940,30 +942,30 @@ class Ui_surveiliaFrontEnd(object):
         self.menuStackedWidget.addWidget(self.alarm_page)
         self.accountInfo_page = QtWidgets.QWidget()
         self.accountInfo_page.setStyleSheet("*{\n"
-"font-family: century gothic;\n"
-"background: #2A2F3C ;\n"
-"}\n"
-"QLineEdit, QTextEdit{\n"
-"background-color:#1C1D25;\n"
-"background-color:#1C1D25;\n"
-"color:white;\n"
-"font-size:18px;\n"
-"}\n"
-"QLabel{\n"
-"color: white;\n"
-"font-size: 18px;\n"
-"\n"
-"}\n"
-"QPushButton, QToolButton{\n"
-"font-weight:bold;\n"
-"color:white ;\n"
-"background-color:#1C1D25;\n"
-"}\n"
-"QPushButton:hover{\n"
-"color:white;\n"
-"background-color:black;\n"
-"}\n"
-"")
+                                            "font-family: century gothic;\n"
+                                            "background: #2A2F3C ;\n"
+                                            "}\n"
+                                            "QLineEdit, QTextEdit{\n"
+                                            "background-color:#1C1D25;\n"
+                                            "background-color:#1C1D25;\n"
+                                            "color:white;\n"
+                                            "font-size:18px;\n"
+                                            "}\n"
+                                            "QLabel{\n"
+                                            "color: white;\n"
+                                            "font-size: 18px;\n"
+                                            "\n"
+                                            "}\n"
+                                            "QPushButton, QToolButton{\n"
+                                            "font-weight:bold;\n"
+                                            "color:white ;\n"
+                                            "background-color:#1C1D25;\n"
+                                            "}\n"
+                                            "QPushButton:hover{\n"
+                                            "color:white;\n"
+                                            "background-color:black;\n"
+                                            "}\n"
+                                            "")
         self.accountInfo_page.setObjectName("accountInfo_page")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.accountInfo_page)
         self.verticalLayout.setObjectName("verticalLayout")
@@ -977,7 +979,7 @@ class Ui_surveiliaFrontEnd(object):
         self.account_form.setObjectName("account_form")
         self.accountInfo_label = QtWidgets.QLabel(self.accountInfo_page)
         self.accountInfo_label.setStyleSheet("FONT-WEIGHT:BOLD;\n"
-"font-size:24px;")
+                                             "font-size:24px;")
         self.accountInfo_label.setObjectName("accountInfo_label")
         self.account_form.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.accountInfo_label)
         spacerItem35 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
@@ -1038,30 +1040,30 @@ class Ui_surveiliaFrontEnd(object):
         self.menuStackedWidget.addWidget(self.accountInfo_page)
         self.usersInfo_page = QtWidgets.QWidget()
         self.usersInfo_page.setStyleSheet("*{\n"
-"font-family: century gothic;\n"
-"background: #2A2F3C ;\n"
-"}\n"
-"QLineEdit, QTextEdit{\n"
-"background-color:#1C1D25;\n"
-"background-color:#1C1D25;\n"
-"color:white;\n"
-"font-size:18px;\n"
-"}\n"
-"QLabel{\n"
-"color: white;\n"
-"font-size: 18px;\n"
-"\n"
-"}\n"
-"QPushButton, QToolButton{\n"
-"font-weight:bold;\n"
-"color:white ;\n"
-"background-color:#1C1D25;\n"
-"}\n"
-"QPushButton:hover{\n"
-"color:white;\n"
-"background-color:black;\n"
-"}\n"
-"")
+                                          "font-family: century gothic;\n"
+                                          "background: #2A2F3C ;\n"
+                                          "}\n"
+                                          "QLineEdit, QTextEdit{\n"
+                                          "background-color:#1C1D25;\n"
+                                          "background-color:#1C1D25;\n"
+                                          "color:white;\n"
+                                          "font-size:18px;\n"
+                                          "}\n"
+                                          "QLabel{\n"
+                                          "color: white;\n"
+                                          "font-size: 18px;\n"
+                                          "\n"
+                                          "}\n"
+                                          "QPushButton, QToolButton{\n"
+                                          "font-weight:bold;\n"
+                                          "color:white ;\n"
+                                          "background-color:#1C1D25;\n"
+                                          "}\n"
+                                          "QPushButton:hover{\n"
+                                          "color:white;\n"
+                                          "background-color:black;\n"
+                                          "}\n"
+                                          "")
         self.usersInfo_page.setObjectName("usersInfo_page")
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.usersInfo_page)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
@@ -1073,7 +1075,7 @@ class Ui_surveiliaFrontEnd(object):
         self.horizontalLayout_16.addItem(spacerItem39)
         self.userInfo_label = QtWidgets.QLabel(self.usersInfo_page)
         self.userInfo_label.setStyleSheet("FONT-WEIGHT:BOLD;\n"
-"font-size:24px;FONT-WEIGHT:BOLD;")
+                                          "font-size:24px;FONT-WEIGHT:BOLD;")
         self.userInfo_label.setObjectName("userInfo_label")
         self.horizontalLayout_16.addWidget(self.userInfo_label)
         spacerItem40 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -1090,12 +1092,12 @@ class Ui_surveiliaFrontEnd(object):
         self.horizontalLayout_14.addWidget(self.viewLabel)
         self.adminstable_radioButton = QtWidgets.QRadioButton(self.usersInfo_page)
         self.adminstable_radioButton.setStyleSheet("font-size:18px;\n"
-"color: white;")
+                                                   "color: white;")
         self.adminstable_radioButton.setObjectName("adminstable_radioButton")
         self.horizontalLayout_14.addWidget(self.adminstable_radioButton)
         self.securitytable_radioButton = QtWidgets.QRadioButton(self.usersInfo_page)
         self.securitytable_radioButton.setStyleSheet("font-size:18px;\n"
-"color: white;")
+                                                     "color: white;")
         self.securitytable_radioButton.setObjectName("securitytable_radioButton")
         self.horizontalLayout_14.addWidget(self.securitytable_radioButton)
         spacerItem43 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -1132,32 +1134,32 @@ class Ui_surveiliaFrontEnd(object):
         self.user_tableWidget.setMinimumSize(QtCore.QSize(800, 0))
         self.user_tableWidget.setMouseTracking(False)
         self.user_tableWidget.setStyleSheet("QTableWidget{ \n"
-"  width: 100%;\n"
-"   padding: 10px;\n"
-"  text-align: left;\n"
-"color: white;\n"
-"}\n"
-"\n"
-"\n"
-"QHeaderView::section {\n"
-"color:white;\n"
-"    background-color:#1C1D25;\n"
-"    padding: 2px;\n"
-"    border: 1px solid black;\n"
-"    font-size: 15px;\n"
-"font-weight:bold;\n"
-"\n"
-"}\n"
-"\n"
-"QTableWidget {\n"
-"    gridline-color: black;\n"
-"    font-size: 16px;\n"
-"}\n"
-"\n"
-"QTableWidget QTableCornerButton::section {\n"
-"    background-color:#1C1D25;\n"
-"    border: 1px solid black;\n"
-"}")
+                                            "  width: 100%;\n"
+                                            "   padding: 10px;\n"
+                                            "  text-align: left;\n"
+                                            "color: white;\n"
+                                            "}\n"
+                                            "\n"
+                                            "\n"
+                                            "QHeaderView::section {\n"
+                                            "color:white;\n"
+                                            "    background-color:#1C1D25;\n"
+                                            "    padding: 2px;\n"
+                                            "    border: 1px solid black;\n"
+                                            "    font-size: 15px;\n"
+                                            "font-weight:bold;\n"
+                                            "\n"
+                                            "}\n"
+                                            "\n"
+                                            "QTableWidget {\n"
+                                            "    gridline-color: black;\n"
+                                            "    font-size: 16px;\n"
+                                            "}\n"
+                                            "\n"
+                                            "QTableWidget QTableCornerButton::section {\n"
+                                            "    background-color:#1C1D25;\n"
+                                            "    border: 1px solid black;\n"
+                                            "}")
         self.user_tableWidget.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.user_tableWidget.setFrameShadow(QtWidgets.QFrame.Plain)
         self.user_tableWidget.setShowGrid(True)
@@ -1219,32 +1221,32 @@ class Ui_surveiliaFrontEnd(object):
         self.horizontalLayout_26.addItem(spacerItem51)
         self.admin_tableWidget = QtWidgets.QTableWidget(self.admintable_stackedWidget)
         self.admin_tableWidget.setStyleSheet("QTableWidget{ \n"
-"  width: 100%;\n"
-"   padding: 10px;\n"
-"  text-align: left;\n"
-"color: white;\n"
-"}\n"
-"\n"
-"\n"
-"QHeaderView::section {\n"
-"color:white;\n"
-"    background-color:#1C1D25;\n"
-"    padding: 2px;\n"
-"    border: 1px solid black;\n"
-"    font-size: 15px;\n"
-"font-weight:bold;\n"
-"\n"
-"}\n"
-"\n"
-"QTableWidget {\n"
-"    gridline-color: black;\n"
-"    font-size: 16px;\n"
-"}\n"
-"\n"
-"QTableWidget QTableCornerButton::section {\n"
-"    background-color:#1C1D25;\n"
-"    border: 1px solid black;\n"
-"}")
+                                             "  width: 100%;\n"
+                                             "   padding: 10px;\n"
+                                             "  text-align: left;\n"
+                                             "color: white;\n"
+                                             "}\n"
+                                             "\n"
+                                             "\n"
+                                             "QHeaderView::section {\n"
+                                             "color:white;\n"
+                                             "    background-color:#1C1D25;\n"
+                                             "    padding: 2px;\n"
+                                             "    border: 1px solid black;\n"
+                                             "    font-size: 15px;\n"
+                                             "font-weight:bold;\n"
+                                             "\n"
+                                             "}\n"
+                                             "\n"
+                                             "QTableWidget {\n"
+                                             "    gridline-color: black;\n"
+                                             "    font-size: 16px;\n"
+                                             "}\n"
+                                             "\n"
+                                             "QTableWidget QTableCornerButton::section {\n"
+                                             "    background-color:#1C1D25;\n"
+                                             "    border: 1px solid black;\n"
+                                             "}")
         self.admin_tableWidget.setObjectName("admin_tableWidget")
         self.admin_tableWidget.setColumnCount(7)
         self.admin_tableWidget.setRowCount(2)
@@ -1279,31 +1281,31 @@ class Ui_surveiliaFrontEnd(object):
         self.menuStackedWidget.addWidget(self.usersInfo_page)
         self.addNewUser_page = QtWidgets.QWidget()
         self.addNewUser_page.setStyleSheet("*{\n"
-"font-family: century gothic;\n"
-"background: #2A2F3C ;\n"
-"}\n"
-"QLineEdit, QTextEdit{\n"
-"background-color:#1C1D25;\n"
-"border:#1C1D25;\n"
-"\n"
-"color:white;\n"
-"font-size:18px;\n"
-"}\n"
-"QLabel{\n"
-"color: white;\n"
-"font-size: 18px;\n"
-"\n"
-"}\n"
-"QPushButton, QToolButton{\n"
-"font-weight:bold;\n"
-"color:white ;\n"
-"background-color:#1C1D25;\n"
-"}\n"
-"QPushButton:hover{\n"
-"color:white;\n"
-"background-color:black;\n"
-"}\n"
-"")
+                                           "font-family: century gothic;\n"
+                                           "background: #2A2F3C ;\n"
+                                           "}\n"
+                                           "QLineEdit, QTextEdit{\n"
+                                           "background-color:#1C1D25;\n"
+                                           "border:#1C1D25;\n"
+                                           "\n"
+                                           "color:white;\n"
+                                           "font-size:18px;\n"
+                                           "}\n"
+                                           "QLabel{\n"
+                                           "color: white;\n"
+                                           "font-size: 18px;\n"
+                                           "\n"
+                                           "}\n"
+                                           "QPushButton, QToolButton{\n"
+                                           "font-weight:bold;\n"
+                                           "color:white ;\n"
+                                           "background-color:#1C1D25;\n"
+                                           "}\n"
+                                           "QPushButton:hover{\n"
+                                           "color:white;\n"
+                                           "background-color:black;\n"
+                                           "}\n"
+                                           "")
         self.addNewUser_page.setObjectName("addNewUser_page")
         self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.addNewUser_page)
         self.verticalLayout_7.setObjectName("verticalLayout_7")
@@ -1317,7 +1319,7 @@ class Ui_surveiliaFrontEnd(object):
         self.addUser_form.setObjectName("addUser_form")
         self.addUser_label = QtWidgets.QLabel(self.addNewUser_page)
         self.addUser_label.setStyleSheet("FONT-WEIGHT:BOLD;\n"
-"font-size:24px;")
+                                         "font-size:24px;")
         self.addUser_label.setObjectName("addUser_label")
         self.addUser_form.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.addUser_label)
         spacerItem54 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
@@ -1367,12 +1369,12 @@ class Ui_surveiliaFrontEnd(object):
         self.horizontalLayout_20.setObjectName("horizontalLayout_20")
         self.aAdmin_radioButton = QtWidgets.QRadioButton(self.addNewUser_page)
         self.aAdmin_radioButton.setStyleSheet("color:white;\n"
-"font-size: 16px;")
+                                              "font-size: 16px;")
         self.aAdmin_radioButton.setObjectName("aAdmin_radioButton")
         self.horizontalLayout_20.addWidget(self.aAdmin_radioButton)
         self.aSecurity_radioButton = QtWidgets.QRadioButton(self.addNewUser_page)
         self.aSecurity_radioButton.setStyleSheet("color:white;\n"
-"font-size: 16px;")
+                                                 "font-size: 16px;")
         self.aSecurity_radioButton.setObjectName("aSecurity_radioButton")
         self.horizontalLayout_20.addWidget(self.aSecurity_radioButton)
         self.addUser_form.setLayout(8, QtWidgets.QFormLayout.FieldRole, self.horizontalLayout_20)
@@ -1391,7 +1393,7 @@ class Ui_surveiliaFrontEnd(object):
         self.english_radioButton = QtWidgets.QRadioButton(self.language_page)
         self.english_radioButton.setGeometry(QtCore.QRect(230, 170, 141, 31))
         self.english_radioButton.setStyleSheet("font-size:21px;\n"
-"COLOR:WHITE;")
+                                               "COLOR:WHITE;")
         self.english_radioButton.setObjectName("english_radioButton")
         self.chooseLanguage_label = QtWidgets.QLabel(self.language_page)
         self.chooseLanguage_label.setGeometry(QtCore.QRect(100, 100, 191, 31))
@@ -1399,7 +1401,7 @@ class Ui_surveiliaFrontEnd(object):
         self.urdu_radioButton = QtWidgets.QRadioButton(self.language_page)
         self.urdu_radioButton.setGeometry(QtCore.QRect(230, 220, 111, 31))
         self.urdu_radioButton.setStyleSheet("font-size:21px;\n"
-"COLOR:WHITE;")
+                                            "COLOR:WHITE;")
         self.urdu_radioButton.setObjectName("urdu_radioButton")
         self.menuStackedWidget.addWidget(self.language_page)
         self.accessdenied_page = QtWidgets.QWidget()
@@ -1422,7 +1424,7 @@ class Ui_surveiliaFrontEnd(object):
         self.account_form_2.setObjectName("account_form_2")
         self.editInfo_label = QtWidgets.QLabel(self.edit_page)
         self.editInfo_label.setStyleSheet("FONT-WEIGHT:BOLD;\n"
-"font-size:24px;")
+                                          "font-size:24px;")
         self.editInfo_label.setObjectName("editInfo_label")
         self.account_form_2.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.editInfo_label)
         spacerItem59 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
@@ -1487,44 +1489,44 @@ class Ui_surveiliaFrontEnd(object):
         self.mainStackedWidget.addWidget(self.main_page)
         self.loggedOut_page = QtWidgets.QWidget()
         self.loggedOut_page.setStyleSheet("*{\n"
-"font-family: century gothic;\n"
-"font-size: 30px;\n"
-"background-color:#1C1D25;\n"
-"}\n"
-"QFrame{\n"
-"\n"
-"background: #2A2F3C ;\n"
-"border-radius:10px;\n"
-"\n"
-"}\n"
-"QLabel{\n"
-"color:white;\n"
-"font-weight: bold;\n"
-"}\n"
-"QToolButton{\n"
-"background:white;\n"
-"border-radius:60px;\n"
-"}\n"
-"QLineEdit{\n"
-"background: transparent;\n"
-"border:none;\n"
-"color:BLACK;\n"
-"border-bottom:1px solid black;\n"
-"font-size:20px;\n"
-"}\n"
-"QPushButton{\n"
-"font-size:18px;\n"
-"font-weight:bold;\n"
-"color:white ;\n"
-"background-color:#1C1D25;\n"
-"}\n"
-"QPushButton:hover{\n"
-"color:white;\n"
-"background-color:black;\n"
-"}\n"
-"#logoLabel{\n"
-"background:transparent;\n"
-"}")
+                                          "font-family: century gothic;\n"
+                                          "font-size: 30px;\n"
+                                          "background-color:#1C1D25;\n"
+                                          "}\n"
+                                          "QFrame{\n"
+                                          "\n"
+                                          "background: #2A2F3C ;\n"
+                                          "border-radius:10px;\n"
+                                          "\n"
+                                          "}\n"
+                                          "QLabel{\n"
+                                          "color:white;\n"
+                                          "font-weight: bold;\n"
+                                          "}\n"
+                                          "QToolButton{\n"
+                                          "background:white;\n"
+                                          "border-radius:60px;\n"
+                                          "}\n"
+                                          "QLineEdit{\n"
+                                          "background: transparent;\n"
+                                          "border:none;\n"
+                                          "color:BLACK;\n"
+                                          "border-bottom:1px solid black;\n"
+                                          "font-size:20px;\n"
+                                          "}\n"
+                                          "QPushButton{\n"
+                                          "font-size:18px;\n"
+                                          "font-weight:bold;\n"
+                                          "color:white ;\n"
+                                          "background-color:#1C1D25;\n"
+                                          "}\n"
+                                          "QPushButton:hover{\n"
+                                          "color:white;\n"
+                                          "background-color:black;\n"
+                                          "}\n"
+                                          "#logoLabel{\n"
+                                          "background:transparent;\n"
+                                          "}")
         self.loggedOut_page.setObjectName("loggedOut_page")
         self.horizontalLayout_27 = QtWidgets.QHBoxLayout(self.loggedOut_page)
         self.horizontalLayout_27.setObjectName("horizontalLayout_27")
@@ -1613,7 +1615,8 @@ class Ui_surveiliaFrontEnd(object):
         self.camLabel5.setText(_translate("surveiliaFrontEnd", "CAMERA_05"))
         self.camLabel6.setText(_translate("surveiliaFrontEnd", "CAMERA_06"))
         self.alarmHistory_label.setText(_translate("surveiliaFrontEnd", "ALARM HISTORY"))
-        self.alarmHistoryDetail_label.setText(_translate("surveiliaFrontEnd", "The history of alarms is displayed here."))
+        self.alarmHistoryDetail_label.setText(
+            _translate("surveiliaFrontEnd", "The history of alarms is displayed here."))
         self.anomalySearch_lineEdit.setText(_translate("surveiliaFrontEnd", "Enter data to search"))
         self.anomalySearch_pushButton.setText(_translate("surveiliaFrontEnd", "Search"))
         self.alarm_tableWidget.setSortingEnabled(True)
@@ -1644,11 +1647,12 @@ class Ui_surveiliaFrontEnd(object):
         self.password_label.setText(_translate("surveiliaFrontEnd", "Password:"))
         self.contactInfo_label.setText(_translate("surveiliaFrontEnd", "Contact Info:"))
         self.address_label.setText(_translate("surveiliaFrontEnd", "Address:"))
-        self.address_field.setHtml(_translate("surveiliaFrontEnd", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'century gothic\'; font-size:18px; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        self.address_field.setHtml(_translate("surveiliaFrontEnd",
+                                              "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                              "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+                                              "p, li { white-space: pre-wrap; }\n"
+                                              "</style></head><body style=\" font-family:\'century gothic\'; font-size:18px; font-weight:400; font-style:normal;\">\n"
+                                              "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.edit_pushButton.setText(_translate("surveiliaFrontEnd", "EDIT"))
         self.userInfo_label.setText(_translate("surveiliaFrontEnd", "  USERS INFORMATION"))
         self.viewLabel.setText(_translate("surveiliaFrontEnd", "View:"))
@@ -1717,11 +1721,12 @@ class Ui_surveiliaFrontEnd(object):
         self.password_label_2.setText(_translate("surveiliaFrontEnd", "Password:"))
         self.contactInfo_label_2.setText(_translate("surveiliaFrontEnd", "Contact Info:"))
         self.address_label_2.setText(_translate("surveiliaFrontEnd", "Address:"))
-        self.address_field_2.setHtml(_translate("surveiliaFrontEnd", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'century gothic\'; font-size:18px; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        self.address_field_2.setHtml(_translate("surveiliaFrontEnd",
+                                                "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                                "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+                                                "p, li { white-space: pre-wrap; }\n"
+                                                "</style></head><body style=\" font-family:\'century gothic\'; font-size:18px; font-weight:400; font-style:normal;\">\n"
+                                                "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.edit_pushButton_2.setText(_translate("surveiliaFrontEnd", "EDIT"))
         self.title3_label.setText(_translate("surveiliaFrontEnd", "SURVEILIA"))
         self.cancel_pushButton.setText(_translate("surveiliaFrontEnd", "CANCEL"))
@@ -1731,9 +1736,9 @@ class Ui_surveiliaFrontEnd(object):
 
 import resource01_rc
 
-
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     surveiliaFrontEnd = QtWidgets.QMainWindow()
     ui = Ui_surveiliaFrontEnd()

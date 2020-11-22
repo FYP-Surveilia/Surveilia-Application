@@ -58,14 +58,15 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
          super(ControlMainWindow, self).__init__(parent)
          self.setupUi(self)
      """
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setupUi(self)
 
-
         self.logic = 0
         self.flag = 0
         self.camSignal = 0
+        self.camcount = 0
         self.mainStackedWidget.setCurrentIndex(0)
         self.menuStackedWidget.setCurrentIndex(0)
 
@@ -135,7 +136,6 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
 
         self.english_radioButton.toggled.connect(self.changeLanguagetoEnglish)
         self.urdu_radioButton.toggled.connect(self.changeLanguagetoUrdu)
-        self.logout_toolButton.clicked.connect(self.changeLanguagetoEnglish)
         self.alarm_toolButton.clicked.connect(self.anomaly_tableDetail)
         self.userDelete_pushButton.clicked.connect(self.deleteUser)
         self.adminDelete_pushButton.clicked.connect(self.deleteAdmin)
@@ -158,10 +158,37 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.anomalysearch = False
 
         self.alarm_tableWidget.clicked.connect(self.checkk)
+
+        self.widget.setStyleSheet("*{\n"
+                                  "background: #2A2F3C;\n"
+                                  "}\n"
+                                  "QToolButton{\n"
+                                  "background: #2A2F3C ;\n"
+                                  "}\n"
+                                  "\n"
+                                  "QToolButton:hover{\n"
+                                  "background:#2A2F3C ;\n"
+                                  "}\n"
+                                  "QToolButton:pressed{\n"
+                                  "background:#1C1D25;\n"
+                                  "}"
+                                  )
+
+        self.addNew_pushButton.setStyleSheet("*{\n"
+                                             "FONT-SIZE: 18px;\n"
+                                             "background: #2A2F3C ;\n"
+                                             "}\n"
+                                             "QToolButton:hover{\n"
+                                             "background:#2A2F3C ;\n"
+                                             "}\n"
+                                             "QToolButton:pressed{\n"
+                                             "background:#1C1D25;\n"
+                                             "}")
+
     def checkk(self):
         if self.alarm_tableWidget.currentColumn() == 4:
             self.openPlayAnomalyVideo()
-    
+
     def openCamOptions(self):
         self.camOptions = camOptionsDialog()
         self.camOptions.openDir_pushButton.clicked.connect(self.openFile)
@@ -214,11 +241,13 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
                 item.setForeground(brush)
             self.anomalysearch = False
 
+    """
     def conditionCross(self):
-        if self.cam01_pushButton.isHidden() and self.cam02_pushButton.isHidden() and self.cam03_pushButton.isHidden() and self.cam04_pushButton.isHidden() and self.cam05_pushButton.isHidden() and self.cam06_pushButton.isHidden():
+        if self.cam01_pushButton.isHidden() == True and self.cam02_pushButton.isHidden() == True and self.cam03_pushButton.isHidden() == True and self.cam04_pushButton.isHidden() == True and self.cam05_pushButton.isHidden()  == True and self.cam06_pushButton.isHidden()  == True:
             self.cameras_label.hide()
         else:
             print("cant hide the cameras label")
+    """
 
     def revealPassword(self):
         if not self.password_shown:
@@ -304,8 +333,8 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
 
     def logout(self):
         self.MessagesProfile("Quit", "Will you like to Logout?")
+        self.camOptions.close()
         # self.mainStackedWidget.setCurrentIndex(2)
-        quit()
 
     def addnewuser(self):
         if self.aAdmin_radioButton.isChecked():
@@ -899,48 +928,65 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         # self.menuStackedWidget.setCurrentIndex(7)
         self.openCamOptions()
 
-
     def displaycross1Action(self):
-        self.conditionCross()
+        self.camcount = self.camcount - 1
+        print(self.camcount)
+        self.widgetColorCheck()
         self.display_1.hide()
         self.displaycross_1.hide()
         self.camLabel1.hide()
         self.cam01_pushButton.hide()
 
     def displaycross2Action(self):
-        self.conditionCross()
+        # self.conditionCross()
+        self.camcount = self.camcount - 1
+        print(self.camcount)
+        self.widgetColorCheck()
         self.display_2.hide()
         self.displaycross_2.hide()
         self.camLabel2.hide()
         self.cam02_pushButton.hide()
 
     def displaycross3Action(self):
-        self.conditionCross()
+        # self.conditionCross()
+        self.camcount = self.camcount - 1
+        print(self.camcount)
+        self.widgetColorCheck()
         self.display_3.hide()
         self.displaycross_3.hide()
         self.camLabel3.hide()
         self.cam03_pushButton.hide()
 
     def displaycross4Action(self):
-        self.conditionCross()
+        # self.conditionCross()
+        self.camcount = self.camcount - 1
+        print(self.camcount)
+        self.widgetColorCheck()
         self.display_4.hide()
         self.displaycross_4.hide()
         self.camLabel4.hide()
         self.cam04_pushButton.hide()
 
     def displaycross5Action(self):
-        self.conditionCross()
+        # self.conditionCross()
+        self.camcount = self.camcount - 1
+        print(self.camcount)
+        self.widgetColorCheck()
         self.display_5.hide()
         self.displaycross_5.hide()
         self.camLabel5.hide()
         self.cam05_pushButton.hide()
 
     def displaycross6Action(self):
-        self.conditionCross()
+        # self.conditionCross()
+        self.camcount = self.camcount - 1
+        print(self.camcount)
+        self.widgetColorCheck()
         self.display_6.hide()
         self.displaycross_6.hide()
         self.camLabel6.hide()
         self.cam06_pushButton.hide()
+
     # METHOD TO OPEN THE IP CAM THROUGH IP ADDRESS
     def openIPcam(self):
         self.camOptions.close()
@@ -950,7 +996,6 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         t = Thread(target=self.tsmmodel, daemon=True, args=(url, self.camSignal))
         t.start()
         cv2.waitKey(10)
-
 
     # METHOD TO OPEN WEB CAM
     @pyqtSlot()
@@ -1023,9 +1068,81 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         # self.menuStackedWidget.setCurrentIndex(1)
 
     # METHOD TO ADD NEW CAMERAS
-    def addNewCamera(self):
+    def widgetColorCheck(self):
+        if self.camcount >= 1 and self.camcount < 6:
+            print("YAAAR")
+            self.widget.setStyleSheet("*{\n"
+                                      "background: #1C1D25;\n"
+                                      "}\n"
+                                      "QToolButton{\n"
+                                      "background: #2A2F3C ;\n"
+                                      "}\n"
+                                      "\n"
+                                      "QToolButton:hover{\n"
+                                      "background:#2A2F3C ;\n"
+                                      "}\n"
+                                      "QToolButton:pressed{\n"
+                                      "background:#1C1D25;\n"
+                                      "}"
+                                      )
+            self.addNew_pushButton.setStyleSheet("*{\n"
+                                                 "FONT-SIZE: 18px;\n"
+                                                 "background: #2A2F3C ;\n"
+                                                 "}\n"
+                                                 "QToolButton:hover{\n"
+                                                 "background:#2A2F3C ;\n"
+                                                 "}\n"
+                                                 "QToolButton:pressed{\n"
+                                                 "background:#1C1D25;\n"
+                                                 "}")
+            self.cameras_label.show()
+            self.addNew_pushButton.setEnabled(True)
 
-        self.cameras_label.show()
+        elif self.camcount >= 6:
+            self.addNew_pushButton.setEnabled(False)
+            self.addNew_pushButton.setStyleSheet("*{\n"
+                                                 "FONT-SIZE: 18px;\n"
+                                                 "background: light grey ;\n"
+                                                 "}\n"
+                                                 "QToolButton:hover{\n"
+                                                 "background:#2A2F3C ;\n"
+                                                 "}\n"
+                                                 "QToolButton:pressed{\n"
+                                                 "background:#1C1D25;\n"
+                                                 "}")
+        elif self.camcount <= 1:
+            print("I AM HEREE")
+            self.cameras_label.hide()
+            self.addNew_pushButton.setEnabled(True)
+            self.widget.setStyleSheet("*{\n"
+                                      "background: #2A2F3C;\n"
+                                      "}\n"
+                                      "QToolButton{\n"
+                                      "background: #2A2F3C ;\n"
+                                      "}\n"
+                                      "\n"
+                                      "QToolButton:hover{\n"
+                                      "background:#2A2F3C ;\n"
+                                      "}\n"
+                                      "QToolButton:pressed{\n"
+                                      "background:#1C1D25;\n"
+                                      "}"
+                                      )
+            self.addNew_pushButton.setStyleSheet("*{\n"
+                                                 "FONT-SIZE: 18px;\n"
+                                                 "background: #2A2F3C ;\n"
+                                                 "}\n"
+                                                 "QToolButton:hover{\n"
+                                                 "background:#2A2F3C ;\n"
+                                                 "}\n"
+                                                 "QToolButton:pressed{\n"
+                                                 "background:#1C1D25;\n"
+                                                 "}")
+
+    def addNewCamera(self):
+        self.camcount = self.camcount + 1
+        self.widgetColorCheck()
+        print(self.camcount)
 
         if self.cam01_pushButton.isHidden():
             self.cam01_pushButton.show()
@@ -1036,7 +1153,6 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
             self.openCamOptions()
             # self.menuStackedWidget.setCurrentIndex(7)
 
-
         elif self.cam02_pushButton.isHidden():
             self.cam02_pushButton.show()
             self.display_2.show()
@@ -1045,7 +1161,6 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
             self.camSignal = 2
             self.openCamOptions()
             # self.menuStackedWidget.setCurrentIndex(7)
-
 
         elif self.cam03_pushButton.isHidden():
             self.cam03_pushButton.show()
@@ -1087,8 +1202,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
 
 
         else:
-            self.addNew_pushButton.setEnabled(False)
-            self.addNew_pushButton.setStyleSheet("background-color: light grey ;\n")
+            self.widgetColorCheck()
 
     ############################TRANSLATE INTO URDU######################################
 
@@ -1107,7 +1221,6 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         """
         ###################################################################
         self.camera_toolButton.setText("کیمرہ")
-        # self.storage_toolButton.setText("اسٹوریج")
         self.logout_toolButton.setText("لاگ آوٹ")
         self.users_toolButton.setText("صارفین")
         self.language_toolButton.setText("زبان")
@@ -1118,27 +1231,22 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.welcome_label.setText("سرویلیا میں خوش آمدید")
         self.getStarted_pushButton.setText("آو شروع کریں")
         self.cameras_label.setText("کیمرے")
-        self.cam01_pushButton.setText("کیمرہ_01")
-        self.cam03_pushButton.setText("کیمرہ_03")
-        self.cam02_pushButton.setText("کیمرہ_02")
-        self.cam04_pushButton.setText("کیمرہ_04")
-        self.cam05_pushButton.setText("کیمرہ_05")
-        self.cam06_pushButton.setText("کیمرہ_06")
+        self.camLabel1.setText("کیمرہ_01")
+        self.camLabel3.setText("کیمرہ_03")
+        self.camLabel2.setText("کیمرہ_02")
+        self.camLabel4.setText("کیمرہ_04")
+        self.camLabel5.setText("کیمرہ_05")
+        self.camLabel6.setText("کیمرہ_06")
         self.addNew_pushButton.setText("نیا شامل کریں")
-        # self.showAll_pushButton.setText("سب دکھائیں")
         self.alarmHistory_label.setText("الارم کی حسٹری")
         self.alarmHistoryDetail_label.setText("الارم کی تاریخ یہاں ظاہر کی گئی ہے۔")
+        self.anomalySearch_lineEdit.setText("متلاش کریں")
+        self.anomalySearch_pushButton.setText("تلاش کریں")
         self.alarm_tableWidget.horizontalHeaderItem(0).setText(" ID کیمرہ ")
         self.alarm_tableWidget.horizontalHeaderItem(1).setText("واقع")
         self.alarm_tableWidget.horizontalHeaderItem(2).setText("تاریخ")
         self.alarm_tableWidget.horizontalHeaderItem(3).setText("وقت")
-        self.storage_label.setText("اسٹوریج")
-        self.show_label.setText("دکھائیں:        ")
-        self.anomalyClip_checkBox.setText("اناملی کلپ")
-        self.cameraFeed_checkBox.setText("کیمرا فیڈ")
-        self.storage_tableWidget.horizontalHeaderItem(0).setText("فائل کا نام")
-        self.storage_tableWidget.horizontalHeaderItem(1).setText("تاریخ")
-        self.storage_tableWidget.horizontalHeaderItem(2).setText("سائز")
+        self.alarm_tableWidget.horizontalHeaderItem(4).setText("ویڈیو URL")
         self.accountInfo_label.setText("اکاؤنٹ کی معلومات")
         self.fname_label.setText("پہلا نام")
         self.lname_label.setText("آخری نام")
@@ -1170,6 +1278,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.admin_tableWidget.horizontalHeaderItem(5).setText("رابطہ نمبر")
         self.admin_tableWidget.horizontalHeaderItem(6).setText("پتہ")
         self.addUser_label.setText("نیا صارف شامل کریں:")
+        self.loggedOut_label.setText("آپ لاگ آؤٹ ہوچکے ہیں")
         self.afname_label.setText("پہلا نام")
         self.alname_label.setText("آخری نام")
         self.aPassword_label.setText("پاس ورڈ")
@@ -1180,21 +1289,33 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.aAdmin_radioButton.setText("ایڈمن")
         self.aSecurity_radioButton.setText("سکیورٹی گارڈ")
         self.accountType_label.setText("اکاؤنٹ ٹاعپ")
-        # self.addIPCam_label.setText(" ایڈریس کا استعمال کرتے ہوئے کیمرا شامل کریں")
-        # self.addIPCam_field.setText("IP ایڈریس یہاں داخل کریں")
-        # self.addIPCam_pushButton.setText("شامل کریں")
-        # self.openDir_label.setText("ڈائریکٹری سے ویڈیو شامل کریں")
-        # self.openDir_pushButton.setText("کھولیں")
-        # self.openWebcam_label.setText("ویب کیم کا استعمال کرتے ہوئے شامل کریں")
-        # self.openWebcam_pushButton.setText("ویب کیم کھولیں")
-        # self.cancel_PushButton.setText("منسوخ کریں")
         self.english_radioButton.setText("English")
         self.chooseLanguage_label.setText("زبان کا انتخاب کریں:")
         self.urdu_radioButton.setText("Urdu")
+        self.accessdenied_label.setText("معلومات نہیں دیکھ سکتے ہیں")
+        self.editInfo_label.setText("معلومات میں ترمیم کریں")
+        self.fname_label_2.setText("پہلا نام")
+        self.lname_label_2.setText("آخری نام")
+        self.username_label_2.setText("صارف نام")
+        self.password_label_2.setText("پاس ورڈ")
+        self.contactInfo_label_2.setText("رابطہ کی معلومات")
+        self.address_label_2.setText("پتہ")
+        self.edit_pushButton_2.setText("ترمیم")
         self.title3_label.setText("سرویلیا")
         self.cancel_pushButton.setText("منسوخ کریں")
         self.loginAgain_pushButton.setText("دوبارہ لاگ ان")
-        self.loggedOut_label.setText("آپ لاگ آؤٹ ہوچکے ہیں")
+        ########################DO NOT REMOVE THIS COMMENTED CODE################################
+        """
+        self.camOptions.addIPCam_label.setText(" ایڈریس کا استعمال کرتے ہوئے کیمرا شامل کریں")
+        self.camOptions.addIPCam_field.setText("IP ایڈریس یہاں داخل کریں")
+        self.camOptions.addIPCam_pushButton.setText("شامل کریں")
+        self.camOptions.openDir_label.setText("ڈائریکٹری سے ویڈیو شامل کریں")
+        self.camOptions.openDir_pushButton.setText("کھولیں")
+        self.camOptions.openWebcam_label.setText("ویب کیم کا استعمال کرتے ہوئے شامل کریں")
+        self.camOptions.openWebcam_pushButton.setText("ویب کیم کھولیں")
+        self.camOptions.cancel_PushButton.setText("منسوخ کریں")
+        """
+        ###########################################################################################
 
         ##########################TRANSLATE INTO ENGLISH###################################
 
@@ -1208,7 +1329,6 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.admin_radioButton.setText("Admin")
         self.loginas1_label.setText("Login as:")
         self.camera_toolButton.setText("Camera")
-        # self.storage_toolButton.setText("Storage")
         self.logout_toolButton.setText("Logout")
         self.users_toolButton.setText("Users")
         self.language_toolButton.setText("Language")
@@ -1218,29 +1338,25 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.title_label.setText("SURVEILIA")
         self.welcome_label.setText("Welcome to SURVEILIA")
         self.getStarted_pushButton.setText("GET STARTED")
-        self.cameras_label.setText("CAMERAS")
-        self.cam01_pushButton.setText("CAMERA_01")
-        self.cam03_pushButton.setText("CAMERA_03")
-        self.cam02_pushButton.setText("CAMERA_02")
-        self.cam04_pushButton.setText("CAMERA_04")
-        self.cam05_pushButton.setText("CAMERA_05")
-        self.cam06_pushButton.setText("CAMERA_06")
-        self.addNew_pushButton.setText("ADD NEW")
+        self.addNew_pushButton.setText("Add Camera")
+        self.cameras_label.setText("CAMERAS LIST")
+        self.camLabel1.setText("CAMERA_01")
+        self.camLabel2.setText("CAMERA_02")
+        self.camLabel3.setText("CAMERA_03")
+        self.camLabel4.setText("CAMERA_04")
+        self.camLabel5.setText("CAMERA_05")
+        self.camLabel6.setText("CAMERA_06")
         self.alarmHistory_label.setText("ALARM HISTORY")
         self.alarmHistoryDetail_label.setText(
-            "The history of alarms is displayed here."
-        )
+            "The history of alarms is displayed here.")
+        self.anomalySearch_lineEdit.setText("Enter data to search")
+        self.anomalySearch_pushButton.setText("Search")
+
         self.alarm_tableWidget.horizontalHeaderItem(0).setText("Camera ID")
         self.alarm_tableWidget.horizontalHeaderItem(1).setText("Event")
         self.alarm_tableWidget.horizontalHeaderItem(2).setText("Date")
         self.alarm_tableWidget.horizontalHeaderItem(3).setText("Time")
-        # self.storage_label.setText("STORAGE")
-        # self.show_label.setText("           Show:")
-        # self.anomalyClip_checkBox.setText("Anomaly Clip")
-        # self.cameraFeed_checkBox.setText("Camera Feed")
-        # self.storage_tableWidget.horizontalHeaderItem(0).setText("Filename")
-        # self.storage_tableWidget.horizontalHeaderItem(1).setText("Date")
-        # self.storage_tableWidget.horizontalHeaderItem(2).setText("Size")
+        self.alarm_tableWidget.horizontalHeaderItem(4).setText("Video URL")
         self.accountInfo_label.setText("ACCOUNT INFORMATION")
         self.fname_label.setText("First Name:")
         self.lname_label.setText("Last Name:")
@@ -1255,7 +1371,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.securitytable_radioButton.setText("Security Guards")
         self.userAdd_pushButton.setText("ADD")
         self.userDelete_pushButton.setText("DELETE")
-        self.user_tableWidget.horizontalHeaderItem(0).setText("ID")
+        self.user_tableWidget.horizontalHeaderItem(0).setText("User ID")
         self.user_tableWidget.horizontalHeaderItem(1).setText("First Name")
         self.user_tableWidget.horizontalHeaderItem(2).setText("Last Name")
         self.user_tableWidget.horizontalHeaderItem(3).setText("Username")
@@ -1264,7 +1380,7 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.user_tableWidget.horizontalHeaderItem(6).setText("Address")
         self.adminAdd_pushButton.setText("ADD")
         self.adminDelete_pushButton.setText("DELETE")
-        self.admin_tableWidget.horizontalHeaderItem(0).setText("ID")
+        self.admin_tableWidget.horizontalHeaderItem(0).setText("Admin ID")
         self.admin_tableWidget.horizontalHeaderItem(1).setText("First Name")
         self.admin_tableWidget.horizontalHeaderItem(2).setText("Last Name")
         self.admin_tableWidget.horizontalHeaderItem(3).setText("Username")
@@ -1281,18 +1397,19 @@ class ControlMainWindow(qtw.QMainWindow, Ui_surveiliaFrontEnd):
         self.ausername_label.setText("Username:")
         self.aAdmin_radioButton.setText("Admin")
         self.aSecurity_radioButton.setText("Security Guard")
-        # self.accountType_label.setText("Account Type:")
-        # self.addIPCam_label.setText("Add camera using IP Address")
-        # self.addIPCam_field.setText("ENTER IP ADDRESS HERE")
-        # self.addIPCam_pushButton.setText("ADD")
-        # self.openDir_label.setText("Add video by file from Directory")
-        # self.openDir_pushButton.setText("OPEN")
-        # self.openWebcam_label.setText("Add using Webcam")
-        # self.openWebcam_pushButton.setText("OPEN WEBCAM")
-        # self.cancel_PushButton.setText("CANCEL")
+        self.accountType_label.setText("Account Type:")
         self.english_radioButton.setText("English")
         self.chooseLanguage_label.setText("Choose Language:")
         self.urdu_radioButton.setText("Urdu")
+        self.accessdenied_label.setText("ACCESS DENIED")
+        self.editInfo_label.setText("EDIT INFORMATION")
+        self.fname_label_2.setText("First Name:")
+        self.lname_label_2.setText("Last Name:")
+        self.username_label_2.setText("Username:")
+        self.password_label_2.setText("Password:")
+        self.contactInfo_label_2.setText("Contact Info:")
+        self.address_label_2.setText("Address:")
+        self.edit_pushButton_2.setText("EDIT")
         self.title3_label.setText("SURVEILIA")
         self.cancel_pushButton.setText("CANCEL")
         self.loginAgain_pushButton.setText("LOGIN AGAIN")
